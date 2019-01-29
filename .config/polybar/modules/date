@@ -1,0 +1,18 @@
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%a %d %b,"
+date-alt = "%Y/%m/%d"
+time = "%H:%M"
+time-alt = %H:%M:%S
+
+label = %date% %time%
+; label-background = #fff
+; label-foreground = #000
+
+;format-prefix = 
+;format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+; vim:fenc=utf-8:ft=dosini:

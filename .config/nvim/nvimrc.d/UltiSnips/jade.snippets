@@ -1,0 +1,31 @@
+snippet img "Image Tag"
+img(src='$1')$0
+endsnippet
+
+snippet a "Anchor"
+a(href='$1')$0
+endsnippet
+
+snippet meta "Meta"
+meta(name='$1' content='$2')
+endsnippet
+
+snippet link "Link"
+link(rel='${1:stylesheet}' href='$2')$0
+endsnippet
+
+snippet html5 "HTML5 Boilerplate"
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width")
+    title ${1:Page Title}
+    link(rel='stylesheet' href='$2')
+  body
+    $0
+endsnippet
+
+snippet svg "SVG Symbol"
+svg(role="img" class="$1"): use(xlink:href="#$1")
+endsnippet

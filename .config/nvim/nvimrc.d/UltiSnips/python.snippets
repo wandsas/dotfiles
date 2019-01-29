@@ -1,0 +1,26 @@
+snippet utf8 "UTF-8 encoding header" b
+# -*- coding: utf-8 -*-
+endsnippet
+
+snippet subprocess "Subprocess output capture" b
+output = subprocess.check_output(
+	'${1:command}',
+	stderr=subprocess.STDOUT,
+	shell=True
+)
+endsnippet
+
+snippet shellstub "Shell script stub" b
+#!/usr/bin/env python
+
+# -*- coding: utf-8 -*-
+
+import subprocess
+
+output = subprocess.check_output(
+	'${1:command}',
+	stderr=subprocess.STDOUT,
+	shell=True
+)
+print(output)
+endsnippet

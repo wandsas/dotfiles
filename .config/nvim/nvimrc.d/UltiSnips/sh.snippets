@@ -1,0 +1,17 @@
+snippet yesno "Yes/No Check"
+function read_yes_no () {
+    printf "[yes|no] "
+    read yesno;
+    while [[ "${yesno}" != "yes" && "${yesno}" != "no" ]]
+    do
+        printf "please answer [yes|no] "
+        read yesno;
+    done
+
+    if [[ "${yesno}" == "no" ]]; then
+        return 1;
+    else
+        return 0;
+    fi
+}
+endsnippet

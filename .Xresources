@@ -1,0 +1,89 @@
+
+URxvt.termName:         rxvt-unicode-256color
+URxvt.title:            Terminal
+URxvt.font:             xft:DejaVu Sans Mono:pixelsize=12:antialias=true:autohint=false
+URxvt.saveLines:        1000
+URxvt.cursorBlink:      false
+URxvt.internalBorder:   0
+URxvt.externalBorder:   0
+URxvt.intensityStyles:  true
+URxvt.jumpScroll:       false
+URxvt.pastableTabs:     true
+URxvt.pointerBlank:     true
+URxvt.scrollBar:        false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress:true
+URxvt.scrollTtyOutput:  false
+URxvt.secondaryScroll:  false
+URxvt.secondaryWheel:   true
+URxvt.skipScroll:       true
+URxvt.tripleclickwords: true
+
+!-*- Perl extensions -*-
+URxvt.perl-ext-common:  default,clipboard,matcher,keyboard-select
+URxvt.keysym.M-u:       perl:url-select:select_next
+URxvt.url-launcher:     /usr/bin/xdg-open
+URxvt.underlineURLs:    true
+URxvt.matcher.button:   1
+
+URxvt.keysym.M-Escape:  perl:keyboard-select:activate
+URxvt.keysym.M-c:       perl:clipboard:copy
+URxvt.keysym.M-v:       perl:clipboard:paste
+URxvt.keysym.M-C-v:     perl:clipboard:paste_escaped
+
+
+!-*- Transparency -*-
+URxvt.transparent:      true
+URxvt.tintColor:        #404040
+!URxvt.inheritPixmap:    False
+URxvt.shading:          100
+!URxvt.tintColor:        #bfbfbf
+URxvt.depth:            32
+URxvt.fading:           30
+URxvt.fadeColor:        #202020
+
+
+!URxvt.background:       #1b181b
+!URxvt.foreground:       #ccc2cc
+URxvt.cursorColor:      orange
+URxvt.colorIT:          magenta
+URxvt.colorBD:          yellow
+URxvt.colorUL:          cyan
+
+!-*- Based on Tomorrow Theme -*-
+*.foreground:       #c5c8c6
+*.background:       #1d1f21
+
+*.color0:           #000000
+*.color8:           #666666
+
+*.color1:           #912226
+*.color9:           #cc6666
+
+*.color2:           #778900
+*.color10:          #b5bd68
+
+*.color3:           #ae7b00
+*.color11:          #f0c674
+
+*.color4:           #1d2594
+*.color12:          #81a2be
+
+*.color5:           #682a9b
+*.color13:          #b294bb
+
+*.color6:           #2b6651
+*.color14:          #8abeb7
+
+*.color7:           #929593
+*.color15:          #ecebec
+
+Xcursor.theme:          Vanilla-DMZ
+Xcursor.size:           16
+
+Xft.antialias:          true
+Xft.autohint:           false
+Xft.hinting:            true
+Xft.hintstyle:          hintslight
+Xft.lcdfilter:          lcddefault
+Xft.rgba:               rgb

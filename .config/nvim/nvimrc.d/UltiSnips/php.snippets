@@ -1,0 +1,213 @@
+snippet php "PHP opening tag"
+<?php
+${1}
+endsnippet
+snippet doc "DocBlock default"
+/**
+ * ${1}
+ *
+ * PHP Version 7
+ *
+ * @category ${2:None}
+ * @package  ${3:None}
+ * @author   ${4:Marcel Bischoff <marcel@herrbischoff.com>}
+ * @license  ${5:MIT http://example.com https://opensource.org/licenses/MIT}
+ * @link     ${6:None}
+ */
+${7}
+endsnippet
+snippet change_date_format52 "Change Date Format for PHP 5.2"
+/**
+ * This is needed for PHP 5.2
+ */
+
+$old_date = date('l, F d y h:i:s');
+$old_date_timestamp = strtotime($old_date);
+$new_date = date('Y-m-d H:i:s', $old_date_timestamp);
+endsnippet
+snippet change_date_format "Change Date Format"
+$date = DateTime::createFromFormat('Ymd', get_field('date_picker'));
+echo $date->format('d-m-Y');
+endsnippet
+snippet check_email_address "Check Email Address"
+$emailAddress = "my_email_test@mail server.com";
+
+if( !filter_var( $emailAddress, FILTER_VALIDATE_EMAIL ) ) {
+    echo "Submitted address is faulty";
+} else {
+    echo "Address submitted successfully";
+}
+endsnippet
+snippet detect_mobile_browser "Detect Mobile Browser"
+<?php
+$tablet_browser = 0;
+$mobile_browser = 0;
+
+if (preg_match('/(tablet|ipad|playbook)|(android(?!.*(mobi|opera mini)))/i', strtolower($_SERVER['HTTP_USER_AGENT']))) {
+    $tablet_browser++;
+}
+
+if (preg_match('/(up.browser|up.link|mmp|symbian|smartphone|midp|wap|phone|android|iemobile)/i', strtolower($_SERVER['HTTP_USER_AGENT']))) {
+    $mobile_browser++;
+}
+
+if ((strpos(strtolower($_SERVER['HTTP_ACCEPT']),'application/vnd.wap.xhtml+xml') > 0) or ((isset($_SERVER['HTTP_X_WAP_PROFILE']) or isset($_SERVER['HTTP_PROFILE'])))) {
+    $mobile_browser++;
+}
+
+$mobile_ua = strtolower(substr($_SERVER['HTTP_USER_AGENT'], 0, 4));
+$mobile_agents = array(
+    'w3c ','acs-','alav','alca','amoi','audi','avan','benq','bird','blac',
+    'blaz','brew','cell','cldc','cmd-','dang','doco','eric','hipt','inno',
+    'ipaq','java','jigs','kddi','keji','leno','lg-c','lg-d','lg-g','lge-',
+    'maui','maxo','midp','mits','mmef','mobi','mot-','moto','mwbp','nec-',
+    'newt','noki','palm','pana','pant','phil','play','port','prox',
+    'qwap','sage','sams','sany','sch-','sec-','send','seri','sgh-','shar',
+    'sie-','siem','smal','smar','sony','sph-','symb','t-mo','teli','tim-',
+    'tosh','tsm-','upg1','upsi','vk-v','voda','wap-','wapa','wapi','wapp',
+    'wapr','webc','winw','winw','xda ','xda-');
+
+if (in_array($mobile_ua,$mobile_agents)) {
+    $mobile_browser++;
+}
+
+if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']),'opera mini') > 0) {
+    $mobile_browser++;
+    //Check for tablets on opera mini alternative headers
+    $stock_ua = strtolower(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA'])?$_SERVER['HTTP_X_OPERAMINI_PHONE_UA']:(isset($_SERVER['HTTP_DEVICE_STOCK_UA'])?$_SERVER['HTTP_DEVICE_STOCK_UA']:''));
+    if (preg_match('/(tablet|ipad|playbook)|(android(?!.*mobile))/i', $stock_ua)) {
+      $tablet_browser++;
+    }
+}
+
+if ($tablet_browser > 0) {
+   // do something for tablet devices
+   print 'is tablet';
+}
+else if ($mobile_browser > 0) {
+   // do something for mobile devices
+   print 'is mobile';
+}
+else {
+   // do something for everything else
+   print 'is desktop';
+}
+endsnippet
+snippet last_word_after_url "Get Last Word From URL After Slash"
+$current_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$self = basename($_SERVER['PHP_SELF']);
+preg_match("/[^\/]+$/", $current_link, $matches);
+if ( $matches ) :
+	$last_word = $matches[0];
+
+	if ( $last_word !== $self ) :
+		// stuff to do
+	endif;
+else :
+	echo 'Nothing to parse.';
+endif;
+endsnippet
+snippet download_file "Download File Instead of Displaying"
+$pattern = "/\/wp-content\/uploads\//";
+
+if ( !empty($_GET['img']) && preg_match($pattern, $_GET['img']) ) {
+	$filename = preg_replace("/^http[\:\/\.a-z]+\//i", "/Users/mbischoff/WebDev/Sites/janweiler.dev/", $_GET['img']);
+	$basename = basename($filename);
+	$size = @getimagesize( $filename );
+	$fp = @fopen( $filename, "rb" );
+	if ( $size && $fp ) {
+		header( "Content-type: {$size['mime']}" );
+		header( "Content-Length: " . filesize($filename) );
+		header( "Content-Disposition: attachment; filename=$basename" );
+		header( 'Content-Transfer-Encoding: binary' );
+		header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+		fpassthru( $fp );
+		exit;
+	}
+}
+
+header( "HTTP/1.0 404 Not Found" );
+endsnippet
+snippet occurrences "Count the occurrences of substring in a string"
+/** Count the occurrences of substring in a string;
+ * @param {String} string   Required. The string;
+ * @param {String} subString    Required. The string to search for;
+ * @param {Boolean} allowOverlapping    Optional. Default: false;
+ */
+function occurrences(string, subString, allowOverlapping) {
+	string += "";
+	subString += "";
+	if (subString.length <= 0) return string.length + 1;
+
+	var n = 0, pos = 0;
+	var step = (allowOverlapping) ? (1):(subString.length);
+
+	while (true) {
+		pos = string.indexOf(subString, pos);
+		if (pos >= 0) {
+			n++;
+			pos += step;
+		} else break;
+	}
+	return(n);
+}
+endsnippet
+
+#########################################
+## WordPress Snippets
+#########################################
+
+snippet register_nav_menu "Register Custom Menu"
+register_nav_menu('main', 'Main navigation menu');
+endsnippet
+snippet acf_date "Reformat ACF Date Entry"
+$date = new DateTime( get_field('date') );
+echo $date->format('d.m.Y');
+endsnippet
+snippet acf_sub_fields "Output All Sub Pages With Repeater Fields"
+<?php $sliders = get_pages( 'child_of=' . get_the_id() ); ?>
+<?php foreach ( $sliders as $slider ) : ?>
+
+<div class="sixteen columns horizontal">
+	<div class="flexslider">
+		<ul class="slides">
+
+<?php while ( has_sub_field('images', $slider->ID) ) : ?>
+
+<li>
+	<img src="<?php bloginfo('template_url') ?>/scripts/timthumb.php?src=<?php the_sub_field('image') ?>&w=940&h=529" />
+</li>
+
+<?php endwhile; ?>
+
+		</ul>
+	</div>
+</div>
+
+<?php endforeach; ?>
+endsnippet
+snippet load_theme_textdomain "Load Text Domain"
+add_action('after_setup_theme', 'my_theme_setup');
+function my_theme_setup(){
+    load_theme_textdomain('my_theme', get_template_directory() . '/languages');
+}
+
+/**
+ * Now add a directory named ‘languages‘ in your theme directory.
+ * With this function you take the first step towards making your theme
+ * available for translation. Its best to call this function from within
+ * the after_setup_theme() action hook i.e. after the setup, registration,
+ * and initialization actions of your theme have run.
+ */
+endsnippet
+snippet functionality "Functionality Plugin Starter"
+<?php
+/*
+Plugin Name: Functionality Plugin
+Plugin URI: https://www.herrbischoff.com
+Description: Custom Plugin for ${1:NAME}, replaces most code usually found in functions.php
+Author: Marcel Bischoff
+Version: 1.0
+Author URI: http://www.herrbischoff.com
+*/
+endsnippet

@@ -1,0 +1,51 @@
+snippet vbase "Vue.js base structure" b
+<template>
+	<div>
+		${1}
+	</div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style lang="stylus" scoped>
+
+</style>
+endsnippet
+
+snippet vdata "Vue.js data function" b
+data() {
+	return {
+		${1:data}: ${2:''}
+	}
+}
+endsnippet
+
+snippet vmounted "Vue.js mount function" b
+mounted() {
+	${1}
+}
+endsnippet
+
+snippet vwatch "Vue.js watch object" b
+watch: {
+	${1}
+}
+endsnippet
+
+snippet vmethods "Vue.js methods object" b
+methods: {
+	${1:do}() {
+		${2}
+	}
+}
+endsnippet
+
+snippet vcomponents "Vue.js components object" b
+components: {
+	${1:Component}
+}
+endsnippet

@@ -1,0 +1,26 @@
+#! /bin/sh
+
+sxhkd &
+random-wallpaper.sh &
+${XDG_CONFIG_HOME}/polybar/launch.sh &
+${XDG_CONFIG_HOME}/compton/launch.sh &
+${XDG_CONFIG_HOME}/spacefm/launch.sh &
+
+urxvtd --quiet --opendisplay --fork &
+redshift-gtk &
+unclutter &
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+bspc config border_width         2
+bspc config window_gap          12
+
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Spacefm desktop='^2'
+bspc rule -a lxtask state=floating
+bspc rule -a lxappearance state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off

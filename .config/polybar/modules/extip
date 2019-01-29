@@ -1,0 +1,11 @@
+[module/extip]
+type = custom/script
+interval = 60
+
+format = <label>
+format-underline = #0a6cf5
+
+exec-if = ping -c 1 gentoo.org
+exec = echo "WAN $(dig +short myip.opendns.com @resolver1.opendns.com)"
+
+; vim:fenc=utf-8:ft=dosini:

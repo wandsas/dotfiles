@@ -1,0 +1,68 @@
+snippet getDocHeight "Get document height function"
+let getDocHeight = () => {
+	return Math.max(
+		document.body.scrollHeight,
+		document.documentElement.scrollHeight,
+		document.body.offsetHeight,
+		document.documentElement.offsetHeight,
+		document.body.clientHeight,
+		document.documentElement.clientHeight
+	);
+};
+endsnippet
+snippet stripTags "Strip HTML tags from string"
+let ${1:strippedString} = ${2:originalString}.replace(/(<([^>]+)>)/ig,"");
+endsnippet
+snippet isInViewport "Determine if an element is in the viewport"
+/**
+ * Determine if an element is in the viewport
+ * @param  {Node}    elem The element
+ * @return {Boolean}      Returns true if element is in the viewport
+ */
+let isInViewport = elem => {
+  let distance = elem.getBoundingClientRect();
+  return (
+    distance.top >= 0 &&
+    distance.left >= 0 &&
+    distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
+
+var elem = document.querySelector('#some-element');
+isInViewport(elem); // Boolean: returns true/false
+endsnippet
+snippet getElemDistance "Get distances to the top of the document"
+// Get current location's distance from the top of the page
+let position = window.pageYOffset;
+
+/**
+ * Get an element's distance from the top of the page
+ * @param  {Node}   elem The element
+ * @return {Number}      Distance from the top of the page
+ */
+let getElemDistance = elem => {
+  let location = 0;
+  if (elem.offsetParent) {
+    do {
+      location += elem.offsetTop;
+      elem = elem.offsetParent;
+    } while (elem);
+  }
+  return location >= 0 ? location : 0;
+};
+let elem = document.querySelector('#some-element');
+let location = getElemDistance(elem);
+endsnippet
+snippet isMobile "Check for mobile browser"
+let isMobile = () => {
+  return /Android|webOS|iPhone|iPod|iPad|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+endsnippet
+snippet checkForSupport "Check for support in browser"
+if ('${1:animate}' in HTMLElement.prototype) {
+  ${2:// Animate with Web Animations.}
+} else {
+  ${3:// Fall back to generated CSS Animations or JS.}
+}
+endsnippet
