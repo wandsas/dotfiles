@@ -20,6 +20,6 @@ shopt -s checkwinsize
 shopt -s histappend
 stty -ixon
 
-for sh in ${XDG_CONFIG}/bash/rc.d/*.sh; do
+for sh in ${XDG_CONFIG_HOME}/bashrc.d/*.sh; do
   [[ -r "${sh}" ]] && source ${sh}
 done

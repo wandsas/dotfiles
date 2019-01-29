@@ -23,8 +23,9 @@ export XDG_DATA_HOME=${HOME}/.local/share
 # XDG system path variable
 # see https://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html
 export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
-export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/tmp/user/${LOGNAME}}
-install -d ${XDG_RUNTIME_DIR}
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/run/user/${LOGNAME}}
+
+test -d ${XDG_RUNTIME_DIR} || install -d -m0700 -o${LOGNAME} -g${LOGNAME} ${XDG_RUNTIME_DIR}
 
 # other variables
 export EDITOR=nvim

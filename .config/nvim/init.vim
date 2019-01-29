@@ -1,7 +1,5 @@
 scriptencoding utf8
-
 set nocompatible
-
 filetype off
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
