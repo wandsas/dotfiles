@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Add git remote all pushing to all found git remotes
+# wandsas 2018/10/12
+
+info () { printf '\033[1;36mINFO:\033[0;36m %s\033[0m\n' "$@" >&2; }
+
+error () { printf '\033[1;31mERROR\033[0m %s\n' "$@" >&2; }
+
+die () { local ret="$?"; error "$@"; exit "$?"; }
+
+should_ignore () {
+  case "$1" in
+    kitenet)     return 0 ;;
+    tokiclover)  return 0 ;;
+    upstream)    return 0 ;;
+    vaeth|mv)    return 0 ;;
+    *)           return 1 ;;
+  esac
+}
+
+
+[[ -z "`git remote`" ]] && die "No git remotes found"
+
+[[ "`git remote| grep all`" == "all" ]] && git remote remove all
+
+for r in `git remote`
+do
+  should_ignore "$remote" && continue
+  git config --add remote.all.url `git config remote.$r.url`
+done
+
+# vim:fenc=utf-8:ft=sh:ts=2:sts=0:sw=2:et:

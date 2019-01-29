@@ -1,0 +1,216 @@
+#!/usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+# Helper script to fetch kernel sources of desired version and optionally patch it with patch(es) of choice.
+#
+# This is very early version that contain only core functionality in limited scope.
+
+import requests
+import os
+import argparse
+import sys
+import subprocess
+
+
+def einfo(msg):
+    print('>>> [INFO] {msg}'.format(msg=msg))
+
+
+def eerror(msg):
+    print('>>> [ERROR] {msg}'.format(msg=msg))
+
+
+def edie(msg):
+    eerror(msg)
+    sys.exit(1)
+
+
+def fetch_file(url, dest_file_name):
+    temp_dest_file_name = dest_file_name + '.tmp'
+    basename = os.path.basename(dest_file_name)
+
+    if os.path.isfile(temp_dest_file_name):
+        os.unlink(temp_dest_file_name)
+
+    if not os.path.isfile(dest_file_name):
+        einfo('Downloading {basename} ...'.format(basename=basename))
+
+        request = requests.get(url, stream=True)
+
+        if not request.status_code == requests.codes.ok:
+            edie('Unable to fetch.')
+
+        with open(temp_dest_file_name, 'wb') as f:
+            for chunk in request.iter_content(chunk_size=5*1024*1024):
+                if chunk:
+                    f.write(chunk)
+
+        os.rename(temp_dest_file_name, dest_file_name)
+
+    else:
+        einfo('The {basename} has been already downloaded.'.format(basename=basename))
+
+
+def get_kernel_version_from_patch_name(name):
+    # Hhere we need to regex search for \<[0-9]+\.[0-9]+\.[0-9]+\> and return it if only one matches.
+    # Fallback to searching for 4 element version.
+    # Fail hard otherwise, forcing user to specify kernel version.
+    edie('get_kernel_version_from_patch_name: Not implamented')
+
+
+def split_kernel_version(kernel_version):
+    # Return major, minor and patch level.
+    # '2.6.15.7'  == ['2.6', '15', '7']
+    # '4.14.20'   == ['4', '14', '20']
+    # '4.15'      == ['4', '15', '0']
+
+    version_list = kernel_version.split('.')
+    version_list_size = len(version_list)
+
+    if version_list_size == 4:
+        return '.'.join(version_list[0:2]), version_list[2], version_list[3]
+    elif version_list_size == 3:
+        return version_list
+    elif version_list_size == 2:
+        return version_list[0], version_list[1], 0
+    else:
+        edie('error, wrong kernel version?')
+        
+
+def get_kernel_sources(kernel_version, downloads_dir):
+    # Download major.minor version, ignoring the patch level as tarball
+    # and download patches separately.
+
+    kernel_version_list = split_kernel_version(kernel_version)
+    major = kernel_version_list[0]
+    minor = kernel_version_list[1]
+    patch = kernel_version_list[2]
+    base_version = '.'.join(kernel_version_list[0:2])
+
+    tarball_path = '{downloads_dir}/linux-{base_version}.tar.xz'.format(
+            downloads_dir=downloads_dir,
+            base_version=base_version
+    )
+
+    if '-rc' in minor:
+        base_version_url = 'https://git.kernel.org/torvalds/t/linux-{base_version}.tar.xz'.format(
+            base_version=base_version
+        )
+    else:
+        base_version_url = 'https://cdn.kernel.org/pub/linux/kernel/v{major}.x/linux-{base_version}.tar.xz'.format(
+            major=major,
+            base_version=base_version
+        )
+
+    fetch_file(base_version_url, tarball_path)
+
+    patch_path = None
+
+    if patch:
+        patch_path = '{downloads_dir}/patch-{kernel_version}.xz'.format(
+            downloads_dir=downloads_dir,
+            kernel_version=kernel_version
+        )
+
+        fetch_file(
+            'https://cdn.kernel.org/pub/linux/kernel/v{major}.x/patch-{kernel_version}.xz'.format(
+                major=major,
+                kernel_version=kernel_version
+            ),
+            patch_path
+        )
+
+    return tarball_path, patch_path
+
+
+def prepare_sources(workdir, kernel_version, suffix, patch):
+    downloads_dir = workdir + "/downloads"
+    sources = workdir
+
+    for i in sources, downloads_dir:
+        if not os.path.isdir(i):
+            os.makedirs(i)
+
+    target_dir = '{sources}/linux-{kernel_version}'.format(
+        sources=sources,
+        kernel_version=kernel_version
+    )
+
+    if suffix:
+        target_dir = '{target_dir}-{suffix}'.format(
+            target_dir=target_dir,
+            suffix=suffix
+        )
+
+    einfo("Preparing {} ...".format(target_dir))
+
+    base_tarball_path, base_patch_path = get_kernel_sources(kernel_version, downloads_dir)
+
+    if os.path.isdir(target_dir):
+        edie('The {target_dir} already exist. Doing nothing.'.format(target_dir=target_dir))
+
+    os.makedirs(target_dir)
+    os.chdir(target_dir)
+    
+    untar(base_tarball_path, 1)
+
+    if base_patch_path:
+        apply_patch(base_patch_path)
+
+    if patch:
+        apply_patch(patch)
+
+
+def apply_patch(patch_path):
+    einfo('Applying {patch} ...'.format(patch=os.path.basename(patch_path)))
+
+    patch_cmd = ['patch', '-s', '-p1']
+
+    stdin = None
+
+    # Maybe using pythonish unxz would be better.
+    if patch_path.endswith('.xz'):
+        stdin = subprocess.Popen(('xz', '-d', '-c', patch_path), stdout=subprocess.PIPE).stdout
+    else:
+        patch_cmd.append('-i')
+        patch_cmd.append(patch_path)
+
+    subprocess.check_call(patch_cmd, stdin=stdin)
+
+
+def untar(tarball_path, strip_components):
+    # Calling `tar` as in-python tarball support does not have strip-components interfaced.
+    einfo('Unpacking {tarball} ...'.format(tarball=os.path.basename(tarball_path)))
+    subprocess.check_call(['tar', '--strip-components', str(strip_components), '-xf', tarball_path])
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-k', '--kernel-version', type=str, nargs=1, help='kernel version')
+    parser.add_argument('-p', '--patch', type=str, nargs=1, help='patch(es) to apply')
+    parser.add_argument('-s', '--suffix', type=str, nargs=1, help='add suffix to kernel sources directory')
+    parser.add_argument('-w', '--work-dir', type=str, nargs=1, help='working directory, default /usr/src')
+
+    if len(sys.argv[1:])==0:
+        parser.print_help()
+        sys.exit(1)
+
+    args = parser.parse_args()
+
+    if not args.kernel_version and args.patch:
+        kernel_version = get_kernel_version_from_patch_name(args.patch[0])
+    elif args.kernel_version:
+        kernel_version = args.kernel_version[0]
+    else:
+        edie("Kernel version needs to be set")
+
+    # Automatically getting suffix maybe?  -S, --auto-suffix, use basename of patch -.patch -.diff.
+    suffix = args.suffix[0] if args.suffix else None
+    patch = args.patch[0] if args.patch else None
+    workdir = args.work_dir[0] if args.work_dir else '/usr/src'
+
+    prepare_sources(workdir, kernel_version, suffix, patch)
+
+
+if __name__ == "__main__":
+    main()

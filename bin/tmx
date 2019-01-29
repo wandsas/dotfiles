@@ -1,0 +1,25 @@
+#!/bin/sh
+# alacritty -e zsh -c tmux_new_or_attach_session
+
+session=${1:-mytmux}
+
+tmux_attach () {
+    tmux attach -t $session
+}
+
+tmux_new_session () {
+    # home
+    tmux new-session -n "home" -s $session -c "$HOME" -d
+    tmux send-keys -t $session "clear && ls -lh" C-m
+    tmux split-window -v -p 50 -t $session -c "$HOME"
+    tmux send-keys -t $session:1.2 "clear" C-m
+    # work
+    tmux new-window -n "work" -t $session -c "$HOME"
+    tmux send-keys -t $session:2 "clear" C-m
+    tmux split-window -v -p 50 -t $session -c "$HOME"
+    tmux send-keys -t $session:2.2 "clear" C-m
+    tmux select-window -t $session:1:2
+    tmux attach -t $session
+}
+
+tmux has-session -t $session && tmux_attach || tmux_new_session

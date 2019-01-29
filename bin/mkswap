@@ -1,0 +1,9 @@
+#!/bin/sh
+sudo touch /swap.img
+#sudo dd if=/dev/zero of=/swap.img bs=1024M count=8
+sudo qemu-img create -f qcow2 /swap.img 10G
+sudo chown root:root /swap.img
+sudo chmod 0600 /swap.img
+sudo mkswap -L myswap /swap.img
+sudo swapon LABEL=myswap
+sudo swapon --summary

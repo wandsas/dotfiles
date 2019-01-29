@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Generate unique MAC-address
+
+die () { local ret="$?"; echo "$1"; exit $ret; }
+
+mac () {
+    [[ "$#" != 1 ]] && die "Usage ${0##*/} <hostname-to-generate-mac>"
+    local oid="00:16:3e"
+    local rand=$(echo $1 | md5sum | sed 's/\(..\)\(..\)\(..\).*/\1:\2:\3/')
+    echo "${oid}:${rand}"
+}
+
+mac "$@"
+
+# vim:fenc=utf-8:ft=sh:

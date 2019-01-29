@@ -1,0 +1,1165 @@
+#!/usr/bin/env sh
+script_version=4.8
+set -u
+set -f
+
+mkopts=
+ccopt=
+
+fullcmd=`command -v -- "$0"`
+fullpath=`readlink -f -- "$fullcmd" 2>/dev/null` || case $fullcmd in
+/*)
+	fullpath=$fullcmd;;
+*)
+	fullpath=${PWD%/}/${fullcmd#./};;
+esac
+
+if eix_functions=`eix-functions.sh 2>/dev/null`
+then	eval "$eix_functions"
+elif command -v portageq >/dev/null 2>&1
+then	ReadVar() {
+	if [ $# -lt 2 ] || [ x"$1" = x"$2" ]
+	then	eval "[ -z \"\${$1++}\" ]" || return 0
+	else	eval unset $1
+	fi
+	read_var=`portageq envvar $2 2>/dev/null` || return
+	eval $1=\$read_var
+}
+else	ReadVar() {
+	if [ $# -lt 2 ] || [ x"$1" = x"$2" ]
+	then	eval ": \${$1:=}"
+	else	eval "$1=\${$2-}"
+	fi
+}
+fi
+
+Push() {
+	PushA_=`push.sh 2>/dev/null` || Fatal \
+"push.sh from https://github.com/vaeth/push (v2.0 or newer) required"
+	eval "$PushA_"
+	Push "$@"
+}
+
+magicquit=130
+magicforce=65
+exittraps=
+Exit() {
+	exitstat=${1:-$?}
+	[ -n "${exittraps}" ] || exit $exitstat
+	trap : EXIT HUP INT TERM
+	exitnumarg=$#
+	eval "$exittraps"
+	trap - EXIT HUP INT TERM
+	exit $exitstat
+}
+
+ExitTraps() {
+	trap : EXIT HUP INT TERM
+	exitstat=
+	eval "$exittraps"
+	trap - EXIT HUP INT TERM
+	exit $magicquit
+}
+
+AddTrap() {
+	if [ -n "${exittraps:++}" ]
+	then	case $exittraps in
+		*"$*"*)
+			return;;
+		esac
+		exittraps="$*
+$exittraps"
+		return
+	fi
+	exittraps=$*
+	trap ExitTraps EXIT HUP INT TERM
+}
+
+TitleTrap() {
+	if [ -z "$exitstat" ]
+	then	Title "${0##*/} interrupt"
+		return
+	fi
+	[ $exitnumarg -gt 1 ] && return 0
+	if [ $exitstat -eq 0 ]
+	then	Title "${0##*/}: finish"
+	elif [ $exitstat -eq $magicforce ] || [ $exitstat -eq $magicquit ]
+	then	Title "${0##*/}: remote finish"
+	else	Title "${0##*/}: failure"
+	fi
+}
+
+Title() {
+Title() {
+:
+}
+	case $titleopt in
+	*-*)
+		return;;
+	esac
+	command -v title >/dev/null 2>&1 || return 0
+	AddTrap TitleTrap
+TitleInit() {
+. title "$@"
+}
+	TitleInit ${titleopt:+"-$titleopt"} -- "$@"
+}
+
+TitleInfo() {
+	Title "${0##*/}: $*"
+}
+
+Echo() {
+	printf '%s\n' "$*"
+}
+
+Echon() {
+	printf '%s' "$*"
+}
+
+Warning() {
+	Echo "${0##*/}: warning: $*" >&2
+}
+
+Info() {
+	printf '### %s\n' "$@"
+}
+
+Fatal() {
+	Echo "${0##*/}: $*" >&2
+	Exit 2
+}
+
+Quote() {
+	Push -c q "$@"
+	Echo "# $q"
+}
+
+QuoteExec() {
+	Quote "$@"
+	"$@"
+}
+
+MyDiff() {
+	TitleInfo 'diff'
+	diffa=$KBUILD_OUTPUT/.config.old
+	diffb=$KBUILD_OUTPUT/.config
+	test -f "$diffa" && test -f "$diffb" || return 0
+	diffd=diff
+	command -v colordiff >/dev/null 2>&1 && diffd=colordiff
+	QuoteExec "$diffd" -- "$diffa" "$diffb"
+}
+
+Version() {
+	Echo "kernel $script_version"
+}
+
+name=
+Log() {
+	$updatelog || return 0
+	log=`date '+%Y-%m-%d %T%z'`': '
+	[ -z "${name:++}" ] || log=$log$name': '
+	Echo "$log$*" >>"$logfile"
+}
+
+Usage() {
+	Echo "Usage: ${0##*/} [options]
+This script will compile and install the kernel and kernel modules
+(by default asking at each step what should be done).
+The following options are available:
+
+  -f (force) always assume 'yes'.  You might want to combine this with other
+           options to suppress certain questions.
+
+  -p       use oldconfig
+  -P       do not ask for oldconfig
+
+  -n       use nconfig    (resp. do not ask for other *config)
+  -x       use xconfig    (resp. do not ask for other *config)
+  -m       use menuconfig (resp. do not ask for other *config)
+  -g       use gconfig    (resp. do not ask for other *config)
+  -N       use no config  (resp. do not ask for *config)
+
+  -u USER  compile with permissions of USER (default for USER is portage).
+  -U umask Use umask and CCACHE_UMASK to (recommended are 077 or 007; default
+           is 077). Use value -(-U-) or the empty string to avoid this feature.
+           Note that kernel ASLR is rather pointless unless .config, kernel,
+           and all modules are hidden, see e.g.
+           https://forums.grsecurity.net/viewtopic.php?f=7&t=3367
+
+  -Y       transfer X data using sudox (default with USER=portage and -x|-g)
+  -X       do not transfer X data
+  -T[pPfHsS-] pass option(s) to the title script; - means no title
+
+  -c       Use ccache. The CCACHE_* variables are read from the environment.
+           If USER=portage the default depends on FEATURES, and the default
+           of all these variables is read from portage. In this case,
+           CCACHE_BASEDIR is automatically the parent directory of KERNEL_DIR
+           (typically /usr/src) so it may be a good idea to make KBUILD_DIR
+           a subdirectory thereof, too.
+  -C       Do not use ccache (default if USER is not portage).
+
+  -a PARA  Add PARA to the make parameters. Typical example:
+           -a 'CONFIG_DEBUG_SECTION_MISMATCH=y'
+           This can be used successively.
+
+  -o PATH  Use PATH as prefix for installation, e.g. install modules into
+           PATH/lib/modules/...
+           If this option is used, also the installation is done with the
+           permissions of USER.
+
+  -O PATH  As -o PATH but use root permissions for the installation.
+
+  -l LOG   Use logfile LOG. Default is /var/log/kernel.log
+  -L       Do not update logfile
+
+  -v       print version and exit
+  -h       show this help"
+	Exit ${1:-1}
+}
+
+remoteopt=
+PushOpt() {
+	Push remoteopt ${1+"$@"}
+}
+
+makeopts=
+PushMake() {
+	Push makeopts ${1+"$@"}
+}
+
+exportpass=
+PushExport() {
+	Push exportpass ${1+"$@"}
+}
+
+forceflag=false
+oldconfig=
+configtype=
+useccache=
+xtransfer=
+remoteuser=
+prefixdir=
+rootinstalls=:
+titleopt=
+setumask=077
+updatelog=:
+logfile=/var/log/kernel.log
+OPTIND=1
+while getopts 'fpPnmgxNcCxXLl:T:a:u:U:o:O:vh' opt
+do	[ x"$opt" != x'?' ] || Exit 1
+	PushOpt "-$opt"
+	case $opt in
+	f)	forceflag=:;;
+	p)	oldconfig=:;;
+	P)	oldconfig=false;;
+	n)	configtype='nconfig';;
+	x)	configtype='xconfig';;
+	m)	configtype='menuconfig';;
+	g)	configtype='gconfig';;
+	N)	configtype='none';;
+	c)	useccache=:;;
+	C)	useccache=false;;
+	Y)	xtransfer=:;;
+	X)	xtransfer=false;;
+	L)	updatelog=false;;
+	l)	PushOpt "$OPTARG"
+		logfile=$OPTARG;;
+	T)	PushOpt "$OPTARG"
+		titleopt=$titleopt$OPTARG;;
+	a)	PushOpt "$OPTARG"
+		PushMake "$OPTARG";;
+	u)	PushOpt "$OPTARG"
+		remoteuser=$OPTARG;;
+	U)	PushOpt "$OPTARG"
+		setumask=$OPTARG;;
+	o)	PushOpt "$OPTARG"
+		prefixdir=$OPTARG
+		rootinstalls=false;;
+	O)	PushOpt "$OPTARG"
+		prefixdir=$OPTARG;;
+	v)	Version;;
+	*)	Usage 0;;
+	esac
+done
+shift $(( $OPTIND - 1 ))
+
+case $titleopt in
+*[!pPfHsS-]*)
+	Usage;;
+esac
+
+if [ -z "${remoteuser:++}" ]
+then	remoteuser='portage'
+	PushOpt '-u' "$remoteuser"
+fi
+
+[ x"${setumask:--}" != x'-' ] || setumask=
+[ -z "${setumask:++}" ] || {
+	case $setumask in
+	*[!01234567]*)
+		Fatal 'illegal umask';;
+	esac
+	Quote umask "$setumask"
+	umask $setumask
+}
+
+if [ -z "${xtransfer:++}" ] && case $configtype in
+	[xg]*)
+		:;;
+	*)
+		false;;
+	esac
+then	[ x"$remoteuser" = x'portage' ] && xtransfer=: || xtransfer=false
+fi
+
+: ${KERNEL_DIR:=/usr/src/linux}
+: ${KBUILD_OUTPUT:=$KERNEL_DIR}
+
+test -d "$KERNEL_DIR" || \
+	Fatal "directory KERNEL_DIR=${KERNEL_DIR} does not exist"
+
+Cd() {
+	case $1 in
+	/*)
+		cd "$1" >/dev/null 2>&1 || Fatal "cd $1 failed";;
+	*)
+		cd "./${1#./}" >/dev/null 2>&1 || Fatal "cd $PWD/${1#./} failed";;
+	esac
+}
+
+Cd "$KERNEL_DIR"
+
+if [ x"$KERNEL_DIR" = x"$KBUILD_OUTPUT" ] || [ x"${PWD-}" = x"$KBUILD_OUTPUT" ]
+then	Fatal "This script should only be used if KBUILD_OUTPUT is set in the
+environment and is a different directory than KERNEL_DIR, i.e. it must *not* be
+	$KERNEL_DIR
+Note that setting KBUILD_OUTPUT should be done in the environment of root or
+alternatively in /etc/portage/make.conf (or /etc/make.conf) so that portage
+will honour it later when emerging kernel-related ebuilds."
+fi
+
+ccache_vars=
+ccache_bools=
+for ccache_var in DIR COMMENTS NOCOMMENTS COMPRESS NOCOMPRESS COMPRESSLEVEL \
+	CPP2 NOCPP2 EXTENSION COMPILERCHECK DIRECT NODIRECT DISABLE NODISABLE \
+	EXTRAFILES HARDLINK NOHARDLINK HASHDIR NOHASHDIR IGNOREHEADERS \
+	LIMIT_MULTIPLE LOGFILE MAXFILES MAXSIZENLEVELSPATH PREFIX PREFIX_CPP \
+	READONLY NOREADONLY READONLY_DIRECT NOREADONLY_DIRECT RECACHE NORECACHE \
+	SIZE SLOPPINESS STATS NOSTATS TEMPDIR UMASK UNIFY NOUNIFY
+do	ccache_vars=$ccache_vars' CCACHE_'$ccache_var
+	case $ccache_var in
+	NO*)
+		ccache_bools=$ccache_bools' '${ccache_var#NO};;
+	esac
+done
+
+BackSpaceArg() {
+	[ -z "${1:++}" ] && return
+	bckspc=$1
+	bckspt=
+	while [ -n "${bckspc:++}" ]
+	do	bckspt=$bckspt'\b \b'
+		bckspc=${bckspc%?}
+	done
+	printf "$bckspt"
+}
+
+schedule=
+command -v schedule >/dev/null 2>&1 && schedule=:
+
+savetty=
+ClearKeyBuffer() {
+	stty -icanon -echo min 0 time 0
+	while [ -n "`dd count=1 bs=1 2>/dev/null`" ]
+	do	:
+	done
+}
+
+TrapResetTty() {
+	ClearKeyBuffer
+	stty $savetty
+}
+
+Getkey() {
+	if [ -z "${savetty:++}" ]
+	then	savetty=`stty -g`
+		AddTrap TrapResetTty
+	fi
+	ClearKeyBuffer
+	stty -icanon -echo min 1 time 0
+	key=`dd count=1 bs=1 2>/dev/null` || key=
+	ClearKeyBuffer
+	stty $savetty
+	:
+}
+
+Schedule() {
+	if [ -z "${SCHEDULE_JOB:++}" ]
+	then	QuoteExec schedule queue 'true kernel rest'
+	else	QuoteExec schedule --job="$SCHEDULE_JOB" \
+			--command-text=kernel --command-text=rest queue true
+	fi || Warning 'schedule failed'
+}
+
+quitstatus=0
+Ask() {
+	if $forceflag
+	then	Echo "$*."
+		return 0
+	fi
+	Title '???'
+	askt="(Yes/No/Rest${schedule:+/Sched}/Quit) "
+	Echon "$*? $askt"
+	while Getkey
+	do	case $key in
+		[yY]*)
+			BackSpaceArg "$askt"
+			Echo 'Yes'
+			return 0;;
+		[nN]*)
+			BackSpaceArg "$askt"
+			Echo 'No'
+			return 1;;
+		[rR]*)
+			BackSpaceArg "$askt"
+			Echo 'Rest'
+			forceflag=:
+			return 0;;
+		[sS]*)
+			[ -n "$schedule" ] || continue
+			BackSpaceArg "$askt"
+			Echo 'Schedule + Rest'
+			forceflag=:
+			Schedule
+			return 0;;
+		[qQ]*)
+			BackSpaceArg "$askt"
+			Echo 'Quit'
+			Exit $quitstatus;;
+		esac
+	done
+}
+
+CalcTimeHelp() {
+	result=
+	for calctimea
+	do	calctimeb=${calctimea:-0}
+		[ "$calctimeb" -gt 9 ] || calctimeb=0$calctimeb
+		result=$result${result:+:}$calctimeb
+	done
+}
+
+CalcTime() {
+	time_minutes=$(( $1 / 60 ))
+	CalcTimeHelp $(( $1 / 3600 )) \
+		$(( $time_minutes % 60 )) \
+		$(( $1 % 60 ))
+}
+
+CalcTimeDifference() {
+	[ "${1:-0}" -gt 99 ] && CurrDate && [ "$currdate" -ge "$1" ] || return
+	time_difference=$(( $currdate - $1 ))
+	CalcTime "$time_difference"
+}
+
+CurrDate() {
+	Info "`date`"
+	currdate=`date '+%s' 2>/dev/null` || currdate=
+	[ -n "$currdate" ] && [ "$currdate" -gt 99 ]
+}
+
+read_features=:
+FeaturesHave() {
+	if $read_features
+	then	ReadVar FEATURES FEATURES
+		read_features=false
+	fi
+	feature_have=1
+	for feature in ${FEATURES-}
+	do	if [ x"$feature" = x"$1" ]
+		then	feature_have=0
+		elif [ x"$feature" = x"-$1" ]
+		then	feature_have=1
+		fi
+	done
+	return $feature_have
+}
+
+# The preparation parts which have to be done as root:
+
+PrepAndRemote() {
+	remoteUID=`id -u "$remoteuser"` || Fatal "id -u $remoteuser failed"
+	remoteGID=`id -g "$remoteuser"` || Fatal "id -g $remoteuser failed"
+	Info "Compiling scheduled for $remoteuser ($remoteUID:$remoteGID)."
+	$forceflag || Info '' 'You will get asked interactively at each step.' \
+	'To avoid this, use option -f or reply on a question with r(est).' ''
+	clr=:
+	if test -d "$KBUILD_OUTPUT"
+	then	if Ask "Clean $KBUILD_OUTPUT (only partially: keep .config*)"
+		then	set -- a
+			shift
+			set +f
+			for preprem in "$KBUILD_OUTPUT"/* "$KBUILD_OUTPUT"/.*
+			do	case ${preprem##*/} in
+				''|.|..|.config*)
+					continue;;
+				'*'|'.*')
+					test -f "$preprem" || \
+						test -d "$preprem" || \
+						continue;;
+				esac
+				set -- "$@" "$preprem"
+			done
+			set -f
+			if [ $# -eq 0 ]
+			then	Info 'directory is already clean'
+			else	SafeRemove 50 "$@" || \
+					Fatal 'cleaning directory failed'
+			fi
+			clr=false
+		elif Ask "Remove and recreate $KBUILD_OUTPUT completely"
+		then	SafeRemove 1 "$KBUILD_OUTPUT" || \
+				Fatal 'cleaning directory failed'
+			clr=false
+		fi
+	else	clr=false
+	fi
+	if ! test -d "$KBUILD_OUTPUT"
+	then	install -d -o "$remoteUID" -g "$remoteGID" -- "$KBUILD_OUTPUT" \
+			|| Fatal "cannot create $KBUILD_OUTPUT"
+	fi
+	if [ -n "${prefixdir:++}" ] && ! test -d "$prefixdir"
+	then	if $rootinstalls
+		then	install -d -- "$prefixdir"
+		else	install -d -o "$remoteUID" -g "$remoteGID" -- "$KBUILD_OUTPUT"
+		fi || Fatal "cannot create $prefixdir"
+	fi
+	if [ "$xtransfer" != false ] && ! command -v sudox >/dev/null 2>&1
+	then	Info 'Will not transfer X permissions as sudox is not in $PATH'
+		xtransfer=false
+	fi
+	if [ -z "${xtransfer:++}" ] && Ask "Transfer X permissions using sudox"
+	then	xtransfer=:
+	else	xtransfer=false
+	fi
+	if [ x"$remoteuser" = x'portage' ]
+	then	removex=:
+	else	removex=false
+	fi
+	$forceflag && PushOpt '-f'
+	CalcNice
+	SHELL=`command -v -- sh`
+	Quote export "SHELL=$SHELL"
+	export SHELL
+	for export_var in $ccache_vars SCHEDULE_JOB
+	do	eval "[ -n \"\${$export_var++}\" ] && PushExport \"\$export_var=\$$export_var\""
+	done
+	PrepareLog
+	PushOpt '--'
+	if $xtransfer
+	then	eval QuoteExec \$nice sudox -- \"\$remoteuser\" \"\$fullpath\" $remoteopt remote $exportpass -- \$removex \$clr
+		rvalue=$?
+	else	removex=false
+		eval QuoteExec \$nice sudo -u \"\$remoteuser\" -H -s -- \"\$fullpath\" $remoteopt remote $exportpass -- \$removex \$clr
+		rvalue=$?
+	fi
+	Info "Remote script finished; back to $user ($uid:$gid)"
+	[ $rvalue -ne 0 ] || return
+	[ $rvalue -eq $magicquit ] && Exit
+	[ $rvalue -eq $magicforce ] && {
+		forceflag=:
+		return
+	}
+	Fatal "calling ${0##*/} as $remoteuser failed"
+}
+
+extrainfo=
+MyMakeTitle() {
+	while :
+	do	case ${1-} in
+		*'='*)
+			shift
+			continue;;
+		esac
+		TitleInfo make ${1+"$@"} ${extrainfo:+"$extrainfo"}
+		return
+	done
+}
+
+nonfatal=false
+MyMake() {
+	MyMakeTitle ${1+"$@"}
+	eval "set -- a $ccopt $makeopts \${1+\"\$@\"}"
+	shift
+	QuoteExec make ${MAKEOPTS-} -- O="$KBUILD_OUTPUT" ${1+"$@"} && return
+	$nonfatal && return 1
+	Fatal 'make' ${1+"$@"} 'failed'
+}
+
+CalcModuleName() {
+	[ -n "${name:++}" ] && [ -n "${modulename:++}" ] && return
+	name=`readlink -f -- "$KERNEL_DIR"` || name=$KERNEL_DIR
+	sourcepath=${name%/*}
+	sourcename=${name##*/}
+	name=${sourcename#*-}
+	[ -n "${name:++}" ] || name='unknown'
+	# We add an "a" and remove it to include possibly trailing newlines
+	localversion=$(sed -n -e 's/^CONFIG_LOCALVERSION="\([^"]*\)"$/\1a/p' -- \
+		"$KBUILD_OUTPUT"/.config 2>/dev/null) || localversion=
+	localversion=${localversion%a}
+	[ -z "$localversion" ] || name=$name$localversion
+	modulename=$prefixdir/lib/modules/$name
+}
+
+CalcKernelSystem() {
+	CalcModuleName
+	kernelname=kernel-$name
+	systemname=$modulename/System.map
+}
+
+PrepareLog() {
+	$updatelog || return 0
+	! test -f "$logfile" || return 0
+	# Do not create logfile if it is not a file
+	! test -r "$logfile" && (
+		umask 022
+		set -C
+		: >"$logfile"
+	) && chown -- "$remoteuser": "$logfile" && test -f "$logfile" || {
+		updatelog=false
+		PushOpt '-L'
+		return 1
+	}
+}
+
+ReadLog() {
+	test -f "$logfile" && test -r "$logfile" || return
+	prevtime=`sed -ne 's/^.*\:[[:space:]]*\(.* compilation time. .*\)/\\1/p' -- "$logfile" | tail -n 1`
+	[ -n "${prevtime:++}" ] || return
+	Info "Previous $prevtime"
+	prevtime=${prevtime%%?compilation*}${prevtime##*time?}
+}
+
+CcacheRegular() {
+	case $1 in
+	CCACHE_SIZE|CCACHE_BASEDIR)
+		return 1;;
+	CCACHE_UMASK)
+		[ -z "${setumask:++}" ] || return 1;
+	esac
+}
+
+ExportVar() {
+	eval "[ -z \"\${$1++}\" ]" || eval "Quote export \"\$1=\$$1\"
+export $1"
+}
+
+UnsetVar() {
+	eval "[ -z \"\${$1++}\" ]" || eval "Quote unset $1
+unset $1"
+}
+
+ExportVarIfNonempty() {
+	if eval "[ -n \"\${$1++}\" ]"
+	then	[ $# -le 1 ] || eval "$1=\$2"
+		ExportVar $1
+		return
+	fi
+	UnsetVar $1
+	return 1
+}
+
+CcacheVarIsNotBool() {
+	case " $ccache_bools " in
+	*" ${1%NO} "*)
+		return 1;;
+	esac
+}
+
+ReadCcacheConf() {
+	for ccache_var in $ccache_vars
+	do	CcacheRegular $ccache_var || continue
+		ReadVar $ccache_var $ccache_var
+	done
+	if [ -z "${CCACHE_DIR:++}" ]
+	then	ReadVar CCACHE_DIR PORTAGE_TMPDIR
+		CCACHE_DIR=${CCACHE_DIR:-/var/tmp}/ccache
+	fi
+	: ${CCACHE_SLOPPINESS='file_macro,time_macros,include_file_mtime,include_file_ctime,file_stat_matches,pch_defines'}
+	for ccache_bool in $ccache_bools
+	do	if ExportVarIfNonempty CCACHE_$ccache_bool true
+		then	UnsetVar CCACHE_NO$ccache_bool
+		else	case $ccache_bool in
+			HASHDIR)
+				eval CCACHE_NO$ccache_bool=true;;
+			esac
+			ExportVarIfNonempty CCACHE_NO$ccache_bool true
+		fi
+	done
+	for ccache_var in $ccache_vars
+	do	CcacheRegular $ccache_var || continue
+		CcacheVarIsNotBool ${ccache_var#CCACHE_} || continue
+		ExportVar $ccache_var
+	done
+	CCACHE_BASEDIR=${KERNEL_DIR%/*}
+	ExportVar CCACHE_BASEDIR
+	if [ -n "${setumask:++}" ]
+	then	CCACHE_UMASK=$setumask
+		ExportVar CCACHE_UMASK
+	fi
+}
+
+CalcCcache() {
+	ccopt=
+	${useccache:-:} || return 0
+	if [ x"$remoteuser" = x'portage' ]
+	then	if [ -z "${useccache:++}" ]
+		then	if FeaturesHave 'ccache'
+			then	! Ask "Use ccache"
+			else	Ask "keep ccache disabled"
+			fi && {
+				useccache=false
+				return 0
+			}
+			useccache=:
+		fi
+		ReadCcacheConf
+	else	${useccache:-false} || return 0
+	fi
+	#Push ccopt 'CC=ccache gcc'
+	Quote export "PATH=/usr/lib/ccache/bin${PATH:+:}$PATH"
+	PATH=/usr/lib/ccache/bin${PATH:+:}$PATH
+	export PATH
+	if [ -n "${CCACHE_SIZE:++}" ]
+	then	Quote ccache -M "$CCACHE_SIZE"
+		ccache -M "$CCACHE_SIZE" >/dev/null 2>&1
+	fi
+}
+
+CalcNice() {
+	if [ -n "${NICENESS++}" ]
+	then	: ${NICENESS:=0}
+	else	ReadVar NICENESS PORTAGE_NICENESS
+	fi
+	case ${NICENESS-} in
+	*[!0123456789]*)
+		NICENESS=;;
+	esac
+	: ${NICENESS:=9}
+	if [ "$NICENESS" -le 0 ] || ! [ "`nice`" -eq 0 ]
+	then	nice=
+	else	nice="nice -n $NICENESS --"
+	fi
+	ReadVar PORTAGE_IONICE_COMMAND PORTAGE_IONICE_COMMAND
+	: ${PORTAGE_IONICE_COMMAND=ionice -c 3}
+	for niceadd in $PORTAGE_IONICE_COMMAND --
+	do	case $niceadd in
+		-p|*PID*)
+			continue;;
+		--*)
+			:;;
+		-*p*)
+			nice=$nice${nice:+\ }${niceadd%p*}${niceadd#*p}
+			false;;
+		esac && nice=$nice${nice:+\ }$niceadd
+		[ x"$niceadd" = x'--' ] && break
+	done
+}
+
+CalcMakeopts() {
+	[ -n "${MAKEOPTS++}" ] && return
+	ReadVar mkopts MAKEOPTS
+	for mkopt in ${mkopts-}
+	do	case $mkopt in
+		V=*|--no-print-directory|--output-sync*|-O*)
+			continue;;
+		esac
+		MAKEOPTS=${MAKEOPTS-}${MAKEOPTS:+\ }$mkopt
+	done
+}
+
+ConfigAskMake() {
+	[ -n "${configtype:++}" ] && [ x"$configtype" != x"$1" ] && return
+	Ask "$2" && {
+		MyMake "$1" && configtype=$1
+		MyDiff
+	}
+}
+
+CompileRemote() {
+	TitleInfo 'prepare'
+	removex=$1
+	shift
+	clr=$1
+
+	CalcCcache
+	CalcMakeopts
+
+	Info "`gcc --version | head -n 1`"
+
+	$clr && Ask 'Use make mrproper (usually you do not want this)' && \
+		MyMake mrproper
+
+	if [ -z "$oldconfig" ]
+	then	if Ask 'Use make oldconfig (usually you do not want this)'
+		then	oldconfig=:
+		else	oldconfig=false
+		fi
+	fi
+	! $oldconfig || {
+		MyMake oldconfig
+		MyDiff
+	}
+
+	nonfatal=:
+	ConfigAskMake nconfig 'Use make nconfig'
+	ConfigAskMake xconfig 'Use make xconfig'
+	ConfigAskMake menuconfig 'Use make menuconfig'
+	ConfigAskMake gconfig 'Use make gconfig (this is ugly)'
+	nonfatal=false
+
+	if $removex
+	then	rm -f -- "$HOME/.Xauthority"
+		[ x"$remoteuser" = x'portage' ] && rm -rf -- "$HOME/.qt"
+	fi
+	test -f "$KBUILD_OUTPUT/.config.old" && \
+		Ask "remove $KBUILD_OUTPUT/.config.old" && \
+		rm -f -- "$KBUILD_OUTPUT/.config.old"
+	prevtimeinfo=`date +%T`
+	! ReadLog || prevtimeinfo=$prevtimeinfo' '$prevtime
+	result=
+	what=
+	if Ask 'Compile both, kernel and modules'
+	then	CurrDate
+		comp_start=$currdate
+		extrainfo=$prevtimeinfo
+		MyMake
+		extrainfo=
+		CalcTimeDifference "$comp_start" && \
+			Info '' "Time for kernel+modules compilation: $result" ''
+		what='kernel+modules'
+	else	compiletime=
+		Ask 'Compile kernel'  && {
+			CurrDate
+			comp_start=$currdate
+			extrainfo=$prevtimeinfo
+			MyMake bzImage
+			extrainfo=
+			CalcTimeDifference "$comp_start" && {
+				compiletime=$time_difference
+				Info '' "Time for kernel compilation: $result" ''
+			}
+			what=kernel
+		}
+		Ask 'Compile modules' && {
+			CurrDate
+			modules_start=$currdate
+			extrainfo=$prevtimeinfo
+			MyMake modules
+			extrainfo=
+			CalcTimeDifference "$modules_start" && {
+				Info '' "Time for modules compilation: $result" ''
+				if [ -n "${what:++}" ]
+				then	CalcTime "$(( $compiletime + $time_difference ))"
+					Info "Time for kernel+modules compilation: $result" ''
+					what='kernel+modules'
+				else	what=modules
+				fi
+			}
+		}
+	fi
+	[ -z "${what:++}" ] || Log "$what compilation time: $result"
+}
+
+SetRootPerm() {
+	permstat=$?
+	if [ "$uid" -eq 0 ]
+	then	chown -- root:root "$1" || permstat=$?
+	fi
+	return $permstat
+}
+
+FixModules() {
+	CalcModuleName
+	rm -f -- "$modulename/build" "$modulename/source"
+}
+
+MoveKernel() {
+	CalcKernelSystem "$1"
+	if Ask "Move kernel -> $1/$kernelname"
+	then	found=false
+		set +f
+		for i in "$KBUILD_OUTPUT"/arch/*/boot/bzImage
+		do	test -r "$i" || continue
+			test -h "$i" && continue
+			found=:
+			installed=${installed-}${installed:+\ }kernel
+			mv -- "$i" "$1/$kernelname" \
+				&& SetRootPerm "$1/$kernelname" \
+				&& break
+			Warning "moving $i failed"
+		done
+		set -f
+		$found || Warning \
+			"$KBUILD_OUTPUT/arch/*/boot/bzImage not found"
+		test -f "$KBUILD_OUTPUT/vmlinux" && rm -f -- "$KBUILD_OUTPUT/vmlinux"
+	fi
+	Ask "Copy System.map -> $systemname" || return 0
+	systemori=$KBUILD_OUTPUT/System.map
+	cp -- "$systemori" "$systemname" \
+		&& touch -r "$systemori" -- "$systemname" \
+		&& SetRootPerm "$systemname" \
+		|| Warning 'copying System.map failed'
+}
+
+InstallIntoPrefix() {
+	if Ask "Install modules to $prefixdir"
+	then	MyMake INSTALL_MOD_PATH=$prefixdir modules_install
+		FixModules
+		installed=modules
+	fi
+	MoveKernel "$prefixdir"
+}
+
+# The installation which has to be done as root:
+
+InstallAsRoot() {
+	bootname='/boot'
+	if [ -n "${prefixdir:++}" ]
+	then	InstallIntoPrefix
+		CleanupSources
+		return
+	fi
+	if Ask 'Install modules'
+	then	MyMake modules_install
+		FixModules
+		installed=modules
+	fi
+	Cd "$bootname"
+	MoveKernel "$bootname"
+	SetSymlinks
+	RemoveOldKernels
+	CleanupSources
+}
+
+CleanupSources() {
+	RemoveOldSources
+	RemoveOldPackages
+}
+
+SetSymlinks() {
+	Cd "$bootname"
+	if test -h bzImage && Ask 'Set both, new and previous symlink'
+	then	mv -- bzImage bzImage.previous \
+			|| Warning "moving old bzImage failed"
+		ln -s -- "$kernelname" bzImage \
+			|| Fatal "setting new bzImage failed"
+	elif Ask 'Set new symlink'
+	then	ln -sf -- "$kernelname" bzImage \
+			|| Fatal "setting new bzImage failed"
+	elif Ask 'Set debug symlink'
+	then	ln -sf -- "$kernelname" 'bzImage.debug' \
+			|| Fatal "setting bzImage.debug failed"
+	fi
+}
+
+RemoveOldKernels() {
+	CalcModuleName
+	set -- a "$name"
+	shift
+	set +f
+	for currlink in "$bootname"/*
+	do	test -h "$currlink" && \
+		currext=`readlink -f -- "$currlink"` && \
+		case $currext in
+		*/kernel-*)
+			set -- a ${1+"$@"} "${currext##*/kernel-}"
+			shift;;
+		esac
+	done
+	set -f
+	Push -c oldexts
+	set +f
+	for oldfile in "$bootname"/kernel-*
+	do	oldext=${oldfile##*/kernel-}
+		iscurrent=false
+		for currext
+		do	if [ x"$oldext" = x"$currext" ]
+			then	iscurrent=:
+				break
+			fi
+		done
+		$iscurrent || Push oldexts "$oldext"
+	done
+	set -f
+	eval "set -- a $oldexts"
+	shift
+	[ $# -ne 0 ] || return 0
+	Push -c oldfiles
+	set +f
+	for oldext
+	do	for oldfile in "$bootname"/*-"$oldext" /lib/modules/"$oldext"
+		do	! test -r "$oldfile" || Push oldfiles "$oldfile"
+		done
+	done
+	set -f
+	eval "set -- a $oldfiles"
+	shift
+	[ $# -ne 0 ] || return 0
+	Info '' 'Presumably obsolete kernel files/dirs found:' '' "$@"
+	if Ask 'Remove old kernel files/dirs'
+	then	SafeRemove 10 "$@"
+	fi
+}
+
+RemoveOldSources() {
+	CalcModuleName
+	[ -n "${sourcepath-}" ] && [ -n "${sourcename-}" ] \
+		&& test -d "$sourcepath/$sourcename" || return 0
+	sourcerump=${sourcename%%-*}
+	Push -c oldsources
+	set +f
+	for oldsource in "$sourcepath/$sourcerump"-*
+	do	[ x"$oldsource" = x"$sourcepath/$sourcename" ] && continue
+		test -d "$oldsource" && Push oldsources "$oldsource"
+	done
+	set -f
+	eval "set -- a $oldsources"
+	shift
+	[ $# -ne 0 ] || return 0
+	Info '' 'Presumably obsolete kernel source dirs found:' '' "$@"
+	if Ask 'Remove old kernel sources'
+	then	SafeRemove 10 "$@"
+	fi
+}
+
+RemoveOldPackages() {
+	CalcModuleName
+	[ -n "${sourcepath-}" ] && [ -n "${sourcename-}" ] || return 0
+	Push -c oldpackages
+	set +f
+	for oldpackage in /var/db/pkg/sys-kernel/*-sources-*
+	do	oldcontent=$oldpackage/CONTENTS
+		test -f "$oldcontent" || continue
+		gentoodir=`sed -ne '/^dir[^\/]*\/[^\/]*\/[^\/]*\/[^\/]*/{s/^dir[^\/]*\(\/.*\)/\1/p;q}' "$oldcontent"` \
+			&& [ -n "$gentoodir" ] || continue
+		test -d "$gentoodir" || Push oldpackages "$oldpackage"
+	done
+	set -f
+	eval "set -- a $oldpackages"
+	shift
+	[ $# -ne 0 ] || return 0
+	Info '' 'Presumably obsolete installed kernel packages found:' '' "$@"
+	if Ask 'Remove obsolete installed kernel packages'
+	then	SafeRemove 10 "$@"
+	fi
+}
+
+SafeToRemove() {
+	case ${1-x} in
+	'')
+		:;;
+	*[!0123456789]*)
+		Fatal "internal error: wrong arg for SafeToRemove: $1";;
+	*)
+		if [ $# -gt $1 ]
+		then	Warning "removing more than $1 files/dirs.
+This number is suspiciously large: skipping removal for safety reasons"
+			return 1
+		fi;;
+	esac
+	shift
+	for saveremove
+	do	if test -f "$saveremove" || test -h "$saveremove"
+		then	case $saveremove in
+			/[!/]*/[!/]*)
+				continue;;
+			esac
+			Warning "not in an absolute subdirectory: $saveremove
+This is suspicious: skipping removal for safety reasons"
+			return 1
+		fi
+		if ! test -d "$saveremove"
+		then	Warning "unusual file type: $saveremove
+This is suspicious: skipping removal for safety reasons"
+			return 1
+		fi
+		case $saveremove in
+		/[!/]*/[!/]*/[!/]*)
+			continue;;
+		esac
+		Warning "dir path length <3: $saveremove
+This number is suspiciously small: skipping for safety reasons"
+		return 1
+	done
+	return 0
+}
+
+SafeRemove() {
+	if SafeToRemove "$@"
+	then	shift
+		QuoteExec rm -rf -- "$@"
+	else	shift
+		Quote skipping rm -rf -- "$@"
+		return 1
+	fi
+}
+
+FinishText() {
+	CalcTimeDifference "$time_begin" && \
+		Info '' "Total time elapsed: $result"
+	TitleInfo '@module-rebuild'
+	Info '' 'Do not forget to reemerge all packages containing kernel modules:'
+	Info '' 'emerge -1O @module-rebuild' ''
+	Exit $? 0
+}
+
+if [ $# -ne 0 ]
+then	arg=$1
+	shift
+elif [ -n "${remoteopt:++}" ]
+then	arg='-'
+fi
+
+user=`id -un`
+uid=`id -u`
+gid=`id -g`
+case $arg in
+-)
+	Info "${0##*/}: called as $user ($uid:$gid)"
+	[ "$uid" -eq 0 ] && [ "$gid" -eq 0 ] && [ x"$user" = x'root' ] || {
+		Warning 'this script should be called as root.'
+	}
+	CurrDate
+	time_begin=$currdate
+	PrepAndRemote
+	installed=
+	$rootinstalls && InstallAsRoot
+	[ -z "${installed:++}" ] || Log "installed: $installed"
+	FinishText;;
+remote)
+	Info "${0##*/}: called remotely as $user ($uid:$gid)"
+	while case ${1:-+} in
+	*'='*)
+		exportvar=${1%%=*}
+		exportvalue=${1#*=}
+		Quote export "$exportvar=$exportvalue"
+		eval $exportvar=\$exportvalue
+		export "$exportvar";;
+	'--')
+		false;;
+	*)
+		Fatal "internal error: argument \"$1\"";;
+	esac
+	do	shift
+	done
+	shift
+	quitstatus=$magicquit
+	CompileRemote ${1+"$@"}
+	$rootinstalls || InstallIntoPrefix
+	$forceflag && Exit $magicforce;;
+*)
+	Usage;;
+esac
+Exit 0
