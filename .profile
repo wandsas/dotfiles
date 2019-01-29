@@ -1,9 +1,5 @@
 # .profile: POSIX-compatible shell login script
 
-if [ -f /etc/profile ]; then
-    . /etc/profile
-fi
-
 # Set default values for required environment variables
 HOSTNAME=${HOSTNAME:-${HOST}}
 HOSTNAME=${HOSTNAME:-$(hostname)}
@@ -27,10 +23,9 @@ export XDG_DATA_HOME=${HOME}/.local/share
 # see https://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html
 export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/run/user/${LOGNAME}}
+[[ -d ${XDG_RUNTIME_DIR} ]] || install -d -m 0700 -o ${LOGNAME} -g ${LOGNAME} ${XDG_RUNTIME_DIR}
 
-test -d ${XDG_RUNTIME_DIR} || install -d -m0700 -o${LOGNAME} -g${LOGNAME} ${XDG_RUNTIME_DIR}
-
-# other variables
+# Other variables
 export EDITOR=nvim
 export GIMP2_DIRECTORY=${XDG_CONFIG_HOME}/gimp
 export GOBIN=${HOME}/.local/bin
@@ -64,6 +59,10 @@ export WEGORC=${XDG_CONFIG_HOME}/wegorc
 export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -XX:-UsePerfData"
 export QT_STYLE_OVERRIDE=GTK+
 
-gpg-connect-agent RELOADAGENT /bye &>/dev/null
+#gpg-connect-agent RELOADAGENT /bye &>/dev/null
+
+if [ -n "${BASH_VERSION}" ]; then
+    . ~/.bashrc
+fi
 
 # vim:fenc=utf-8:ft=sh:

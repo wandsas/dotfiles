@@ -95,8 +95,8 @@ autoload -Uz run-help
 # For file extensions, we use the defaults of zsh-mime-setup.
 # See /etc/mailcap, /etc/mime.types for system configs
 # and ~/.mailcap, ~/.config/mimeapps.list for user configs.
-zstyle ":mime:*" current-shell true
-zsh-mime-setup
+#zstyle ":mime:*" current-shell true
+#zsh-mime-setup
 
 # Environment setup
 NULLCMD=:
@@ -121,8 +121,8 @@ watch=(notme root)
 typeset -U infopath
 
 infopath=(
-    $HOME/{.local/,}share/info(N)
-    /usr/{local/,}share/info(N)
+    $HOME/{.local/,}share/info
+    /usr/{local/,}share/info
     $infopath
         )
 

@@ -1,10 +1,6 @@
-[[ $TERM = linux ]] && export LC_MESSAGES="C"
+[[ $TERM = linux ]] && export LC_MESSAGES=C
 
 umask 022
-
-if [ ~/.profile ]; then
-    . ~/.profile
-fi
 
 # If not running interactively, don't do anything else
 [[ $- != *i* ]] && return
@@ -23,3 +19,6 @@ stty -ixon
 for sh in ${XDG_CONFIG_HOME}/bashrc.d/*.sh ${XDG_CONFIG_HOME}/aliases.sh; do
   [[ -r "${sh}" ]] && source ${sh}
 done
+unset sh
+
+# vim:fenc=utf-8:ft=sh:
