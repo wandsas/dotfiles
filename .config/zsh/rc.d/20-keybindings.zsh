@@ -1,6 +1,3 @@
-#
-# Custom ZLE widgets
-#
 
 zmodload zsh/terminfo
 
@@ -44,7 +41,6 @@ bindkey '^g' peco-ghq
 function insert-datestamp () { LBUFFER+=${(%):-'%D{%Y-%m-%d}'}; }
 zle -N insert-datestamp
 bindkey '^xd' insert-datestamp
-
 
 #
 # Zsh keybindings
@@ -129,7 +125,6 @@ else
     done
     unset i
 fi
-
 
 #
 # Enhanced vi-mode

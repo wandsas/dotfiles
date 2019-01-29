@@ -1,23 +1,18 @@
 # ~/.zshenv
 
-# This gets run even for non-interactive shells, so keep it as fast as possible.
+# This gets run even for non-interactive shells,
+# so keep it as fast as possible.
 
 export ZDOTDIR=${ZDOTDIR:-$HOME}
-
 
 # Stop bad system-wide scripts interfering.
 setopt NO_global_rcs
 
-setopt extended_glob
-
-
-if [ -r "$HOME/.profile" ]; then
-    source ~/.profile
+if [ -f ~/.profile ]; then
+    . ~/.profile
 fi
 
-# 077 would be more secure, but 022 is generally quite realistic
 umask 022
-
 
 # Path
 typeset -U PATH path
@@ -37,7 +32,6 @@ export MANPATH
 typeset -U infopath
 export INFOPATH
 
-
 # Libraries
 
 # LD_LIBRARY_PATH
@@ -45,22 +39,6 @@ typeset -TU LD_LIBRARY_PATH ld_library_path
 
 # Perl libraries
 typeset -TU PERL5LIB perl5lib
-
-# GOPATH
-export GOPATH=$HOME/.go
-
-# Python libraries
-typeset -TU PYTHONPATH pythonpath
-export PYTHONPATH
-
-# Ruby libraries
-typeset -TU RUBYLIB rubylib
-export RUBYLIB
-
-# Node.js
-export npm_config_prefix=$HOME/.npm-global
-export NODE_PATH=$npm_config_prefix/lib/node_modules
-
 
 # Fpath
 fpath=(

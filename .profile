@@ -5,12 +5,15 @@ if [ -f /etc/profile ]; then
 fi
 
 # Set default values for required environment variables
+HOSTNAME=${HOSTNAME:-${HOST}}
+HOSTNAME=${HOSTNAME:-$(hostname)}
 LOGNAME=${LOGNAME:-${USER}}
 LOGNAME=${LOGNAME:-$(id -un)}
 
 # POSIX variables
 # see http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03
 export HOME=${HOME:-/home/${LOGNAME}}
+export HOSTNAME=${HOSTNAME}
 export LOGNAME=${LOGNAME}
 export PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 
@@ -45,6 +48,8 @@ export LESSHISTFILE=${XDG_CACHE_HOME}/history/less
 export LESSOPEN="|lesspipe %s"
 export MAKEFLAGS="-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory"
 export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
+export npm_config_prefix=${XDG_CONFIG_HOME}/npm-global
+export NODE_PATH=${npm_config_prefix}/lib/node_modules
 export PAGER=less
 export PASSWORD_STORE_ENABLE_EXTENSIONS=1
 export NO_AT_BRIDGE=1
