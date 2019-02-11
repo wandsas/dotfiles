@@ -8,8 +8,8 @@
 [core]
   editor = $EDITOR
   whitespace=fix,space-before-tab,tab-in-indent,trailing-space,cr-at-eol
-  #pager = less -FRSX
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = less -FRSX
+  #pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore_global
   attributesfile = ~/.gitattributes
   untrackedCache = true

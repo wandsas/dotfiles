@@ -254,7 +254,7 @@ assign [class="(?i)spacefm"]                    $ws2
 assign [class="(?i)(S|s)nappergui"]             $ws2
 # browser
 assign [class="(?i)firefox"]                    $ws3
-assign [class="(?i)chromium-browser-ungoogled-chromium"] $ws3
+assign [class="(?i)chromium-browser-chromium"] $ws3
 assign [class="(?i)chromium-devel"]             $ws3
 # dev-ide
 assign [class="(?i)Android SDK Manager"]        $ws4

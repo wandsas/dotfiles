@@ -4,11 +4,10 @@ type = internal/fs
 interval = 60
 
 mount-0 = /
-mount-1 = /tmp
-mount-2 = /var/tmp
+mount-1 = /usr
+mount-2 = /var
+mount-3 = /tmp
 
 label-mounted = %{F#63FB99}%mountpoint%%{F-} %percentage_used%%
-;label-mounted = %mountpoint%: %percentage_free%%/%percentage_used%% F: %free%, U: %used%, T: %total%
-remove-unmounted = true
 
 ; vim:fenc=utf-8:ft=dosini:

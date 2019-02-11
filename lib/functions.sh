@@ -1,3 +1,4 @@
+# vim:fencoding=utf-8:filetype=sh:
 
 #
 # Print a info message

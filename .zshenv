@@ -1,5 +1,7 @@
 # ~/.zshenv
 
+echo ~/.zshenv
+
 # This gets run even for non-interactive shells,
 # so keep it as fast as possible.
 
@@ -8,10 +10,6 @@ export ZDOTDIR=${ZDOTDIR:-$HOME}
 # Stop bad system-wide scripts interfering.
 setopt NO_global_rcs
 
-if [ -f ~/.profile ]; then
-    . ~/.profile
-fi
-
 umask 022
 
 # Path
@@ -19,7 +17,7 @@ typeset -U PATH path
 export PATH
 
 path=(
-    $ZDOTDIR/{.local/,.go/,.cargo/,.npm-global/,.cask/,}bin
+    $ZDOTDIR/{.local/,.npm-global/,.cask/,}bin
     /usr/local/{bin,sbin}
     $path
     )
@@ -42,7 +40,7 @@ typeset -TU PERL5LIB perl5lib
 
 # Fpath
 fpath=(
-    $ZDOTDIR/.[z]sh/{$ZSH_VERSION/*.zwc,functions}(N)
+    $ZDOTDIR/.config/zsh/{$ZSH_VERSION/*.zwc,functions}(N)
     $fpath
     )
 

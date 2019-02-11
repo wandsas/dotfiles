@@ -1,12 +1,19 @@
 scriptencoding utf8
-set nocompatible
-filetype off
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+set nocompatible
+filetype off
+
+set runtimepath^=/usr/share/vim/vimfiles/ftdetect
+set runtimepath^=/usr/share/vim/vimfiles/fplugin
+set runtimepath^=/usr/share/vim/vimfiles/indent
+set runtimepath^=/usr/share/vim/vimfiles/plugin
+set runtimepath^=/usr/share/vim/vimfiles/syntax
 
 call plug#begin('~/.local/share/nvim/bundle')
 
@@ -16,16 +23,11 @@ Plug 'tpope/vim-rhubarb'           " dependency for tpope/fugitive
 
 Plug 'junegunn/vim-plug'
 Plug 'mhartington/oceanic-next'
-Plug 'whatyouhide/vim-gotham'
 Plug 'ryanoasis/vim-devicons'
 Plug 'bkad/CamelCaseMotion'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'w0rp/ale'
-Plug 'kylef/apiblueprint.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tyru/caw.vim'
 Plug 'ctrlpvim/ctrlp.vim'          " CtrlP is installed to support tag finding in vim-go
-Plug 'JulesWang/css.vim'
 Plug 'Rip-Rip/clang_complete'
 Plug 'Shougo/context_filetype.vim'
 Plug 'Raimondi/delimitMate'
@@ -33,7 +35,6 @@ Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 Plug 'termhn/i3-vim-nav', { 'for': 'i3' }
-Plug 'kassio/neoterm'
 Plug 'Shougo/neoyank.vim'
 Plug 'roryokane/detectindent', { 'on': 'DetectIndent' }
 Plug 'Shougo/deol.nvim'
@@ -41,7 +42,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'   " default snippets for many languages
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' } " Go auto completion
-Plug 'lifepillar/pgsql.vim'                    " PostgreSQL syntax highlighting
 Plug 'pangloss/vim-javascript'                 " JavaScript syntax highlighting
 Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
 Plug 'vim-scripts/OmniCppComplete', { 'for': 'cpp' }
@@ -51,12 +51,9 @@ Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'zchee/deoplete-jedi' , { 'for': 'go' }
 Plug 'Shougo/echodoc'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'vue'] }
-Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'junegunn/fzf', { 'dir': '~/.go/src/github.com/junegunn/fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'BurningEther/iron.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neossh.vim'
 Plug 'sbdchd/neoformat', { 'on': 'NeoFormat' }
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'vim-python/python-syntax', { 'for': ['python', 'python3'] }
@@ -67,12 +64,9 @@ Plug 'tmhedberg/SimpylFold', { 'for': ['python', 'python3'] }
 Plug 'gu-fan/riv.vim', { 'for': 'rust' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
-Plug 'ervandew/supertab'
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
-Plug 'wellle/targets.vim'
 Plug 'tomtom/tcomment_vim'
-Plug 'Quramy/tsuquyomi'
 Plug 'chrisbra/unicode.vim'
 Plug 'Shougo/unite.vim'
 Plug 'SirVer/ultisnips'
@@ -81,7 +75,6 @@ Plug 'vimwiki/vimwiki'
 Plug 'honza/vim-snippets'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'slashmili/alchemist.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rhysd/vim-clang-format'
@@ -89,7 +82,6 @@ Plug 'vhdirk/vim-cmake'
 Plug 'gko/vim-coloresque', { 'for': ['css', 'less', 'sass', 'html', 'vue'] }
 Plug 'junegunn/vim-easy-align', { 'on': 'EasyAlign' }
 Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive', { 'for': 'git' }
 Plug 'tpope/vim-git', { 'for': 'git' }
 Plug 'jamessan/vim-gnupg', { 'for': 'gnupg' }

@@ -25,7 +25,10 @@ case "${1:-$(tty)}" in
     bspwm*|*tty2)
         exec bspwm
         ;;
+    dwm*|*tty3)
+        exec dwm
+        ;;
     *)
-        xterm -geometry 90x25-00
+        urxvt -geometry 90x25-00
         ;;
 esac

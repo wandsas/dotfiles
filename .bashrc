@@ -17,8 +17,6 @@ shopt -s histappend
 stty -ixon
 
 for sh in ${XDG_CONFIG_HOME}/bashrc.d/*.sh ${XDG_CONFIG_HOME}/aliases.sh; do
-  [[ -r "${sh}" ]] && source ${sh}
+  [ -r $sh ] && . $sh
 done
 unset sh
-
-# vim:fenc=utf-8:ft=sh:

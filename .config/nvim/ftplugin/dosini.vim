@@ -9,3 +9,8 @@ setlocal foldmethod=syntax
 
 " Uncomment to start with folds open
 "setlocal foldlevel=20
+
+set tabstop=2
+set softtabstop=0
+set shiftwidth=2
+set expandtab
