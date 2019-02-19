@@ -92,4 +92,7 @@ map \T <Esc>:set tabstop=4 softtabstop=4 shiftwidth=4 expandtab<CR>
 "nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 "vnoremap <Space> zf
 
+" build ctags db from current directory
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
 " vim:fenc=utf-8:ft=vim:ts=2:sts=0:sw=2:et:

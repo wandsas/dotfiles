@@ -1,7 +1,0 @@
-# neovim-gtk config (rust gui for neovim)
-
-#if exists('g:GtkGuiLoaded')
-  " some code here
-  #endif
-
-#GuiFont Font DejaVu Sans Mono:12
