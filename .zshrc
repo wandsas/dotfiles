@@ -1,7 +1,5 @@
 # ~/.zshrc
 
-echo ~/.zshrc
-
 [[ $TERM = linux ]] && export LC_MESSAGES="C"
 
 umask 022
@@ -62,7 +60,6 @@ setopt                      \
 
 stty -ixon
 ttyctl -f
-
 
 # Zsh modules (See man zshmodules)
 

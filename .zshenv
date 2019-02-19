@@ -1,7 +1,5 @@
 # ~/.zshenv
 
-echo ~/.zshenv
-
 # This gets run even for non-interactive shells,
 # so keep it as fast as possible.
 
@@ -40,13 +38,13 @@ typeset -TU PERL5LIB perl5lib
 
 # Fpath
 fpath=(
-    $ZDOTDIR/.config/zsh/{$ZSH_VERSION/*.zwc,functions}(N)
+    ${ZDOTDIR}/.config/zsh/{$ZSH_VERSION/*.zwc,functions}(N)
     $fpath
     )
 
 for dirname in $fpath; do
     case "$dirname" in
-	($ZDOTDIR/.zsh*) fns=( $dirname/*~*~(-N.x:t) ) ;;
+	(${ZDOTDIR}/.config/zsh*) fns=( $dirname/*~*~(-N.x:t) ) ;;
 	              *) fns=( $dirname/*~*~(-N.:t ) ) ;;
     esac
     (( $#fns )) && autoload "$fns[@]"

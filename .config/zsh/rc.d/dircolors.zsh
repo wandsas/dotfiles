@@ -1,5 +1,3 @@
-echo ~/.config/zsh/rc.d/dircolors.zsh
-
 (( $+commands[dircolors] )) && {
 	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
 	LS_COLORS=
@@ -23,5 +21,3 @@ echo ~/.config/zsh/rc.d/dircolors.zsh
     export LESS_TERMCAP_ue=$'\E[0m'
     export LESS_TERMCAP_us=$'\E[1;32m'
 }
-
-# vim:fenc=utf-8:ft=sh:

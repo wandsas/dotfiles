@@ -61,7 +61,6 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': ['python', 'python3'] }
 Plug 'kana/vim-textobj-user', { 'for': ['python', 'python3'] }
 Plug 'bps/vim-textobj-python', { 'for': ['python', 'python3'] }
 Plug 'tmhedberg/SimpylFold', { 'for': ['python', 'python3'] }
-Plug 'gu-fan/riv.vim', { 'for': 'rust' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
 Plug 'scrooloose/syntastic'

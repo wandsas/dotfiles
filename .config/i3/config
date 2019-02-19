@@ -246,7 +246,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # {{{ Assign apps to workspaces
 
 # xterm
-#assign [class="(?i)urxvt"]                      $ws1
+assign [class="(?i)urxvt"]                      $ws1
 #assign [class="(?i)xterm"]                      $ws1
 assign [class="(?i)alacritty"]                  $ws1
 # file-manager
