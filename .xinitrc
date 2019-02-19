@@ -8,6 +8,7 @@ setxkbmap \
 
 [ -s ~/.Xresources ] && xrdb -load ~/.Xresources
 
+
 xsetroot -cursor_name left_ptr
 xrandr --dpi 96         # set DPI
 xset r rate 300 80      # key repeat
@@ -17,10 +18,10 @@ xset s off              # disable screensaver
 xset -b                 # disable bell
 xset -dpms              # disable DPMS (Energy Star) features
 
+
 case "${1:-$(tty)}" in
     i3*|*tty1)
         exec i3
-        # exec i3 -V -d all >> ~/.log/i3.log
         ;;
     bspwm*|*tty2)
         exec bspwm
@@ -29,6 +30,8 @@ case "${1:-$(tty)}" in
         exec dwm
         ;;
     *)
-        urxvt -geometry 90x25-00
+        xterm -geometry 90x25-00
         ;;
 esac
+
+# vim:fenc=utf-8:ft=sh:
