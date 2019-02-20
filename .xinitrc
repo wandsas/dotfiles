@@ -1,12 +1,14 @@
-# ~/.xinitrc
+
+if [ -s ~/.config/Xresources ]; then
+    xrdb -load ~/.config/Xresources
+fi
+
 
 setxkbmap \
     -model "pc105" \
     -layout "de" \
     -variant "nodeadkeys" \
     -option "terminate:ctrl_alt_bksp"
-
-[ -s ~/.Xresources ] && xrdb -load ~/.Xresources
 
 
 xsetroot -cursor_name left_ptr
@@ -20,14 +22,11 @@ xset -dpms              # disable DPMS (Energy Star) features
 
 
 case "${1:-$(tty)}" in
-    i3*|*tty1)
-        exec i3
-        ;;
-    bspwm*|*tty2)
+    bspwm*|*tty1)
         exec bspwm
         ;;
-    dwm*|*tty3)
-        exec dwm
+    i3*|*tty2)
+        exec i3
         ;;
     *)
         xterm -geometry 90x25-00

@@ -1,6 +1,4 @@
-# ~/.zshrc
-
-[[ $TERM = linux ]] && export LC_MESSAGES="C"
+[[ $TERM = linux ]] && export LC_MESSAGES=C
 
 umask 022
 

@@ -42,6 +42,7 @@ export MAKEFLAGS="-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory"
 export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
 export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc
 export I3SOCK=${XDG_RUNTIME_DIR}/i3/socket
+export BSPWM_SOCKET=${XDG_RUNTIME_DIR}/bspwm/socket
 export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
 export SSH_ASKPASS=x11-ssh-askpass
 export TMUX_TMPDIR=${XDG_RUNTIME_DIR}
