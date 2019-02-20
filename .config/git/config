@@ -1,0 +1,22 @@
+[color]
+	ui = true
+[core]
+    editor = $EDITOR
+	compression = 9
+    excludesfile = ${XDG_CONFIG_HOME}/gitignore_global
+    attributesfile = ${XDG_CONFIG_HOME}/git/attributes
+[init]
+	templateDir = /var/empty
+[push]
+	default = simple
+[receive]
+	denyCurrentBranch = warn
+[sendemail]
+	from = Sascha Wander <sascha.wander@gmail.com>
+[stash]
+	showPatch = true
+[transfer]
+	fsckObjects = true
+[user]
+	email = sascha.wander@gmail.com
+	name = Sascha Wander

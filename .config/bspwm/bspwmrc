@@ -18,9 +18,10 @@ bspc config window_gap          12
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
+
+bspc rule -a urxvt desktop='^1'
 bspc rule -a Spacefm desktop='^2'
+bspc rule -a chromium-browser-chromium desktop='^3'
+bspc rule -a Gimp desktop='^5' state=floating follow=on
 bspc rule -a lxtask state=floating
 bspc rule -a lxappearance state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off

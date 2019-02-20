@@ -4,7 +4,7 @@ type = internal/fs
 interval = 60
 
 mount-0 = /
-mount-1 = /usr
+mount-1 = /usr/portage
 mount-2 = /var
 mount-3 = /tmp
 
