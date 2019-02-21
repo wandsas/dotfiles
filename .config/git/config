@@ -2,9 +2,12 @@
 	ui = true
 [core]
     editor = $EDITOR
+    whitespace=fix,space-before-tab,tab-in-indent,trailing-space,cr-at-eol
+    pager = less -FRSX
 	compression = 9
-    excludesfile = ${XDG_CONFIG_HOME}/gitignore_global
+    excludesfile = ${XDG_CONFIG_HOME}/git/gitignore_global
     attributesfile = ${XDG_CONFIG_HOME}/git/attributes
+    hooksPath = ${XDG_CONFIG_HOME}/git/template/hooks
 [init]
 	templateDir = /var/empty
 [push]

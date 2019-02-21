@@ -1,14 +1,14 @@
 
-if [ -s ~/.config/Xresources ]; then
-    xrdb -load ~/.config/Xresources
-fi
-
-
 setxkbmap \
     -model "pc105" \
     -layout "de" \
     -variant "nodeadkeys" \
     -option "terminate:ctrl_alt_bksp"
+
+
+if [ -s ~/.config/Xresources ]; then
+    xrdb -load ~/.config/Xresources
+fi
 
 
 xsetroot -cursor_name left_ptr
