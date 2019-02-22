@@ -162,12 +162,11 @@ zstyle ':completion:*' special-dirs ..
 
 # Add a special SUDO_PATH for completion of sudo & friends:
 [[ $UID -eq 0 ]] || () {
-zstyle ":completion:*:(sudo|sudox):*"   command-path \
-                                        /root/bin \
-                                        /home/wandsas/bin \
-                                        /usr/local/{bin,sbin} \
-                                        /usr/{bin,sbin} \
-                                        /{bin,sbin}
+zstyle ":completion:*:(sudo|sudox):*"   command-path /root/bin \
+                                                    /home/wandsas/bin \
+                                                    /usr/local/{bin,sbin} \
+                                                    /usr/{bin,sbin} \
+                                                    /{bin,sbin}
 }
 
 for sh in ${XDG_CONFIG_HOME}/zsh/rc.d/*.zsh ${XDG_CONFIG_HOME}/aliases.sh; do
