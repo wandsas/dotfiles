@@ -70,6 +70,6 @@ zplugin light zsh-users/zsh-history-substring-search
 zplugin light zdharma/fast-syntax-highlighting
 
 # zsh-completions & gentoo-zsh-completions
-#zplugin creinstall /usr/share/zsh/site-functions
+zplugin creinstall /usr/share/zsh/site-functions
 
 # vim:fenc=utf-8:ft=zsh:

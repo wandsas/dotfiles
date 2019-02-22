@@ -1,19 +1,17 @@
-[color]
-	ui = true
 [core]
     editor = $EDITOR
     whitespace=fix,space-before-tab,tab-in-indent,trailing-space,cr-at-eol
     pager = less -FRSX
 	compression = 9
-    excludesfile = ${XDG_CONFIG_HOME}/git/gitignore_global
-    attributesfile = ${XDG_CONFIG_HOME}/git/attributes
-    hooksPath = ${XDG_CONFIG_HOME}/git/template/hooks
+    excludesfile = ~/.config/git/gitignore_global
+    attributesfile = ~/.config/git/attributes
+    hooksPath = ~/.config/git/template/hooks
 [commit]
   gpgsign = false
 [gpg]
   program = /usr/bin/gpg
 [ghq]
-  root = ${HOME}/repos
+  root = ~/repos
 [gui]
   fontui   = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
   fontdiff = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
