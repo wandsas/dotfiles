@@ -7,10 +7,10 @@ super + ctrl + Return
 
 # program launcher
 super + @space
-	rofi -show drun -show-icons
+    j4-dmenu-desktop
 
 super + d
-    j4-dmenu-desktop
+	rofi -show drun -show-icons
 
 super + ctrl + t
     lxtask
@@ -30,6 +30,16 @@ super + alt + Escape
 # close and kill
 super + {_,shift + }w
 	bspc node -{c,k}
+
+
+# Toggle fullscreen/floating state
+super + shift + f
+  bspc node -t \~fullscreen
+super + ctrl + f
+  bspc node -t \~floating
+super + shift + t
+  bspc node -t \~tiled
+
 
 # alternate between the tiled and monocle layout
 super + m

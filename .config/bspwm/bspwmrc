@@ -31,9 +31,9 @@ bspc config gapless_monocle         true
 bspc rule -a URxvt desktop='^1'
 bspc rule -a Spacefm desktop='^2'
 bspc rule -a Chromium-browser-chromium desktop='^3'
-bspc rule -a Gimp desktop='^5' state=floating follow=on
+bspc rule -a Gimp desktop='^5'
 
 # floating apps
 bspc rule -a NeovimGtk "state=floating"
 bspc rule -a Lxtask "state=floating"
-bspc rule -a lxappearance state=floating
+bspc rule -a Lxappearance state=floating
