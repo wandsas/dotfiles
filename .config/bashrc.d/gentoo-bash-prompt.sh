@@ -13,5 +13,4 @@ GIT_PS1_DESCRIBE_STYLE=auto
 GIT_PS1_SHOWCOLORHINTS=true
 GIT_PS1_HIDE_IF_PWD_IGNORED=true
 
-PROMPT_COMMAND='history -a;__git_ps1 "\[\033[01;31m\]\h\[\033[01;34m\] \w\[\033[00m\]" " \\\$ "'
-#PS1='\[\033[01;31m\]\h\[\033[01;34m\] \w\[\033[00m\]$(__git_ps1 " (%s)") \$ '
+PROMPT_COMMAND='history -a;__git_ps1 "\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[00m\]" " \\\$ "'
