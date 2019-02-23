@@ -36,7 +36,7 @@ export LESSOPEN="|lesspipe %s"
 export GIMP2_DIRECTORY=${XDG_CONFIG_HOME}/gimp
 export GOBIN=${HOME}/.local/bin
 export GOPATH=${HOME}/.local/lib/go
-export GHQ_ROOT=/nfs/repos
+export GHQ_ROOT=${HOME}/repos
 export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -XX:-UsePerfData"
 export MAKEFLAGS="-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory"
 export MPD_HOST=${XDG_RUNTIME_DIR}/mpd

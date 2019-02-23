@@ -17,7 +17,7 @@
   fontdiff = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
   editor = nvim-gtk
 [init]
-	templateDir = ${XDG_CONFIG_HOME}/git/template/hooks
+	templateDir = ~/.config/git/template/hooks
 [interactive]
   diffFilter = diff-so-fancy --patch-mode | less --tabs=4 -RFX
 [log]

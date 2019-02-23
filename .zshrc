@@ -35,7 +35,6 @@ setopt                      \
     path_dirs               \
     pushd_ignore_dups       \
     rm_star_silent          \
-    rc_expand_param         \
     short_loops             \
  no_sh_file_expansion       \
  no_sh_word_split           \
@@ -43,6 +42,7 @@ setopt                      \
     path_dirs               \
     unset
 
+# Zsh history
 HISTFILE=${XDG_CACHE_HOME}/history/zsh
 HISTSIZE=10000
 SAVEHIST=10000
@@ -96,28 +96,27 @@ watch=(notme root)
 # Infopath
 typeset -U infopath
 
-#infopath=(
-#    $HOME/{.local/,}share/info
-#    /usr/{local/,}share/info
-#    $infopath
-#        )
+infopath=(
+    $HOME/{.local/,}share/info
+    /usr/{local/,}share/info
+    $infopath
+        )
 
 # Manpath
-#typeset -U manpath
+typeset -U manpath
 
-#manpath=(
-#    $ZDOTDIR/{.local/,}share/man
-#    /usr/{,local/,}share/man
-#    $manpath[@]
-#    )
+manpath=(
+    $ZDOTDIR/{.local/,}share/man
+    /usr/{,local/,}share/man
+    $manpath[@]
+    )
 
 # Prompt
 autoload -Uz promptinit && promptinit
-[[ `id -u` == 0 ]] && prompt wandsas || prompt wandsas2
+prompt wandsas2
 
 # Use modern completion system
 autoload -Uz compinit && compinit
-
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' auto-description '%F{cyan}specify: %d'
 zstyle ':completion:*' format '%F{cyan}Completing %d'
@@ -155,18 +154,18 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # Completion Caching
 zstyle ':completion:*' use-cache  yes
-zstyle ':completion:*:complete:*' cache-path ${ZDOTDIR:-$HOME}/.cache
+zstyle ':completion:*:complete:*' cache-path ${XDG_CACHE_HOME}/zsh
 
 # .. as a completion
 zstyle ':completion:*' special-dirs ..
 
 # Add a special SUDO_PATH for completion of sudo & friends:
 [[ $UID -eq 0 ]] || () {
-zstyle ":completion:*:(sudo|sudox):*"   command-path /root/bin \
-                                                    /home/wandsas/bin \
-                                                    /usr/local/{bin,sbin} \
-                                                    /usr/{bin,sbin} \
-                                                    /{bin,sbin}
+zstyle ":completion:*:sudo:*" command-path /root/bin \
+                                            /home/wandsas/bin \
+                                            /usr/local/{bin,sbin} \
+                                            /usr/{bin,sbin} \
+                                            /{bin,sbin}
 }
 
 for sh in ${XDG_CONFIG_HOME}/zsh/rc.d/*.zsh ${XDG_CONFIG_HOME}/aliases.sh; do

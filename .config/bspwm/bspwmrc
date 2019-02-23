@@ -27,10 +27,13 @@ bspc config history_aware_focus     true
 bspc config borderless_monocle      true
 bspc config gapless_monocle         true
 
-
+# assign to workspaces
 bspc rule -a URxvt desktop='^1'
 bspc rule -a Spacefm desktop='^2'
 bspc rule -a Chromium-browser-chromium desktop='^3'
 bspc rule -a Gimp desktop='^5' state=floating follow=on
+
+# floating apps
+bspc rule -a NeovimGtk "state=floating"
 bspc rule -a Lxtask "state=floating"
 bspc rule -a lxappearance state=floating
