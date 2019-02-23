@@ -1,5 +1,5 @@
 [[ $TERM = linux ]] && export LC_MESSAGES=C
-
+echo .zshrc
 umask 022
 
 # If not running interactively, don't do anything else

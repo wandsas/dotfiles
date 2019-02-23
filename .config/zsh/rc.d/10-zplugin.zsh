@@ -15,6 +15,7 @@ install-zplugin () {
         git clone --depth 10 https://github.com/zdharma/zplugin.git bin
     fi
     echo ">>> Done"
+    cd ${OLDPWD}
 }
 
 [[ -d ~/.zplugin ]] || install-zplugin
@@ -27,7 +28,7 @@ autoload -Uz _zplugin
 ### Added by Zplugin's installer
 
 # zsh-completions
-#zplugin creinstall /usr/share/zsh/site-functions
+# zplugin creinstall /usr/share/zsh/site-functions
 
 # fzf
 zplugin ice from"gh-r" as"program"; zplugin load junegunn/fzf-bin

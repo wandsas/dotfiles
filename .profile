@@ -1,5 +1,5 @@
 # .profile: POSIX-compatible shell login script
-
+echo .profile
 # Set default values for required environment variables
 LOGNAME=${LOGNAME:-${USER}}
 LOGNAME=${LOGNAME:-$(id -un)}
@@ -64,5 +64,5 @@ gpg-connect-agent RELOADAGENT /bye &>/dev/null
 
 case "${SHELL##*/}" in
     bash) . ~/.bashrc ;;
-    zsh)  . ~/.zshrc  ;;
+#    zsh)  . ~/.zshrc  ;;
 esac
