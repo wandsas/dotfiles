@@ -8,8 +8,6 @@ export ZDOTDIR=${ZDOTDIR:-$HOME}
 # Stop bad system-wide scripts interfering.
 setopt NO_global_rcs
 
-setopt extended_glob
-
 umask 022
 
 # Path
@@ -46,7 +44,7 @@ fpath=(
 
 for dirname in $fpath; do
     case "$dirname" in
-	(${ZDOTDIR}/.zsh*) fns=( $dirname/*~*~(-N.x:t) ) ;;
+	(${ZDOTDIR}/./zsh*) fns=( $dirname/*~*~(-N.x:t) ) ;;
 	              *) fns=( $dirname/*~*~(-N.:t ) ) ;;
     esac
     (( $#fns )) && autoload "$fns[@]"
