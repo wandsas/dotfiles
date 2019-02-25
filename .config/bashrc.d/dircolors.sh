@@ -26,7 +26,7 @@ if type -P dircolors >/dev/null ; then
     # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
     LS_COLORS=
     if [ -f ${XDG_CONFIG_HOME}/dir_colors ]; then
-        eval "$(dircolors -b ~/.dir_colors)"
+        eval "$(dircolors -b ${XDG_CONFIG_HOME}/dir_colors)"
     elif [ -f /etc/DIR_COLORS ]; then
         eval "$(dircolors -b /etc/DIR_COLORS)"
     else

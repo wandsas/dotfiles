@@ -26,7 +26,7 @@ case "${1:-$(tty)}" in
         exec bspwm
         ;;
     i3*|*tty2)
-        exec i3
+        exec bspwm
         ;;
     *)
         xterm -geometry 90x25-00

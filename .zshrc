@@ -168,7 +168,7 @@ zstyle ":completion:*:sudo:*" command-path /root/bin \
                                             /{bin,sbin}
 }
 
-for sh in ${XDG_CONFIG_HOME}/zsh/rc.d/*.zsh ${XDG_CONFIG_HOME}/aliases.sh; do
+for sh in ~/.zsh/rc.d/*.zsh ${XDG_CONFIG_HOME}/aliases.sh; do
     [[ -r "$sh" ]] && source $sh
 done
 
