@@ -7,10 +7,10 @@ super + ctrl + Return
 
 # program launcher
 super + @space
-    j4-dmenu-desktop
+	rofi -show drun -show-icons
 
 super + d
-	rofi -show drun -show-icons
+    j4-dmenu-desktop
 
 super + ctrl + t
     lxtask

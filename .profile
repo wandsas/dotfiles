@@ -9,8 +9,10 @@ PATH=${PATH:-/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin}
 # see http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03
 export HOME=${HOME:-/home/${LOGNAME}}
 export LOGNAME=${LOGNAME}
-export PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 export SHELL=${SHELL:-$(getent passwd "${LOGNAME}" | cut -d: -f7)}
+export PATH=${HOME}/bin:${HOME}/.local/bin:${HOME}/.cargo/bin:${HOME}/.npm-global/bin:${PATH}
+export MANPATH=${HOME}/.local/share/man:/usr/local/share/man:${MANPATH}
+export INFOPATH=${HOME}/.local/share/info:/usr/local/share/info:${INFOPATH}
 
 # XDG path variables
 # see https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -41,11 +43,13 @@ export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc
 export NO_AT_BRIDGE=1
 export QT_STYLE_OVERRIDE=GTK+
 export GHQ_ROOT=${HOME}/repos
-export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -XX:-UsePerfData"
+export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -XX:-UsePerfData"
 #export MAKEFLAGS="-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory"
 export MAKEFLAGS="-j13 --no-print-directory"
 export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
 export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc
+export QT_STYLE_OVERRIDE=GTK+
+export NO_AT_BRIDGE=1
 export I3SOCK=${XDG_RUNTIME_DIR}/i3/socket
 #export BSPWM_SOCKET=${XDG_RUNTIME_DIR}/bspwm/socket
 export BSPWMRC="${XDG_CONFIG_HOME}/bspwm/bspwmrc"
@@ -53,7 +57,8 @@ export BSPWM_STATE=${XDG_CACHE_HOME}/bspwm/state.json
 export BSPWM_FIFO=${XDG_CACHE_HOME}/bspwm/wm_state
 export SXHKD_SHELL=/bin/sh
 export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
-export SSH_ASKPASS=x11-ssh-askpass
+export SUDO_ASKPASS=x11-ssh-askpass
+export PASSWORD_STORE_ENABLE_EXTENSIONS=1
 export TMUX_TMPDIR=${XDG_RUNTIME_DIR}
 export GPG_TTY=$(tty)
 export SSH_AGENT_PID=
