@@ -44,14 +44,13 @@ Plug 'Shougo/neosnippet-snippets'   " default snippets for many languages
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' } " Go auto completion
 Plug 'pangloss/vim-javascript'                 " JavaScript syntax highlighting
 Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
-Plug 'vim-scripts/OmniCppComplete', { 'for': 'cpp' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'zchee/deoplete-jedi' , { 'for': 'go' }
 Plug 'Shougo/echodoc'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf', { 'dir': '~/.go/src/github.com/junegunn/fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': '~/.local/lib/go/src/github.com/junegunn/fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'BurningEther/iron.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'sbdchd/neoformat', { 'on': 'NeoFormat' }
@@ -102,7 +101,6 @@ Plug 'tpope/vim-surround'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'christoomey/vim-tmux-navigator', { 'for': 'tmux' }
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-scripts/visualrepeat'
 Plug 'Shougo/vimfiler'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'

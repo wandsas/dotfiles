@@ -10,6 +10,8 @@ setopt NO_global_rcs
 
 umask 022
 
+setopt extended_glob
+
 # Path
 typeset -U PATH path
 export PATH
@@ -38,13 +40,13 @@ typeset -TU PERL5LIB perl5lib
 
 # Fpath
 fpath=(
-    ${ZDOTDIR}/.zsh/{$ZSH_VERSION/*.zwc,functions}(N)
+    ${ZDOTDIR}/.zsh/{${ZSH_VERSION}/*.zwc,functions}(N)
     $fpath
     )
 
 for dirname in $fpath; do
     case "$dirname" in
-	(${ZDOTDIR}/./zsh*) fns=( $dirname/*~*~(-N.x:t) ) ;;
+	(${ZDOTDIR}/.zsh*) fns=( $dirname/*~*~(-N.x:t) ) ;;
 	              *) fns=( $dirname/*~*~(-N.:t ) ) ;;
     esac
     (( $#fns )) && autoload "$fns[@]"
