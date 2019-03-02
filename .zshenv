@@ -40,7 +40,7 @@ typeset -TU PERL5LIB perl5lib
 
 # Fpath
 fpath=(
-    ${ZDOTDIR}/.zsh/{${ZSH_VERSION}/*.zwc,functions}(N)
+    ${ZDOTDIR}/{.zsh/{${ZSH_VERSION}/*.zwc,functions},.local/share/zsh/site-functions}(N)
     $fpath
     )
 

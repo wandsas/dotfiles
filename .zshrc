@@ -95,7 +95,6 @@ watch=(notme root)
 
 # Infopath
 typeset -U infopath
-
 infopath=(
     $HOME/{.local/,}share/info
     /usr/{local/,}share/info
@@ -104,7 +103,6 @@ infopath=(
 
 # Manpath
 typeset -U manpath
-
 manpath=(
     $ZDOTDIR/{.local/,}share/man
     /usr/{,local/,}share/man
@@ -113,7 +111,7 @@ manpath=(
 
 # Prompt
 autoload -Uz promptinit && promptinit
-prompt wandsas2
+[[ ${EUID} == 0 ]] && prompt wandsas || prompt wandsas2
 
 # Use modern completion system
 autoload -Uz compinit && compinit
