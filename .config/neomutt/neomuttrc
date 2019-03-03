@@ -1,0 +1,336 @@
+# $Id: ~/.neovimrc wandsas 2018/08/13
+
+# My config for the Neovim E-Mail Client - Teaching an Old Dog New Tricks
+
+# {{{ References
+
+# Neomutt Guide     https://www.neomutt.org/guide/
+
+# Neomutt           Cmdline Reference https://www.neomutt.org/guide/reference
+
+# MSMTP             http://msmtp.sourceforge.net/doc/msmtp.html
+
+# Offlineimap       http://www.offlineimap.org/documentation.html
+
+# Mairix Indexing   http://www.rpcurnow.force9.co.uk/mairix/
+
+# Procmail          http://pm-doc.sourceforge.net/doc/
+
+# }}}
+
+# {{{ Include files
+
+set alias_file       = ~/.neomutt/aliases
+set header_cache     = ~/.neomutt/cache/headers
+set message_cachedir = ~/.neomutt/cache/bodies
+set certificate_file = ~/.neomutt/certificates
+set mailcap_path     = ~/.neomutt/mailcap
+set signature        = ~/.neomutt/signature.html
+set tmpdir           = /tmp
+
+source ~/.neomutt/themes/solarized-256
+source ~/.neomutt/lists
+source ~/.neomutt/aliases
+
+# }}}
+
+# {{{ Basic options
+
+set wait_key = no               # shut up, mutt
+set timeout = 0                 # idle before scanning
+set mail_check = 0              # minimum time between scans
+unset move                      # gmail does that
+set delete                      # do not ask, just do !
+unset confirmappend             # do not ask, just do !!
+set quit                        # do not ask, just do !!!
+unset mark_old                  # read/new is good enough for me
+set beep_new                    # bell on new mails
+set pipe_decode                 # strip headers and eval mimes when piping
+set thorough_search             # strip headers and eval mimes before searching
+set recall=no                   # don't ask to recall postponed msg when composing
+set delete=yes                  # don't ask to confirm purge deleted msg on sync
+unset record                    # gmail smtp already copies emails to sent folder
+set autoedit
+set read_inc=10                 # show count number for every tenth mail
+set write_inc=10                # update number after each tenth read mail
+
+# }}}
+
+# {{{ Sidebar
+
+### Sidebar view options ###
+set sidebar_visible = yes
+set sidebar_width   = 20
+
+### Sidebar keybindings ###
+bind index,pager <down>    sidebar-next
+bind index,pager <up>      sidebar-prev
+bind index,pager <right>   sidebar-open
+
+# toggle sidebar
+macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+
+# }}}
+
+# {{{ Statusbar
+
+### Statusbar view options ###
+set status_on_top
+set status_chars   = " *%A"
+set status_format  = "Folder: %f : %r%n new (%m messages)%?d? (%d to delete)?%?t? (%t tagged)? %>-%?p?( %p postponed )? : "
+
+### Statusbar format description ###
+# status_format - format of summary on the current folder in the index
+# meta strings:
+#  -----f-h---lmn-p-rst-v----  lower case letters (10)
+#  ------------M----------X--  upper case letters (02)
+#
+# %d      the number of messages with the flag 'delete'  (v64)
+# %f      the full pathname of the current mailbox
+# %h      local hostname
+# %l      size (in bytes) of the current mailbox
+# %m      the number of messages in the mailbox
+# %M      the number of messages shown (i.e., which match the current limit)
+# %n      number of new messages in the mailbox
+# %p      number of postponed messages
+# %s      current sorting mode
+# %r      modified/read-only/won't-write/attach-message indicator-status_chars
+# %t      number of tagged messages
+# %v      Mutt version string
+# %>X     right justify the rest of the string and pad with "X"
+# %|X     pad to the end of the line with "X"
+#
+# %?<sequence_char>?<optional_string>? optionally print string, if>0
+
+### Statusbar Examples ###
+#set status_format="%v: %f (%s) [%?M/?%m]  [flags:%?t tagged,?%n new%?p post?]"
+#set status_format="%v: %f (%s) [%?M/?%m]  [flags:%?t tagged,?%n new]"
+#set status_format="%v: %f (%s) [%M/%m]\n[flags:n=%n,D=%d,t=%t,!=%F]"
+#set status_format="%v: %f (%s) [%M/%m]  [flags:n=%n,t=%t]"
+#set status_format="%v:    (%s) [%M/%m]  [flags:n=%n,t=%t]"
+#set status_format="%v:    (%s) [%M/%m]  [flags:n:%n,t:%t,p:%p]"
+#set status_format="%v:    (%s) [%M/%m]  [flags:%?02n new?,t:%t]"
+#set status_format="%v: %f (%s) [%M/%m]  [flags:%n new,%?t tagged?]"
+#set status_format="%v: %f (%s) [%M/%m;%l bytes]  [N=%n,*=%t,post=%p]"
+#set status_format="%v: %f (%s) [%M/%m] [N=%n,*=%t,post=%p,new=%b]"
+#set status_format=" Msgs=%M(%m) [N=%n,O=%o,*=%t,p=%p] %> %r (%P) %h:%f [%l] (%s/%S) (%v) "
+#set status_format  = "Folder: %f : %r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? %>-%?p?( %p postponed )? : "
+
+# }}}
+
+# {{{ Window title
+
+# set terminal status line and icon name (xterm window title)
+set ts_enabled
+
+# Terminal status line  has the same format like $status_format
+set ts_status_format = " NeoMutt with %?m?%m messages&no messages?%?n? [%n NEW]? "
+
+# }}}
+
+# {{{ Index
+
+### Index view options ###
+set date_format = %Y/%m/%d"
+#set date_format="%Y/%m/%d %H:%M %Z"
+set index_format = "[%Z] %D %-20.20F %s"
+#set index_format = "%4C (%4c) %Z %?GI?%GI& ? %[%d/%b]  %-20.19F %?K?%15.14K&               ? %?M?(%3M)&     ? %?X?¤& ? %s %> %?g?%g?"
+
+set sort = threads                          # like gmail
+set sort_aux = reverse-last-date-received   # like gmail
+set uncollapse_jump                         # don't collapse on an unread message
+set sort_re                                 # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+### Index keybindings ###
+bind index g        noop
+bind index gg       first-entry
+bind index G        last-entry
+
+bind index R        group-reply
+bind index <tab>    sync-mailbox
+bind index <space>  collapse-thread
+
+# "ctrl-r" to mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# "o" to quick sync INBOX only
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync INBOX"
+# "O" to sync all mail folders
+macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail folders"
+
+# Saner copy/move dialogs
+# "c" to copy a msg to a mailbox
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+# "m" to move a msg to a mailbox
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
+# }}}
+
+# {{{ Pager
+
+### Pager view options ###
+set pager_index_lines = 10                  # number of lines to show
+set pager_context = 3                       # number of context lines to show
+set pager_stop                              # don't go to the next message automatically
+set menu_scroll                             # scroll in menus
+set tilde                                   # show tildes like in vi
+unset markers                               # no ugly plus signs
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+### Pager keybindings ###
+bind pager k    previous-line
+bind pager j    next-line
+bind pager g    noop
+bind pager gg   top
+bind pager G    bottom
+bind pager R    group-reply
+
+# View attachments properly
+bind attach <return> view-mailcap
+
+# Handle URLs
+# "ctrl-u" to open links
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+# }}}
+
+# {{{ Gnupg
+
+set pgp_sign_as = 0xF6BC73162CFD2DBD
+set pgp_use_gpg_agent = yes
+set pgp_timeout = 3600
+
+set pgp_autosign
+#set crypt_replysign
+#set crypt_verify_sig
+
+set crypt_use_gpgme
+#set crypt_autoencrypt = yes
+set crypt_replyencrypt = yes
+
+set smime_encrypt_self = yes
+set smime_default_key = 0xA9B9C696EBED04DB
+
+# }}}
+
+# {{{ Keybase
+set editor = 'echo %s > ~/.neomutt/keybase/.tmp; vim %s'
+macro compose K "<enter-command>unset wait_key<enter><shell-escape>python ~/.neomutt/keybase/keybase.py<enter><enter-command>set wait_key<enter>
+# }}}
+
+# {{{ SSL
+set ssl_starttls
+set ssl_force_tls
+# }}}
+
+# {{{ Gmail
+
+# {{{ Maildir
+set mbox_type   = Maildir
+set sendmail    = /usr/bin/msmtp
+
+set folder      = ~/maildir/gmail
+set spoolfile   = "+INBOX"
+set postponed   = "+Drafts"
+unset record
+
+#set mbox        = "+All Mail"
+# }}}
+
+# {{{ Mailboxes
+mailboxes +INBOX \
+          +Sent \
+          +Drafts \
+          +Flagged \
+          +Spam \
+          +Trash \
+          +Android \
+          +Kernel \
+          +Gentoo \
+
+# Important and 'All Mail' mailboxes are disabled on server-side and excluded.
+# As fallback they are excluded in offlineimap with a folderfilter.
+# Bin is renamed to Trash and Starred to Flagged
+# }}}
+
+# {{{ Keybindings
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>=[Gmail].All Mail<enter>" "Go to all mail"
+macro index gs "<change-folder>=[Gmail].Sent Mail<enter>" "Go to sent mail"
+macro index gS "<change-folder>=[Gmail].Spam<enter>" "Go to spam"
+macro index gt "<change-folder>=[Gmail].Trash<enter>" "Go to trash"
+macro index gd "<change-folder>=[Gmail].Drafts<enter>" "Go to drafts"
+
+bind  editor <space>    noop
+bind  index,pager   c   mail                # compose
+bind  index,pager   e   resend-message      # open a draft message for editing
+bind  generic       x   tag-entry           # select Conversation
+bind  index         x   tag-thread          # select Conversation
+bind  pager         x   tag-message         # select Conversation
+macro index,pager   +   <save-message>=[Gmail]/Important<enter><enter> "Mark as important"
+macro index,pager   !   <save-message>=[Gmail]/Spam<enter><enter> "Report spam"
+bind  index,pager   a   group-reply         # Reply all
+bind  index,pager   \#  delete-thread       # Delete
+bind  index,pager   l   copy-message        # Label
+macro index,pager   I   <set-flag>O "Mark as read"
+macro index,pager   U   <clear-flag>O "Mark as unread"
+macro index         M   <save-message>?<toggle-mailboxes> "move a message to a mailbox"
+# }}}
+
+# {{{ Search
+macro index s "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py ~/mail/mick-readmore/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
+# }}}
+
+# {{{ Contacts
+set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
+bind editor <Tab> complete-query
+bind editor ^T    complete
+# set query_command="goobook query %s"
+# macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
+# bind editor <Tab> complete-query
+# }}}
+
+# }}}
+
+# {{{ Header
+ignore *                                    # ignore all headers
+unignore from: to: cc: date: subject:       # show only these
+unhdr_order *                               # some distros order things
+hdr_order from: to: cc: date: subject:      # and in this order
+my_hdr X-PGP-Key: https://keybase.io/wandsas/pgp_keys.asc
+# }}}
+
+# {{{ Compose message
+### Compose view options ###
+set realname="Sascha Wander"
+set from="sascha.wander@gmail.com"
+set envelope_from                           # which from?
+set sig_dashes                              # dashes before sig
+set edit_headers                            # show headers when composing
+set fast_reply                              # skip to compose when replying
+# set askcc                                 # ask for CC:
+set fcc_attach                              # save attachments with the body
+set mime_forward = ask-no                   # forward attachments as attachments
+# unset mime_forward                        # forward attachments as a part of body
+set forward_format = "Fwd: %s"              # format of subject when forwarding
+set forward_decode                          # decode when forwarding
+set attribution = "On %d, %n wrote:"        # format of quoting header
+set reply_to                                # reply to Reply to: field
+set reverse_name                            # reply as whoever it was to
+set include                                 # include message in reply
+set forward_quote                           # include message in forwards
+set text_flowed = yes                       # eliminate odd line breaks
+set editor = "nvim +:silent+?^$"
+#set editor = "nvim -c 'set spell spelllang=en' -c 'setlocal fo+=aw' +:silent+?^$"
+# }}}
+
+# {{{ Postpone message
+bind compose p postpone-message
+bind index p recall-message
+# }}}
+
+# vim:fenc=utf-8:ft=muttrc:fdm=marker:foldlevel=0:

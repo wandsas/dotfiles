@@ -1,0 +1,59 @@
+#
+# Offlneimap config for Gmail with OAuth2 Authentication
+#
+
+[general]
+accounts = Gmail
+#pythonfile = ~/.offlineimap.py
+
+
+[Account Gmail]
+localrepository = GmailLocal
+remoterepository = GmailRemote
+
+[Repository GmailLocal]
+type = Maildir
+localfolders = ~/maildir/gmail
+nametrans = lambda folder: {'Drafts': '[Gmail].Drafts',
+                            'Flagged': '[Gmail].Starred',
+                            'Sent': '[Gmail].Sent Mail',
+                            'Spam': '[Gmail].Spam',
+                            'Trash': '[Gmail].Bin',
+                           }.get(folder, folder)
+
+[Repository GmailRemote]
+type = Gmail
+maxconnections = 3
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+realdelete = no
+
+### Gmail account settings ###
+remoteuser = sascha.wander@gmail.com
+auth_mechanisms = XOAUTH2
+oauth2_request_url = https://accounts.google.com/o/oauth2/token
+oauth2_refresh_token = 1/az4PapNif93rkG8FNupuKhv8DRTP-BfnCvj5ffStYGqgwUUzKfPRXHBS2jd4Ds_H
+oauth2_client_id = 26813673704-euqnqbrjadk483ec6929deao8f0jg5cv.apps.googleusercontent.com
+oauth2_client_secret = VeN5FKBrukF_ve6-7riEHb_H
+#oauth2_client_secret = oauthpasswd("sascha.wander@gmail.com")
+
+
+# exlude "All Mail" and Important, although it's always disabled on the server-side.
+folderfilter = lambda folder: folder not in ['[Gmail].Important',
+                                             '[Gmail].All Mail']
+
+nametrans = lambda folder: {'[Gmail]/Drafts': 'Drafts',
+                            '[Gmail]/Sent Mail': 'Sent',
+                            '[Gmail]/Starred': 'Flagged',
+                            '[Gmail]/Spam': 'Spam',
+                            '[Gmail]/Bin': 'Trash',
+                           }.get(folder, folder)
+
+#[mbnames]
+#enabled = yes
+#filename = ~/.mutt/mailboxes
+#header = "mailboxes "
+#peritem = "+%(accountname)s/%(foldername)s"
+#sep = " "
+#footer = "\n"
+
+# vim:fenc=utf-8:ft=dosini:

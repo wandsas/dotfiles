@@ -1,0 +1,34 @@
+# $Id: ~/.mailcap
+
+# Open/View attachments
+
+# View text or open attachments with a special application using the
+# mailcap viewer definition
+
+# Images
+image/jpg;          ~/.neomutt/scripts/view-attachment.sh %s jpg
+image/jpeg;         ~/.neomutt/scripts/view-attachment.sh %s jpg
+image/pjpeg;        ~/.neomutt/scripts/view-attachment.sh %s jpg
+image/png;          ~/.neomutt/scripts/view-attachment.sh %s png
+image/gif;          ~/.neomutt/scripts/view-attachment.sh %s gif
+
+# PDF
+text/pdf;           ~/.neomutt/scripts/view-attachment.sh %s pdf
+application/pdf;    ~/.neomutt/scripts/view-attachment.sh %s pdf
+
+# HTML
+# Explicitly render in browser with "v" (view attachment)
+text/html;          ~/.neomutt/scripts/view-attachment.sh %s html
+
+# Try to display implicitly using elinks
+text/html;          elinks -dump %s -dump-charset %{charset} -force-html; \
+                    nametemplate=%s.html; copiousoutput
+# Or, alternatively
+# text/html; w3m -I %{charset} -T text/html; copiousoutput;
+
+text/plain;         ~/.neomutt/scripts/view-mail.sh %s %{charset}; needsterminal
+
+# Unidentified files
+application/octet-stream; ~/.neomutt/scripts/view-attachment.sh %s "-"
+
+# vim:fenc=utf-8:ft=muttrc:
