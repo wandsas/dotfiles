@@ -11,7 +11,7 @@ ${XDG_CONFIG_HOME}/compton/launch.sh &
 ${XDG_CONFIG_HOME}/spacefm/launch.sh &
 
 urxvtd --quiet --opendisplay --fork &
-redshift-gtk &
+redshift &
 unclutter &
 
 bspc monitor -d I II III IV V VI VII VIII IX X
