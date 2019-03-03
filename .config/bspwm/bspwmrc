@@ -4,12 +4,11 @@ if ! bspc wm -g &>/dev/null; then
     exit 1
 fi
 
-sxhkd &
-random-wallpaper.sh &
+random-desktop.sh &
 ${XDG_CONFIG_HOME}/polybar/launch.sh &
-${XDG_CONFIG_HOME}/compton/launch.sh &
-${XDG_CONFIG_HOME}/spacefm/launch.sh &
-
+sxhkd &
+compton -b &
+spacefm --daemon-mode --no-desktop &
 urxvtd --quiet --opendisplay --fork &
 redshift &
 unclutter &
