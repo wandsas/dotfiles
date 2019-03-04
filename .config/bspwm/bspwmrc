@@ -4,7 +4,7 @@ if ! bspc wm -g &>/dev/null; then
     exit 1
 fi
 
-random-desktop.sh &
+random-desktop &
 ${XDG_CONFIG_HOME}/polybar/launch.sh &
 sxhkd &
 compton -b &

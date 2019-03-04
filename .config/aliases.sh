@@ -96,4 +96,8 @@ sd () {
     source ~/.Xdisplay.${HOST%%.*}
 }
 
+# copy/paste to clipboard
+alias xcut='xsel --clipboard < $1'
+alias xpaste='xsel --clipboard > $1'
+
 # vim:fenc=utf-8:ft=sh:
