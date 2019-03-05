@@ -1,0 +1,11 @@
+#!/bin/sh
+
+tmux_current_session () {
+    if [ "$TMUX" ]; then
+        tmux display-message -pF '#{client_session}'
+    fi
+}
+
+tmux_current_session "$@"
+
+#tmux list-sessions | awk -F: '/\(attached\)/ { print $1 }'

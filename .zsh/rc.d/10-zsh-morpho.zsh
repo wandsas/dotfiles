@@ -1,4 +1,4 @@
-# Zsh screen savers (https://github.com/psprint/zsh-morpho)
+# Terminal Screensaver for the Z-Shell (https://github.com/psprint/zsh-morpho)
 
 zshrc_morpho () {
 	path=(
