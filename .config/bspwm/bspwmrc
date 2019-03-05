@@ -36,3 +36,6 @@ bspc rule -a Gimp desktop='^5'
 bspc rule -a NeovimGtk "state=floating"
 bspc rule -a Lxtask "state=floating"
 bspc rule -a Lxappearance state=floating
+
+# external rules
+bspc config external_rules_command "$(which external_rules)"
