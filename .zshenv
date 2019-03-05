@@ -51,3 +51,7 @@ for dirname in $fpath; do
     esac
     (( $#fns )) && autoload "$fns[@]"
 done
+
+#for sh in ~/.zsh/env.d/*.zsh; do
+#    [[ -r "$sh" ]] && source $sh
+#done
