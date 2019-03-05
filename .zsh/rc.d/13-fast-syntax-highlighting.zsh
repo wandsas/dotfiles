@@ -7,7 +7,6 @@ zshrc_fast_syntax_highlighting () {
     ) . fast-syntax-highlighting.plugin.zsh NIL || return
     FAST_HIGHLIGHT[use_async]=1
     FAST_HIGHLIGHT[use_brackets]=1
-
 }
 
 if [[ -z "${ZSHRC_SKIP_FAST_SYNTAX_HIGHLIGHTING:++}" ]] && is-at-least 4.3.9

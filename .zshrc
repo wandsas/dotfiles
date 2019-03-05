@@ -1,5 +1,10 @@
 [[ $TERM = linux ]] && export LC_MESSAGES=C
 
+ZSHRC_SKIP_HISTORY_SUBSTRING_SEARCH=1
+ZSHRC_SKIP_MORPHO=
+ZSHRC_SKIP_AUTOSUGGESTIONS=1
+ZSHRC_SKIP_FAST_SYNTAX_HIGHLIGHTING=1
+
 umask 022
 
 # If not running interactively, don't do anything else

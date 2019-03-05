@@ -132,13 +132,14 @@ fi
 
 bindkey -v
 
+
 # history-substring-search up/down
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
 
 # history-substring-search vi k/j
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+bindkey -M vicmd 'k' history-beginning-search-backward
+bindkey -M vicmd 'j' history-substring-search-forward
 
 # allow ctrl-p, ctrl-n for navigate history (standard behaviour)
 bindkey '^P' up-history
@@ -155,7 +156,6 @@ bindkey '^r' history-incremental-search-backward
 # allow ctrl-a and ctrl-e to move to beginning/end of line
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
-
 
 # Incremental search is elite!
 bindkey -M vicmd "/" history-incremental-search-backward

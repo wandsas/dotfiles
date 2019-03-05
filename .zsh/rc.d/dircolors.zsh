@@ -1,14 +1,11 @@
 (( $+commands[dircolors] )) && {
-	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-	LS_COLORS=
-    if [[ -r "$HOME/.dir_colors" ]] {
-        eval $(dircolors -b ~/.dir_colors)
+    if [[ -r "${XDG_CONFIG_HOME}/dir_colors" ]] {
+        eval $(dircolors -b ${XDG_CONFIG_HOME}/dir_colors)
     } elif [[ -r "/etc/DIR_COLORS" ]] {
         eval $(dircolors -b /etc/DIR_COLORS)
     } else { eval $(dircolors -b) }
 
     alias ls='ls --color=auto'
-
     alias grep='grep --color=auto'
     alias egrep='egrep --color=auto'
     alias fgrep='fgrep --color=auto'
