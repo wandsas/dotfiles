@@ -1,5 +1,5 @@
 # .profile: POSIX-compatible shell login script
-echo profile
+
 # Set default values for required environment variables
 LOGNAME=${LOGNAME:-${USER}}
 LOGNAME=${LOGNAME:-$(id -un)}
