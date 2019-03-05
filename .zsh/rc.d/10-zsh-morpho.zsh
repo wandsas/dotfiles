@@ -1,11 +1,7 @@
 # Terminal Screensaver for the Z-Shell (https://github.com/psprint/zsh-morpho)
 
 zshrc_morpho () {
-	path=(
-		/usr/share/zsh/site-contrib/zsh-morpho
-		$path
-	) . zsh-morpho.plugin.zsh NIL || return;:
-
+    . ~/.local/lib/zsh-morpho/zsh-morpho.plugin.zsh NIL | return;
     # Screensaver: zmorpho | zmandelbrot | zblank | pmorpho | cmatrix
     zstyle ":morpho" screen-saver "zmandelbrot"
     zstyle ":morpho" arguments "-s"

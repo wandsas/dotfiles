@@ -4,6 +4,11 @@ if ! bspc wm -g &>/dev/null; then
     exit 1
 fi
 
+if [ -e "$BSPWM_STATE" ] ; then
+	bspc wm -l "$BSPWM_STATE"
+	rm "$BSPWM_STATE"
+fi
+
 random-desktop &
 ${XDG_CONFIG_HOME}/polybar/launch.sh &
 sxhkd &

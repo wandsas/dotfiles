@@ -1,10 +1,7 @@
 # Syntax Highlighting for the Z-Shell (https://github.com/zdharma/fast-syntax-highlighting)
 
 zshrc_fast_syntax_highlighting () {
-    path=(
-        /usr/share/zsh/site-contrib/fast-syntax-highlighting
-        $path
-    ) . fast-syntax-highlighting.plugin.zsh NIL || return
+    . ~/.local/lib/fast-syntax-highlighting.plugin.zsh NIL || return
     FAST_HIGHLIGHT[use_async]=1
     FAST_HIGHLIGHT[use_brackets]=1
 }

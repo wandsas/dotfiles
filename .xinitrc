@@ -27,4 +27,4 @@ if ! tmux has-session -t sxhkd 2> /dev/null ; then
 	tmux paste-buffer -t sxhkd
 fi
 
-exec bspwm
+exec wm

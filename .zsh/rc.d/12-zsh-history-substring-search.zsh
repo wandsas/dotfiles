@@ -2,10 +2,7 @@
 # (https://github.com/zsh-users/zsh-history-substring-search)
 
 zshrc_history_substring_search () {
-	path=(
-		/usr/share/zsh/site-contrib/zsh-history-substring-search
-		$path
-	) . zsh-history-substring-search.zsh NIL || return
+	. ~/.local/lib/zsh-history-substring-search.zsh NIL || return
 }
 
 if [[ -z "${ZSHRC_SKIP_HISTORY_SUBSTRING_SEARCH:++}" ]] && is-at-least 4.3.11
