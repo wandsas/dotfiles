@@ -1,38 +1,51 @@
-# terminal emulator
+#
+# application hotkeys
+#
+
+# urxvt
 super + Return
     urxvtc
 
+# xterm
+super + shift + Return
+    xterm
+# spacefm
 super + ctrl + Return
     spacefm
-
-# program launcher
+# rofi
 super + @space
 	rofi -show drun -show-icons
-
+# dmenu
 super + d
     j4-dmenu-desktop
-
+# lxtask
 super + ctrl + t
     lxtask
-
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
+# chromium
+super + shift + c
+    chromium
 
 #
 # bspwm hotkeys
 #
 
+# reload functions
+super + Escape
+	${XDG_CONFIG_HOME}/sxhkd/functions
+
+# reload sxhkd configs
+super + shift + r
+	pkill -USR1 -x sxhkd
+
 # quit bspwm normally
 super + alt + Escape
 	bspc quit
 
-# close and kill
-super + {_,shift + }w
+# kill selected window
+super + {_,shift + }q
 	bspc node -{c,k}
 
-
-# Toggle fullscreen/floating state
+# toggle fullscreen/floating state
 super + shift + f
   bspc node -t \~fullscreen
 super + ctrl + f
@@ -40,8 +53,7 @@ super + ctrl + f
 super + shift + t
   bspc node -t \~tiled
 
-
-# alternate between the tiled and monocle layout
+# toggle tiled/monocle layout
 super + m
 	bspc desktop -l next
 
@@ -49,7 +61,7 @@ super + m
 super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 
-# swap the current node and the biggest node
+# swap current and biggest node
 super + g
 	bspc node -s biggest
 
@@ -57,11 +69,11 @@ super + g
 # state/flags
 #
 
-# set the window state
-super + {t,shift + t,s,f}
+# set window state
+
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
-# set the node flags
+# set node flags
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
@@ -80,10 +92,6 @@ super + {p,b,comma,period}
 # focus the next/previous node in the current desktop
 super + {_,shift + }c
 	bspc node -f {next,prev}.local
-
-# focus the next/previous desktop in the current monitor
-super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
 super + {grave,Tab}

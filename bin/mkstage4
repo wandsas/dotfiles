@@ -1,10 +1,4 @@
 #!/bin/bash
-#
-# $Header: ~/bin/mkstage4.bash                              Exp $
-# $Author: -tclover <tokiclover@gmail.com>                  Exp $
-# $Version: 2.0 2015/07/26 13:08:56                         Exp $
-# $License: MIT (or 2-clause/new/simplified BSD)            Exp $
-#
 
 shopt -qs extglob nullglob
 
