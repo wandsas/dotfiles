@@ -1,0 +1,2 @@
+#!/bin/sh
+emerge -avb `qlist -I xorg && qlist -I x11-driver`

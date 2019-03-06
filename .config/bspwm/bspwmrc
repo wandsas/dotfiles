@@ -11,6 +11,7 @@ fi
 
 random-desktop &
 ${XDG_CONFIG_HOME}/polybar/launch.sh &
+sxhkd_notify "$SXHKD_FIFO" &
 sxhkd &
 compton -b &
 spacefm --daemon-mode --no-desktop &

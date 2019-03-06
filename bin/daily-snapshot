@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+HOSTNAME="rpi.gnu.local"
+BACKUP_DISK=LABEL="storage"
+BACKUP_MOUNTPOINT="/mnt/storage"
+TARGET_DAILY="$BACKUP_MOUNTPOINT/$HOSTNAME/daily"
+
+
+mountpoint -q /mnt/storage &>/dev/null \
+	|| sudo mount LABEL=storage -o rw,noatime,nosuid,nodev /mnt/storage
+
+
+sudo install -d "${TARGET_DAILY}"
+sudo rsync -avzx --delete /home /etc "${TARGET_DAILY}"

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+HOSTNAME="rpi.gnu.local"
+BACKUP_DISK=LABEL="storage"
+BACKUP_MOUNTPOINT="/mnt/storage"
+SOURCE_DAILY="${BACKUP_MOUNTPOINT}/${HOSTNAME}/daily"
+TARGET_MONTHLY="${BACKUP_MOUNTPOINT}/${HOSTNAME}/rpi-$(date +'%Y%m%d')"
+
+mountpoint -q /mnt/storage &>/dev/null \
+	|| sudo mount LABEL=storage -o rw,noatime,nosuid,nodev /mnt/storage
+
+
+tar -cjvf "${TARGET_MONTHLY}.tar.bz2" "${SOURCE_DAILY}"

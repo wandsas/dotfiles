@@ -1,7 +1,6 @@
+#!/bin/sh
 
-# {{{ Loading status
-
-#[ "$shell" = -zsh ] && unsetopt function_argzero
+# Loading status
 
 # Default to 1, and treat empty as 0.  This ensures we have an integer.
 : ${DEBUG_LOCAL_HOOKS=1}
@@ -41,7 +40,5 @@ sh_load_status () {
     echo -e -n "\r\e[0K$_text$debug"
   fi
 }
-
-# }}}
 
 sh_load_status .shared_env
