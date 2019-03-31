@@ -5,7 +5,6 @@
 # urxvt
 super + Return
     urxvtc
-
 # xterm
 super + shift + Return
     xterm
@@ -19,7 +18,7 @@ super + @space
 super + d
     j4-dmenu-desktop
 # lxtask
-super + ctrl + t
+super + shift + t
     lxtask
 # chromium
 super + shift + c

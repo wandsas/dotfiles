@@ -17,14 +17,17 @@ xset s off              # disable screensaver
 xset -b                 # disable bell
 xset -dpms              # disable DPMS (Energy Star) features
 
-[ -e "$SXHKD_FIFO" ] && rm $SXHKD_FIFO
-mkfifo $SXHKD_FIFO
-sxhkd -s $SXHKD_FIFO &
+#[ -e "$SXHKD_FIFO" ] && rm $SXHKD_FIFO
+#mkfifo $SXHKD_FIFO
+#sxhkd -s $SXHKD_FIFO &
 
-if ! tmux has-session -t sxhkd 2> /dev/null ; then
-	tmux new-session -s sxhkd -d
-	printf '%s\n' '. "$XDG_CONFIG_HOME"/sxhkd/functions' | tmux load-buffer -
-	tmux paste-buffer -t sxhkd
-fi
+#if ! tmux has-session -t sxhkd 2> /dev/null ; then
+#	tmux new-session -s sxhkd -d
+#	printf '%s\n' '. "$XDG_CONFIG_HOME"/sxhkd/functions' | tmux load-buffer -
+#	tmux paste-buffer -t sxhkd
+#fi
 
-exec wm
+#exec wm
+
+exec bspwm
+#exec i3
