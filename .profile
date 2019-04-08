@@ -69,5 +69,5 @@ gpg-connect-agent RELOADAGENT /bye &>/dev/null
 
 case "${SHELL##*/}" in
     bash) . ~/.bashrc ;;
-#    zsh)  . ~/.zshrc  ;;
+    zsh)  . ~/.zshrc  ;;
 esac
