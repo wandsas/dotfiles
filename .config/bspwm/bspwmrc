@@ -15,6 +15,7 @@ ${XDG_CONFIG_HOME}/polybar/launch.sh &
 sxhkd &
 compton -b &
 spacefm --daemon-mode --no-desktop &
+devmon &
 urxvtd --quiet --opendisplay --fork &
 redshift &
 unclutter &

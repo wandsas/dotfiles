@@ -28,6 +28,5 @@ xset -dpms              # disable DPMS (Energy Star) features
 #fi
 
 #exec wm
-
-exec bspwm
 #exec i3
+exec bspwm

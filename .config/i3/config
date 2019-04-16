@@ -284,7 +284,7 @@ assign [class="(?i)Weechat"]                    $ws7
 
 # {{{ Autostart services
 
-exec_always --no-startup-id random-wallpaper.sh
+exec_always --no-startup-id random-wallpaper
 exec_always --no-startup-id ${XDG_CONFIG_HOME}/polybar/launch.sh
 exec --no-startup-id ${XDG_CONFIG_HOME}/compton/launch.sh
 exec --no-startup-id ${XDG_CONFIG_HOME}/spacefm/launch.sh
