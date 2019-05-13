@@ -7,7 +7,7 @@ super + Return
     urxvtc
 # xterm
 super + shift + Return
-    xterm
+    alacritty
 # spacefm
 super + ctrl + Return
     spacefm

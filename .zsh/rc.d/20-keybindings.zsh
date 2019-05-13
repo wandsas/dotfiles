@@ -95,11 +95,11 @@ bind2maps       viins vicmd -- Right       vi-forward-char
 
 bindkey "\E[Z" reverse-menu-complete
 bindkey "\C-L"  clear-screen
-bindkey "\C-Xl" screenclearx
+#bindkey "\C-Xl" screenclearx
 
 bindkey -M vicmd "ga" what-cursor-position
 bindkey -M viins "\E\C-R" redisplay
-bindkey -M vicmd "\C-R" redisplay2
+#bindkey -M vicmd "\C-R" redisplay2
 bindkey -M vicmd "c" vi-change
 bindkey -M vicmd "C" vi-change-eol
 bindkey -M vicmd "S" vi-change-whole-line
@@ -139,7 +139,7 @@ bindkey '^[[B' history-beginning-search-forward
 
 # history-substring-search vi k/j
 bindkey -M vicmd 'k' history-beginning-search-backward
-bindkey -M vicmd 'j' history-substring-search-forward
+bindkey -M vicmd 'j' history-beginning-search-forward
 
 # allow ctrl-p, ctrl-n for navigate history (standard behaviour)
 bindkey '^P' up-history

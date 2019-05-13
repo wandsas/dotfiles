@@ -1,0 +1,418 @@
+; {{{ Header
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;==========================================================
+; }}}
+
+; {{{ Colors
+
+[colors]
+background = ${xrdb:background}
+background-alt = ${xrdb:color9}
+foreground = ${xrdb:foreground}
+foreground-alt = ${xrdb:color0}
+
+primary   = ${xrdb:color6}
+secondary = ${xrdb:color14}
+alert     = ${xrdb:color1}
+border    = ${xrdb:color15}
+
+; }}}
+
+; {{{ Bars
+
+[bar/base]
+monitor = ${env:MONITOR:DP-2}
+width = 100%
+height = 27
+radius = 6.0
+enable-ipc = true
+
+font-0 = Dejavu Sans Mono Nerd Font:pixelsize=9;1
+font-1 = FontAwesome:pixelsize=9;2
+
+spacing = 3
+
+line-color = #f00
+line-size = 2
+
+module-margin-left = 0
+module-margin-right = 6
+
+padding-left = 0
+padding-right = 4
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+
+[bar/top]
+inherit = bar/base
+bottom = false
+
+tray-position = right
+tray-padding = 2
+
+modules-left   = bspwm i3
+modules-center = xwindow
+modules-right  = volume date powermenu
+
+
+[bar/bottom]
+inherit = bar/base
+bottom = true
+
+height = 32
+
+modules-left   = extip networkspeedup networkspeeddown
+modules-center =
+modules-right  = cpu memory filesystem
+
+; }}}
+
+; {{{ Modules
+
+; {{{ i3
+[module/i3]
+type = internal/i3
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state>
+
+;local-workspaces = true
+;workspace-name-strip-nchars = 2
+strip-wsnumbers = true
+
+fuzzy-match = true
+
+label-focused = %index% %icon%
+label-focused-background = #3f3f3f
+label-focused-padding = 2
+
+label-unfocused = %index% %icon%
+label-unfocused-foreground = #444
+label-unfocused-padding = 2
+
+label-urgent = %index% %icon%
+label-urgent-background = #bd2c40
+label-urgent-padding = 2
+
+label-visible = %index% %icon%
+label-visible-padding = 2
+
+; }}}
+
+; {{{ bspwm
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+; }}}
+
+; {{{ xwindow
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:50:...%
+
+; }}}
+
+; {{{ date
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%a %d %b,"
+date-alt = "%Y/%m/%d"
+time = "%H:%M"
+time-alt = %H:%M:%S
+
+label = %date% %time%
+; label-background = #fff
+; label-foreground = #000
+
+;format-prefix = 
+;format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+; }}}
+; {{{ powermenu
+
+[module/powermenu]
+type = custom/menu
+expand-right = true
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close = cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = ~/.config/polybar/scripts/reboot.sh
+menu-0-1 = power off
+menu-0-1-exec = ~/.config/polybar/scripts/poweroff.sh
+
+; }}}
+
+; {{{ volume
+
+[module/volume]
+type = internal/alsa
+master-mixer = Master
+format-volume = <label-volume>%
+label-volume =  %percentage%
+
+; }}}
+
+; {{{ systray
+
+[module/systray]
+type = internal/systray
+
+format = <label-toggle> <tray-clients> <label-toggle>
+format-spacing = 2
+
+label-toggle = hide
+label-toggle-alt = show
+label-toggle-padding = 2
+label-toggle-background = #bc99ed
+label-toggle-foreground = #000
+
+; }}}
+
+; {{{ networkspeed
+
+[module/network]
+type = internal/network
+interface = eth0
+format-connected = <label-connected>
+format-connected-prefix-foreground = #5b
+
+[module/networkspeedup]
+inherit = module/network
+label-connected = "%upspeed:7%"
+format-connected-prefix = "etho  "
+
+[module/networkspeeddown]
+inherit = module/network
+label-connected = "%downspeed:7%"
+format-connected-prefix = "eth0  "
+
+; }}}
+
+; {{{ extip
+
+[module/extip]
+type = custom/script
+interval = 60
+
+format = <label>
+format-underline = #0a6cf5
+
+exec-if = ping -c 1 gentoo.org
+exec = echo "WAN $(dig +short myip.opendns.com @resolver1.opendns.com)"
+
+; }}}
+
+; {{{ filesystem
+
+[module/filesystem]
+type = internal/fs
+interval = 60
+
+mount-0 = /
+mount-1 = /usr/portage
+mount-2 = /var
+mount-3 = /tmp
+
+label-mounted = %{F#63FB99}%mountpoint%%{F-} %percentage_used%%
+
+; }}}
+
+; {{{ memory
+
+[module/memory]
+type = internal/memory
+interval = 3
+
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+;   <ramp-used>
+;   <ramp-free>
+format = <label> <bar-used>
+
+; Available tokens:
+;   %percentage_used% (default)
+;   %percentage_free%
+;   %gb_used%
+;   %gb_free%
+;   %gb_total%
+;   %mb_used%
+;   %mb_free%
+;   %mb_total%
+;   %percentage_swap_used%
+;   %percentage_swap_free%
+;   %mb_swap_total%
+;   %mb_swap_free%
+;   %mb_swap_used%
+;   %gb_swap_total%
+;   %gb_swap_free%
+;   %gb_swap_used%
+
+label = %{F#63FB99}RAM%{F-} %gb_used%/%gb_total%
+
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 15
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+; Only applies if <ramp-used> is used
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+; Only applies if <ramp-free> is used
+ramp-free-0 = ▁
+ramp-free-1 = ▂
+ramp-free-2 = ▃
+ramp-free-3 = ▄
+ramp-free-4 = ▅
+ramp-free-5 = ▆
+ramp-free-6 = ▇
+ramp-free-7 = █
+
+; }}}
+
+; {{{ cpu
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+format = <label> <bar-load>
+
+; Available tokens:
+;   %percentage% (default) - total cpu load
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = %{F#63FB99}CPU%{F-} %percentage%%
+
+ramp-coreload-width = 10
+ramp-coreload-0 = ▁
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1 = ▂
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2 = ▃
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3 = ▄
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4 = ▅
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+ramp-coreload-6-foreground = #ff5555
+ramp-coreload-7 = █
+ramp-coreload-7-foreground = #ff5555
+
+bar-load-width = 10
+bar-load-foreground-0 = #c1cb7f
+bar-load-foreground-1 = #d9c37f
+bar-load-foreground-2 = #e4a48a
+bar-load-foreground-3 = #ed9896
+bar-load-indicator = ■
+bar-load-indicator-font = 0
+bar-load-indicator-foreground = #55fdf6e3
+bar-load-fill = ■
+bar-load-fill-font = 0
+bar-load-empty = □
+bar-load-empty-font = 0
+bar-load-empty-foreground = #99586e75
+
+; }}}
+
+; }}}
+
+; {{{ General settings
+
+[settings]
+screenchange-reload = true
+;compositing-background = over         ; options: over, screen, xor
+;compositing-foreground = difference   ; options: difference, over, source
+;compositing-overline = over
+;compositing-underline = over
+;compositing-border = over
+
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+;fixed-center = true
+;override-redirect = true
+
+; }}}
+
+; vim:fenc=utf-8:ft=dosini:ts=2:sts=0:sw=2:fdm=marker:foldlevel=0:
