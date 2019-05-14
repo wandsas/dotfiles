@@ -12,8 +12,8 @@
 random-desktop &
 
 #${XDG_CONFIG_HOME}/polybar/launch.sh &
-[ -e "$PANEL_FIFO" ] && bspc subscribe report > "$PANEL_FIFO" &
-pgrep -x panel > /dev/null || panel &
+[ -e "$PANEL_FIFO" ] && bspc subscribe report > "$PANEL_FIFO" \
+    & pgrep -x panel > /dev/null || panel &
 
 #sxhkd_notify "$SXHKD_FIFO" &
 sxhkd &
