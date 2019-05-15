@@ -1,52 +1,63 @@
 #! /bin/sh
 
-#if ! bspc wm -g &>/dev/null; then
-#    exit 1
-#fi
+# Window Management
+# -----------------
+# See `man bspc` and `man bspwm`
 
-#if [ -e "$BSPWM_STATE" ] ; then
-#	bspc wm -l "$BSPWM_STATE"
-#	rm "$BSPWM_STATE"
-#fi
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
-random-desktop &
+bspc config border_width 2
+bspc config window_gap 6
+bspc config split ratio 0.5
+bspc config focus_follows_pointer true
+bspc config ignore_ewmh_focus true
+bspc config focus_by_distance true
+bspc config history_aware_focus true
+bspc config borderless_monocle true
+bspc config gapless_monocle true
+bspc config pointer_action1 move # alt + left-click to move node
+bspc config pointer_action2 resize_side # alt + right-click to resize node splits
 
-#${XDG_CONFIG_HOME}/polybar/launch.sh &
-[ -e "$PANEL_FIFO" ] && bspc subscribe report > "$PANEL_FIFO" \
-    & pgrep -x panel > /dev/null || panel &
-
-#sxhkd_notify "$SXHKD_FIFO" &
-sxhkd &
-compton -b &
-spacefm --daemon-mode --no-desktop &
-devmon &
-urxvtd --quiet --opendisplay --fork &
-redshift &
-unclutter &
-
-bspc monitor -d I II III IV V VI VII VIII IX X
-
-bspc config border_width         2
-bspc config window_gap          12
-
-bspc config split ratio             0.5
-bspc config focus_follows_pointer   true
-bspc config ignore_ewmh_focus       true
-bspc config focus_by_distance       true
-bspc config history_aware_focus     true
-bspc config borderless_monocle      true
-bspc config gapless_monocle         true
-
-# assign to workspaces
+# Assign apps to workspaces
 bspc rule -a URxvt desktop='^1'
 bspc rule -a Spacefm desktop='^2'
 bspc rule -a Chromium-browser-chromium desktop='^3'
 bspc rule -a Gimp desktop='^5'
 
-# floating apps
+# Floating apps
 bspc rule -a NeovimGtk "state=floating"
 bspc rule -a Lxtask "state=floating"
 bspc rule -a Lxappearance state=floating
 
-# external rules
+# External rules
 bspc config external_rules_command "$(which external_rules)"
+
+
+# Autostart
+# ---------
+
+sxhkd &
+# Lemonbar
+pgrep -x panel && pkill -x panel
+pgrep -x panel_bar && pkitt -x panel_bar
+panel &
+# Compton
+compton -b &
+# Wallpaper
+random-wallpaper &
+# URxvt
+urxvtd --quiet --opendisplay --fork &
+# Spacefm
+pgrep -x spacefm && pkill -x spacefm
+pgrep -x udevil && pkill -x udevil
+pgrep -x devmon && pkill -x devmon
+spacefm --daemon-mode --no-desktop &
+devmon &
+# Redshift
+pgrep -x redshift && pkill -x redshift
+redshift &
+# Unclutter
+pgrep -x unclutter && pkill -x unclutter
+unclutter &
+
+# vim:fenc=utf-8:ft=sh:
