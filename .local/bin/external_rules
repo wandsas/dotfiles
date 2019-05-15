@@ -1,14 +1,18 @@
 #! /bin/sh
 
-wid=$1
-class=$2
-instance=$3
+win_id=$1
+win_class=$2
 
-if [ "$instance" = fontforge ] ; then
-	title=$(xtitle "$wid")
-	case "$title" in
-		Layers|Tools|Warning)
-			echo "focus = off"
-			;;
-	esac
+if [[ "$win_class" = "my_float_window" ]]; then
+    echo "state=floating"
+else
+    win_type=$(xprop -id "$win_id" _NET_WM_WINDOW_TYPE)
+    case "$win_type" in
+        *_NET_WM_WINDOW_TYPE_DIALOG*)
+            echo "state=floating" ;;
+        *_NET_WM_WINDOW_TYPE_NOTIFICATION)
+            echo "layer=above" ;;
+    esac
 fi
+
+# vim:fenc=utf-8:ft=sh:

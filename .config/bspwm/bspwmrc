@@ -29,7 +29,14 @@ bspc rule -a NeovimGtk "state=floating"
 bspc rule -a Lxtask "state=floating"
 bspc rule -a Lxappearance state=floating
 
-# External rules
+# Program-specific rules (use `xprop` to find each window's specifics)
+# For special use cases, I apply "my_float_window" for programs that can
+# accept a custom name/class. These two definitions apply a custom
+# class and name respectively
+bspc rule -a my_float_window:* state=floating
+bspc rule -a *:my_float_window state=floating
+
+# External window rules
 bspc config external_rules_command "$(which external_rules)"
 
 
