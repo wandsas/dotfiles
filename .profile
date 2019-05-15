@@ -42,7 +42,7 @@ export GOPATH=${HOME}/.local/lib/go
 export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc
 export NO_AT_BRIDGE=1
 export QT_STYLE_OVERRIDE=GTK+
-export GHQ_ROOT=${HOME}/repo
+export GHQ_ROOT=${HOME}/repos
 export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -XX:-UsePerfData"
 export MAKEFLAGS="-j$((($(getconf _NPROCESSORS_ONLN)/2)+1)) --no-print-directory"
 export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
@@ -55,7 +55,7 @@ export PANEL_HEIGHT=24
 export PANEL_FONT="-*-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
 export PANEL_WM_NAME=bspwm_panel
 export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
-export SUDO_ASKPASS=x11-ssh-askpass
+export SUDO_ASKPASS=/usr/bin/x11-ssh-askpass
 export PASSWORD_STORE_ENABLE_EXTENSIONS=1
 export TMUX_TMPDIR=${XDG_RUNTIME_DIR}
 export GPG_TTY=$(tty)
