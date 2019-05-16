@@ -55,9 +55,8 @@ bspc config presel_feedback_color "#2a2829" # feedback for manual node split
 # The hotkey daemon that handles all custom key bindings, including control of BSPWM
 sxhkd &
 # Launch custom lemonbar
-pgrep -x panel && pkill -x panel
-pgrep -x panel_bar && pkitt -x panel_bar
-panel &
+pgrep -x panel && pkill -x avocado_panel
+avocado_panel &
 # Compton Compositor
 compton -b &
 # Wallpaper
