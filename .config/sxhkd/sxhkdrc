@@ -1,6 +1,6 @@
-#
-# application hotkeys
-#
+
+# Application Hotkeys
+# -------------------
 
 # urxvt
 super + Return
@@ -24,9 +24,9 @@ super + shift + t
 super + shift + c
     chromium
 
-#
-# bspwm hotkeys
-#
+
+# BSPWM Hotkeys
+# -------------
 
 # reload functions
 super + Escape

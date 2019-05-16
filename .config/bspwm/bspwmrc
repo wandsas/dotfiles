@@ -7,7 +7,7 @@
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 bspc config border_width 2
-bspc config window_gap 6
+bspc config window_gap 10
 bspc config split ratio 0.5
 bspc config focus_follows_pointer true
 bspc config ignore_ewmh_focus true
@@ -67,12 +67,9 @@ random-wallpaper &
 # which startup very fast and reduces memory usage. (Unix domain socket ${XDG_RUNTIME_DIR}/urxvtd)
 urxvtd --quiet --opendisplay --fork &
 
-# Launch the Spacefm file-manager daemon and start the Udevil automount tool for removable devices
+# Launch Spacefm file-manager daemon
 pgrep -x spacefm && pkill -x spacefm
-pgrep -x udevil && pkill -x udevil
-pgrep -x devmon && pkill -x devmon
 spacefm --daemon-mode --no-desktop &
-devmon &
 
 # Redshift
 pgrep -x redshift && pkill -x redshift
