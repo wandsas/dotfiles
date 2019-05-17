@@ -176,10 +176,11 @@ for sh in ~/.zsh/rc.d/*.zsh ${XDG_CONFIG_HOME}/aliases.sh; do
     [[ -r "$sh" ]] && source $sh
 done
 
-# vim:fenc=utf-8:ft=zsh:
 
-PATH="/home/wandsas/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/wandsas/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/wandsas/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/wandsas/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/wandsas/perl5"; export PERL_MM_OPT;
+#PATH="/home/wandsas/.local/lib/perl5/5.26.2/bin${PATH:+:${PATH}}"; export PATH;
+#PERL5LIB="/home/wandsas/.local/lib/perl5/5.26.2/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+#PERL_LOCAL_LIB_ROOT="/home/wandsas/.local/lib/perl5/5.26.2${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+#PERL_MB_OPT="--install_base \"/home/wandsas/.local/lib/perl5/5.26.2\""; export PERL_MB_OPT;
+#PERL_MM_OPT="INSTALL_BASE=/home/wandsas/.local/lib/perl5/5.26.2"; export PERL_MM_OPT;
+
+# vim:fenc=utf-8:ft=zsh:

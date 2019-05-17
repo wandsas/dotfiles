@@ -52,6 +52,4 @@ for dirname in $fpath; do
     (( $#fns )) && autoload "$fns[@]"
 done
 
-#for sh in ~/.zsh/env.d/*.zsh; do
-#    [[ -r "$sh" ]] && source $sh
-#done
+# vim:fenc=utf-8:ft=zsh:
