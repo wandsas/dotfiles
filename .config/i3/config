@@ -82,7 +82,6 @@ bindsym $mod+Ctrl+o           exec --no-startup-id random-wallpaper.sh
 # Screenshot complete desktop/acitve window or select window
 bindsym Print               exec scrot
 bindsym Shift+Print         exec scrot -u
-bindsym $mod+Print          exec scrot -s
 
 # Kill focused window
 bindsym $mod+Shift+q    kill

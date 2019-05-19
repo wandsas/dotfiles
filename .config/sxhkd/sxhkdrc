@@ -23,7 +23,12 @@ super + shift + t
 # chromium
 super + shift + c
     chromium
-
+# Screenshot desktop
+Print
+    scrot
+shift + Print
+# screenshot active window
+    scrot -u
 
 # BSPWM Hotkeys
 # -------------
