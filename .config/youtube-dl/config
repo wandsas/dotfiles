@@ -1,0 +1,65 @@
+# ~/.config/youtube-dl/config
+#
+# Youtube Downloader (youtube-dl)
+#
+# References:
+# https://github.com/rg3/youtube-dl.git
+# https://ffmpeg.org/
+#
+# Installation:
+# curl -fsSL https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+# chmod a+rx /usr/local/bin/youtube-dl
+# pip install --upgrade --user youtube-dl
+#
+# youtubue-dl batch downloads:
+# cat > my_video_urls <<'EOF'
+# https://soundcloud.com/zehninrecords/lucy-the-hermit-zehnin01
+# https://soundcloud.com/zehninrecords/lucy-the-high-priestess-zehnin01
+# https://soundcloud.com/lucy/your-cell-will-teach-you-all-things-mix-cd
+# EOF
+# youtube-dl --batch-file=my_video_urls
+###############################################################################
+
+# Output directory
+--output /tmp/youtube-dl/%(title)s.%(ext)s
+
+# Cache directory
+--cache-dir /tmp/youtube-dl/cache
+
+
+# Video settings
+--format mp4,mp3
+--merge-output-format mp4
+--recode-video=mp4		# encode to another format if necessary
+
+
+### Audio settings
+--audio-format m4a
+--extract-audio                 # convert video files to audio-only
+--audio-quality 0
+--restrict-filenames
+--keep-video                    # keep video after extracting audio files
+--embed-thumbnail               # embed thumbnail in the audio as cover art
+--write-thumbnail               # write thumbnail image to disk
+--add-metadata                  # write metadata to video file
+
+
+# Download settings
+--continue                      # resume partially downloaded files
+--ignore-errors                 # continue on download errors
+--no-overwrites                 # do not overwrite files
+--console-title                 # display progress in titlebar
+--newline                       # output progress bar as new lines
+--encoding UTF-8
+--hls-prefer-native             # use native HLS downloader instead of ffmpeg
+--hls-use-mpegts                # use mpegts container, playing video when downloading
+
+
+# Prefer ffmpeg converter
+--prefer-ffmpeg                 # prefer ffmpeg over MP3Box, libav
+--prefer-free-formats
+--youtube-skip-dash-manifest	# do not download DASH manifests & related data
+--no-mtime                      # do not use last-modified as modification time
+--no-part                       # do not use .part files - write into file
+--default-search auto           # warn for unqualified urls
+--no-call-home                  # do not contact youtube-dl server for debug

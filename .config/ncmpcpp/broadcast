@@ -1,0 +1,3 @@
+#!/bin/sh
+
+notify-send -u low -a ncmpcpp -c audio "$(mpc --format "<b>Now playing:</b>\n%artist% - %title%" | head -2)"
