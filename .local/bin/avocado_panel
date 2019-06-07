@@ -3,7 +3,7 @@
 # Custom lemon bar
 
 
-# Bspwm Top Panel
+# BSPWM Top Panel
 # ---------------
 
 export PANEL_WM_NAME=bspwm_top_panel
