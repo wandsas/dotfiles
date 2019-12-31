@@ -1,6 +1,0 @@
-
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:50:...%
-
-; vim:fenc=utf-8:ft=dosini:

@@ -1,2 +1,0 @@
-#!/bin/sh
-i3-msg -t GET_TREE | json_xs
