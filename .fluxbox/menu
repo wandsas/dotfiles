@@ -1,0 +1,21 @@
+[begin] (Fluxbox) {} <>
+    [exec] (run ...) {fbrun} <>
+    [exec] (xterm) {xterm} <>
+    [exec] (spacefm) {spacefm} <>
+    [exec] (chromium) {chromium} <>
+    [separator]
+    [submenu] (Applications) {} <>
+        [include] (/etc/X11/fluxbox/menudefs.hook) {} <>
+    [end]
+    [submenu] (Fluxbox) {} <>
+        [config] (Configure) {} <>
+        [submenu] (Styles) {Choose a style...} <>
+            [stylesdir] (/usr/share/fluxbox/styles) {} <>
+            [stylesdir] (~/.fluxbox/styles) {} <>
+        [end]
+        [reconfig] (Reload config) {} <>
+        [restart] (Restart) {} <>
+    [end]
+    [workspaces] (Workspace List) {} <>
+    [exit] (Exit) {} <>
+[end]
