@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 #
 # Add to PATH helper
 #
@@ -24,7 +26,7 @@ pathremove () {
 }
 
 #
-# Convert a path form relative to abolut
+# Convert a path form relative to absolut
 #
 relative2absolut () {
     local relpath_="$1"
@@ -35,3 +37,5 @@ relative2absolut () {
     dprint "$0: \"$relpath_\" => \"$abspath_\""
     echo "$abspath_"
 }
+
+# vim:ft=sh:fenc=utf-8:

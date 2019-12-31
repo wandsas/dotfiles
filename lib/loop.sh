@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 source init.sh
-include functions.sh
+include log_stdout.sh
 include path.sh
 finish
 
@@ -56,3 +56,5 @@ resize () {
     e2fsck -fy "$file"
     resize2fs "$file" "$size"
 }
+
+# vim:ft=sh:fenc=utf-8:

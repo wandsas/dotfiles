@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 
 yesno () {
 	case "${1:-NO}" in
@@ -49,3 +50,5 @@ lower () {
 trim () {
   sed -r 's/^\s*(\S)|(\S*)\s*$/\1\2/g' <<< "$@"
 }
+
+# vim:ft=sh:fenc=utf-8:

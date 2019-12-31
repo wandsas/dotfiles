@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 pipe=""
 
@@ -41,3 +41,5 @@ pipe_tail () {
     echo "$line"
   done
 }
+
+# vim:ft=sh:fenc=utf-8:

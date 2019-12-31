@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 #
 # Check if running session is interactive
 #
@@ -28,3 +30,5 @@ is_zsh () {
 is_bash () {
     [[ -n "$BASH_VERSION" ]]
 }
+
+# vim:ft=sh:fenc=utf-8:

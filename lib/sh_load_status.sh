@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Loading status
 
@@ -41,4 +41,4 @@ sh_load_status () {
   fi
 }
 
-sh_load_status .shared_env
+# vim:ft=sh:fenc=utf-8:

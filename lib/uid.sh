@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 
 #
 # Check for root-permissions
@@ -18,3 +19,5 @@ is_uid_non_root () {
     exit 1
   fi
 }
+
+# vim:ft=sh:fenc=utf-8:

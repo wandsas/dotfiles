@@ -50,3 +50,5 @@ EX_NOPERM=77        # permission denied
 EX_CONFIG=78        # configuration error
 
 EX__MAX=78          # maximum listed value
+
+# vim:ft=sh:enc=utf-8:

@@ -1,3 +1,9 @@
+#!/usr/bin/env sh
+
+source init.sh
+include colors.sh
+finish
+
 info () {
 	echo -e "\e[1;34mINFO\e[0m: ${@}"
 }
@@ -13,3 +19,5 @@ error () {
 die () {
 	local ret="$?"; error "$@"; exit "$ret"
 }
+
+# vim:ft=sh:fenc=utf-8:

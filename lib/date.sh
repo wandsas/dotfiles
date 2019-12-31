@@ -1,4 +1,4 @@
-# vim:fenc=utf-8:ft=sh
+#!/usr/bin/env sh
 
 #
 # Print a timestamp (e.g. 20181027_160749)
@@ -27,3 +27,5 @@ print-date () {
 print-datetime () {
 	echo $(date +'%Y/%m/%d %H:%M:%S')
 }
+
+# vim:ft=sh:fenc=utf-8:

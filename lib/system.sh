@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 
 is_darwin () {
     [[ `uname -s` == Darwin ]]
@@ -26,3 +27,9 @@ is_gentoo () {
 is_alpine () {
     [[ -f /etc/alpine-release ]]
 }
+
+is_void () {
+    [[ -f /etc/void-release ]]
+}
+
+# vim:ft=sh:fenc=utf-8:

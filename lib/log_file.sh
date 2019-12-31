@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 
 fatal () {
     error "$@"
@@ -25,3 +26,5 @@ log () {
     fi
     echo "$*" >> "$LOG_FILE" || _die "Can't append to $LOG_FILE - aborting"
 }
+
+# vim:ft=sh:fenc=utf-8:

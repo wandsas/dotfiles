@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # alacritty -e zsh -c tmux_new_or_attach_session
 
 SESSION=${1:-mytmux}
