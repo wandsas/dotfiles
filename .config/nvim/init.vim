@@ -33,8 +33,8 @@ Plug 'Shougo/context_filetype.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
-Plug 'termhn/i3-vim-nav', { 'for': 'i3' }
+"Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
+"Plug 'termhn/i3-vim-nav', { 'for': 'i3' }
 Plug 'Shougo/neoyank.vim'
 Plug 'roryokane/detectindent', { 'on': 'DetectIndent' }
 Plug 'Shougo/deol.nvim'
@@ -49,7 +49,6 @@ Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'zchee/deoplete-jedi' , { 'for': 'go' }
 Plug 'Shougo/echodoc'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.local/lib/go/src/github.com/junegunn/fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'BurningEther/iron.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -69,7 +68,7 @@ Plug 'chrisbra/unicode.vim'
 Plug 'Shougo/unite.vim'
 Plug 'SirVer/ultisnips'
 Plug 'lervag/vimtex'
-Plug 'vimwiki/vimwiki'
+"Plug 'vimwiki/vimwiki'
 Plug 'honza/vim-snippets'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -102,8 +101,6 @@ Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'christoomey/vim-tmux-navigator', { 'for': 'tmux' }
 Plug 'tpope/vim-unimpaired'
 Plug 'Shougo/vimfiler'
-Plug 'vimwiki/vimwiki'
-Plug 'mattn/calendar-vim'
 call plug#end()
 
 filetype plugin indent on
