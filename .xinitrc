@@ -1,3 +1,5 @@
+# ~/.xinitrc wandsas start xserver
+
 setxkbmap \
     -model "pc105" \
     -layout "de" \
@@ -27,6 +29,6 @@ xset -dpms              # disable DPMS (Energy Star) features
 #	tmux paste-buffer -t sxhkd
 #fi
 
-#exec wm
-#exec i3
-exec bspwm
+#exec startfluxbox
+#exec bspwm
+exec i3

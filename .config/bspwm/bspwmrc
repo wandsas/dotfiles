@@ -32,7 +32,8 @@ bspc rule -a Gimp desktop='^5'
 # Floating apps
 bspc rule -a NeovimGtk "state=floating"
 bspc rule -a Lxtask "state=floating"
-bspc rule -a Lxappearance state=floating
+bspc rule -a Lxappearance "state=floating"
+bspc rule -a Emacs "state=floating"
 
 # Program-specific rules (use `xprop` to find each window's specifics)
 # For special use cases, I apply "my_float_window" for programs that can
