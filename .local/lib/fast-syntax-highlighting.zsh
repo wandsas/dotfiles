@@ -1,0 +1,1 @@
+/home/wandsas/.GIT/3rd-Party/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
