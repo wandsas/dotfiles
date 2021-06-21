@@ -18,11 +18,6 @@ export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/run/user/$(id -u)}
 
-# Create XDG dirs at first user login
-for XDG in $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME; do
-  [ -d $XDG ] || mkdir -p $XDG
-done
-
 ## XDG system path variable
 # https://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html.
 export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
