@@ -1,0 +1,19 @@
+{
+    "current_user": "wandsas",
+    "maintenance": {
+        "wandsas": {
+            "bug_3964_repair_time": "1620818491581"
+        }
+    },
+    "mountdir": "/run/user/1000/keybase/kbfs",
+    "mountdirdefault": "/run/user/1000/keybase/kbfs",
+    "users": {
+        "wandsas": {
+            "device": "61d95d68a22f91c184cdbcda80e7c018",
+            "id": "cb3629a6356a642cab5d6f19bf0e1619",
+            "name": "wandsas",
+            "passphrase_state": 0,
+            "salt": "7e42bf578064c99af549bdeb3167bf4d"
+        }
+    }
+}

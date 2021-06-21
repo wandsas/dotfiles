@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>.config</name>
+	<unique-id>1618790127326420-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>drive-removable-media</icon>
+	<name>isomount</name>
+	<unique-id>1619934501037536-1</unique-id>
+	<command>udisksctl loop-setup -f %f</command>
+	<description>Mount iso in a loop device</description>
+	<patterns>*.iso</patterns>
+	<other-files/>
+</action>
+</actions>

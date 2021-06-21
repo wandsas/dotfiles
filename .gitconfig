@@ -1,0 +1,43 @@
+[core]
+  compression = 9
+[init]
+  defaultBranch = master
+  templateDir = /var/empty
+[push]
+  default = simple
+[user]
+  name = Sascha Wander
+  email = sascha.wander@gmail.com
+  signkey = 0xC026CCEBC1D3B54C
+
+[alias]
+    l = log --pretty='format:%h %s%d' -n 20 --graph
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
+    s = status -sb
+    ss = s -uno
+
+
+[color]
+  branch = yes
+  pager = yes
+  diff = auto
+  status = auto
+  interactive = always
+[color "branch"]
+  current = green
+  local = yellow
+  remote  = cyan
+[color "diff"]
+  meta = yellow
+  frag = magenta
+  old = red
+  new = green
+[color "interactive"]
+  error = red bold
+[color "status"]
+  header = magenta
+  added = yellow
+  changed = green
+  untracked = cyan
