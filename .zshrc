@@ -178,7 +178,7 @@ if [ -d $XDG_CONFIG_HOME/zshrc.d ]; then
   done
 fi
 
-# Load local user aliases
-[ -r $XDG_CONFIG_HOME/aliases.sh ] && . $XDG_CONFIG_HOME/aliases.sh
+# Load some more local user aliases, if available.
+[ -r ~/.aliases.sh ] && . ~/.aliases.sh
 
 # vim:fenc=utf-8:ft=zsh:

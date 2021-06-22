@@ -76,6 +76,5 @@ if [ -d $XDG_CONFIG_HOME/profile.d ]; then
   unset sh
 fi
 
-
 # We want to source ~/.bashrc
-[ -f $HOME/.bashrc ] && . $HOME/.bashrc
+[ -f ~/.bashrc ] && . ~/.bashrc

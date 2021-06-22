@@ -1,4 +1,4 @@
-# .bashrc voidlinux
+# .bashrc void linux
 
 [[ $- != *i* ]] && return   # Shell is non-interactive.  Be done now!
 
@@ -6,10 +6,18 @@ set -o vi
 stty -ixon
 shopt -qs extglob
 #shopt -qs nullglob
+
+shopt -s cdspell
+shopt -s extglob
+shopt -s cdable_vars
+
 shopt -s no_empty_cmd_completion
 shopt -s checkwinsize
+
+# GNU Bash history setup
 shopt -s histappend # append commands to the history file
 shopt -s cmdhist    # multi-line commands in one history entry
+
 HISTCONTROL=ignoredups:ignorespace,erasedups
 HISTIGNORE=ls:ps:history
 HISTSIZE=1000
@@ -29,15 +37,14 @@ case ${TERM} in
 		unset PS1;;
 esac
 
-
-# Gentoo's default prompt.
+# Default prompt likewise Gentoo's
 if [ $EUID == 0 ]; then
     PS1+='\[\033[01;31m\]\h\[\033[01;34m\] \w \$\[\033[00m\] '
 else
     PS1+='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W \$\[\033[00m\] '
 fi
 
-# enable color support of ls and also add handy aliases
+# Enable color support of ls and also add handy aliases.
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
     alias grep='grep --color=auto'
@@ -53,7 +60,7 @@ alias la='ls -a'
 alias  l='ls -lha'
 alias cls=clear
 
-# Load local user environment settings. 
+# Load more bash user settings.
 if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then
   for sh in $XDG_CONFIG_HOME/bashrc.d/*.sh; do
     [ -r "$sh" ] && . "$sh"
@@ -61,5 +68,5 @@ if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then
   unset sh
 fi
 
-# Load more local user bash aliases.
-[ -r $XDG_CONFIG_HOME/bash_aliases.sh ] && . $XDG_CONFIG_HOME/bash_aliases.sh
+# Load some more local user aliases, if available.
+[ -r ~/.aliases.sh ] && . ~/.aliases.sh

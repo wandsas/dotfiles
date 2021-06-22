@@ -1,24 +1,8 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
-[/home/wandsas/desktop/crosshatcher.asc]
-row=3
-col=0
-
-[/home/wandsas/desktop/keyring.sh]
-row=4
-col=0
-
 [/home/wandsas/desktop/perllib.sh]
 row=5
-col=0
-
-[/home/wandsas/desktop/intellij-idea.desktop]
-row=8
-col=1
-
-[/home/wandsas/desktop/src]
-row=2
 col=0
 
 [/home/wandsas/desktop/android-studio.desktop]
@@ -28,6 +12,30 @@ col=0
 [/home/wandsas/desktop/firefox.desktop]
 row=7
 col=0
+
+[/home/wandsas/desktop/wandsas.asc]
+row=6
+col=0
+
+[/home/wandsas/desktop/crosshatcher.asc]
+row=3
+col=0
+
+[/home/wandsas/desktop/src]
+row=2
+col=0
+
+[/home/wandsas/desktop/keyring.sh]
+row=4
+col=0
+
+[/home/wandsas/desktop/intellij-idea.desktop]
+row=8
+col=1
+
+[/home/wandsas/desktop/28.eml]
+row=0
+col=1
 
 [Trash]
 row=0

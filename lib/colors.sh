@@ -1,14 +1,14 @@
 # ansi colors
-#black="\e[0;90m"
-#red="\e[0;91m"
-#green="\e[0;92m"
-#yellow="\e[0;93m"
-#blue="\e[0;94m"
-#magenta="\e[0;95m"
-#cyan="\e[0;96m"
-#bold="\e[1m"
-#underline="\e[4m"
-#reset="\e[0m"
+black="\e[0;90m"
+red="\e[0;91m"
+green="\e[0;92m"
+yellow="\e[0;93m"
+blue="\e[0;94m"
+magenta="\e[0;95m"
+cyan="\e[0;96m"
+bold="\e[1m"
+underline="\e[4m"
+reset="\e[0m"
 
 # tput colors
 black=$(tput setaf 0)
