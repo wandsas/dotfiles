@@ -1,26 +1,23 @@
-# .bashrc
+# .bashrc voidlinux
 
 [[ $- != *i* ]] && return   # Shell is non-interactive.  Be done now!
 
 set -o vi
+stty -ixon
+shopt -qs extglob
+#shopt -qs nullglob
 shopt -s no_empty_cmd_completion
 shopt -s checkwinsize
-
 shopt -s histappend # append commands to the history file
 shopt -s cmdhist    # multi-line commands in one history entry
-export LESSHISTFILE=$XDG_CACHE_HOME/less_history
-export HISTFILE=$XDG_CACHE_HOME/bash_history
-export HISTCONTROL=ignoredups:ignorespace,erasedups
-export HISTIGNORE=ls:ps:history
-export HISTSIZE=1000
-export HISTFILESIZE=1000
-export HISTTIMEFORMAT="%h %d %H:%M:%S "
-export PROMPT_COMMAND="history -a; history -c; history -r;  $PROMPT_COMMAND"
-
-
-shopt -qs extglob
-shopt -qs nullglob
-stty -ixon
+LESSHISTFILE=$XDG_CACHE_HOME/less_history
+HISTFILE=$XDG_CACHE_HOME/bash_history
+HISTCONTROL=ignoredups:ignorespace,erasedups
+HISTIGNORE=ls:ps:history
+HISTSIZE=1000
+HISTFILESIZE=1000
+HISTTIMEFORMAT="%h %d %H:%M:%S "
+PROMPT_COMMAND="history -a; history -c; history -r;  $PROMPT_COMMAND"
 
 
 # Change window title of X terminals 
@@ -41,11 +38,17 @@ else
     PS1+='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W \$\[\033[00m\] '
 fi
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+    alias ls='ls --color=auto'
+    alias ip='ip --color=auto'
+fi 
 
 # Some minimal local user aliases.
-alias grep='grep --color=auto'
-alias ip='ip --color=auto'
-alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias la='ls -a'
 alias  l='ls -lha'
