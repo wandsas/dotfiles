@@ -10,15 +10,14 @@ shopt -s no_empty_cmd_completion
 shopt -s checkwinsize
 shopt -s histappend # append commands to the history file
 shopt -s cmdhist    # multi-line commands in one history entry
-LESSHISTFILE=$XDG_CACHE_HOME/less_history
-HISTFILE=$XDG_CACHE_HOME/bash_history
 HISTCONTROL=ignoredups:ignorespace,erasedups
 HISTIGNORE=ls:ps:history
 HISTSIZE=1000
 HISTFILESIZE=1000
 HISTTIMEFORMAT="%h %d %H:%M:%S "
 PROMPT_COMMAND="history -a; history -c; history -r;  $PROMPT_COMMAND"
-
+HISTFILE=$XDG_CACHE_HOME/bash_history
+LESSHISTFILE=$XDG_CACHE_HOME/less_history
 
 # Change window title of X terminals 
 case ${TERM} in
