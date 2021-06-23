@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Install pre requirements for user environment setup
 
