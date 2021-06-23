@@ -38,8 +38,9 @@ input 1133:49271:Logitech_USB_Optical_Mouse {
 
     bindsym $mod+Shift+q kill
 
-    bindsym $mod+Shift+d exec dmenu_run
     bindsym $mod+d exec $menu
+    bindsym $mod+Shift+d exec xfce4-appfinder -c
+    bindsym $mod+p exec passmenu
 
     bindsym $mod+Ctrl+Return exec thunar
     bindsym $mod+t exec xfce4-taskmanager

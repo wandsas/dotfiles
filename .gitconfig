@@ -10,6 +10,8 @@
   email = sascha.wander@gmail.com
   signkey = 0xC026CCEBC1D3B54C
 
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 [alias]
     l = log --pretty='format:%h %s%d' -n 20 --graph
     tags = tag -l

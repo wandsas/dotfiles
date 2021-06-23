@@ -1,4 +1,0 @@
-#!/bin/sh
-xbps-rindex --sign --signedby "wandsas" \
-    --privkey $HOME/.ssh/id_void.pem \ 
-   $HOME/void-packages/hostdir/binpkgs

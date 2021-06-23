@@ -16,8 +16,8 @@ case "$(id -u)" in
 	: ${SVDIR:="/var/service"}
 	;;
 1000)
-	: ${ETCSVDIR:="/home/duncan/sv"}
-	: ${SVDIR:="/home/duncan/service /home/duncan/service.x"}
+	: ${ETCSVDIR:="/home/wandsas/sv"}
+	: ${SVDIR:="/home/wandsas/service /home/wandsas/service.x"}
 	;;
 esac
 
