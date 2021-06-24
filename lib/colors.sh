@@ -1,30 +1,37 @@
-# ansi colors
-black="\e[0;90m"
-red="\e[0;91m"
-green="\e[0;92m"
-yellow="\e[0;93m"
-blue="\e[0;94m"
-magenta="\e[0;95m"
-cyan="\e[0;96m"
-bold="\e[1m"
-underline="\e[4m"
-reset="\e[0m"
-
-# tput colors
-black=$(tput setaf 0)
-red=$(tput setaf 1)
-green=$(tput setaf 2)
-yellow=$(tput setaf 3)
-blue=$(tput setaf 4)
-magenta=$(tput setaf 5)
-cyan=$(tput setaf 6)
-bold=$(tput bold)
-underline=$(tput smul)
-reset=$(tput sgr0)
-
-# Stdout Log
+# ~/lib/colors.sh
+#
 # RED: Errors
 # BLUE: Descriptions
 # GREEN: Info, Success
 # YELLOW: Warning
 # CYAN: Questions
+
+# ansi colors
+black="\033[0;90m"
+red="\033[0;91m"
+green="\033[0;92m"
+yellow="\033[0;93m"
+blue="\033[0;94m"
+magenta="\033[0;95m"
+cyan="\033[0;96m"
+bold="\033[1m"
+underline="\033[4m"
+reset="\033[m"
+
+
+# tput colors
+tblack=$(tput setaf 0)
+tred=$(tput setaf 1)
+tgreen=$(tput setaf 2)
+tyellow=$(tput setaf 3)
+tblue=$(tput setaf 4)
+tmagenta=$(tput setaf 5)
+tcyan=$(tput setaf 6)
+tbold=$(tput bold)
+tunderline=$(tput smul)
+treset=$(tput sgr0)
+
+### TESTING ###
+
+printf "${green}INFO:${reset} foo bar bar foo\n"
+

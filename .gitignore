@@ -1,2 +1,14 @@
 .vim/plugins
 .vim/autoload/plug.vim
+
+.config/Chromium
+.config/gcloud
+.config/Mousepad
+.config/Thunar
+.config/autostart
+.config/dconf
+.config/gcolor3
+.config/gimp
+.config/keybase
+.config/spicy
+.config/mr

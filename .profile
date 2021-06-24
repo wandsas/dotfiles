@@ -37,13 +37,10 @@ export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locu
 export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
 export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
 
-export LESS='--skip-search-screen --max-back-scroll=100 --ignore-case --jump-target=15 --long-prompt
---quiet --RAW-CONTROL-CHARS --HILITE-UNREAD --max-forw-scroll=100 --no-init'
-#export LESS='--RAW-CONTROL-CHARS --long-prompt --shift 5'
+export LESS='--max-back-scroll=100 --ignore-case --jump-target=15 --quiet --RAW-CONTROL-CHARS --HILITE-UNREAD --max-forw-scroll=100 --no-init'
 export LESSOPEN='|lesspipe %s'
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 export LESSKEY=$XDG_CACHE_HOME/less.key
-
 export SSH_ASKPASS=gnome-ssh-askpass
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
@@ -70,7 +67,6 @@ prependpath "$HOME/.local/bin"
 prependpath "$HOME/bin"
 unset prependpath
 export PATH
-
 
 # Load local user profiles settings (~/.config/profile.d). if available.
 if [ -d $XDG_CONFIG_HOME/profile.d ]; then

@@ -34,18 +34,18 @@ unclutter -keystroke -idle 2 -noevents &
 ##### SESSION CONFIGURATION #####
 
 # Start runit service of local user, inform dbus.
-exec dbus-launch --exit-with-session runsvdir-wandsas -P ~/service
+#exec dbus-launch --exit-with-session runsvdir-wandsas -P ~/service
 
 # Init gnome-keyring and inform dbus.
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
-export GPG_AGENT_INFO SSH_AUTH_SOCK
-dbus-update-activation-environment --all DISPLAY
+#eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
+#export GPG_AGENT_INFO SSH_AUTH_SOCK
+#dbus-update-activation-environment --all DISPLAY
 # Authentication
-/usr/libexec/xfce-polkit &
+#/usr/libexec/xfce-polkit &
 
 ### SESSION CONFIGURATION ### 
 
-case ${1:-$[tty} in
+case "${1:-$(tty)}" in
     xfce4|*tty1)
         exec startxfce4;;
     sway|*tty2)
