@@ -1,4 +1,4 @@
-# Setup 256 colors terminal support for rxvt-unicode and xterm
+# Setup 256 colors terminal support
 
 zmodload zsh/zutil
 zmodload zsh/parameter
