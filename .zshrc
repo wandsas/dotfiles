@@ -1,15 +1,9 @@
-[[ $TERM = linux ]] && export LC_MESSAGES=C
 
-umask 022
 # If not running interactively, don't do anything else
 [[ $- != *i* ]] && return
 
-ZSHRC_SKIP_MORPHO=
-ZSHRC_SKIP_AUTOSUGGESTIONS=
-ZSHRC_SKIP_FAST_SYNTAX_HIGHLIGHTING=
-ZSHRC_SKIP_HISTORY_SUBSTRING_SEARCH=
+umask 022
 
-# vi keybindings
 bindkey -v
 
 # Zsh options (See man zshoptions)
@@ -48,9 +42,9 @@ setopt                      \
     unset
 
 # Zsh history
-HISTFILE=${XDG_CACHE_HOME}/zshistory
-HISTSIZE=10000
-SAVEHIST=10000
+HISTFILE=${XDG_CACHE_HOME}/zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
 
 setopt                      \
   append_history            \
@@ -62,7 +56,6 @@ setopt                      \
   share_history
 
 stty -ixon
-ttyctl -f
 
 # Zsh modules (See man zshmodules)
 
@@ -70,7 +63,7 @@ ttyctl -f
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
 
-# Smart URLs
+# Smart urls
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
@@ -78,7 +71,7 @@ zle -N self-insert url-quote-magic
 (( ${+aliases[run-help]} )) && unalias run-help
 autoload -Uz run-help
 
-# Zsh mime
+# Zsh Mime
 # For file extensions, we use the defaults of zsh-mime-setup.
 # See /etc/mailcap, /etc/mime.types for system configs
 # and ~/.mailcap, ~/.config/mimeapps.list for user configs.
@@ -157,7 +150,7 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # Completion Caching
 zstyle ':completion:*' use-cache  yes
-zstyle ':completion:*:complete:*' cache-path ${XDG_CACHE_HOME}/zsh
+zstyle ':completion:*:complete:*' cache-path ${XDG_CACHE_HOME}/zsh_cache
 
 # .. as a completion
 zstyle ':completion:*' special-dirs ..

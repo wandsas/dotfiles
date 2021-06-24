@@ -8,8 +8,6 @@ export ZDOTDIR=${ZDOTDIR:-$HOME}
 # Stop bad system-wide scripts interfering.
 setopt NO_global_rcs
 
-umask 022
-
 setopt extended_glob
 
 # Path
