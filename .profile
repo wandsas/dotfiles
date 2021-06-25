@@ -41,15 +41,17 @@ prependpath /usr/sbin
 prependpath /usr/bin
 prependpath /usr/local/sbin
 prependpath /usr/local/bin
-prependpath "$GOPATH/bin"
-prependpath "$HOME/.cargo/bin"
-prependpath "$HOME/.local/bin"
-prependpath "$HOME/bin"
+#prependpath ${GOPATH}/bin
+#prependpath ${HOME}/.cargo/bin
+#prependpath ${HOME}/.pyenv/bin
+#prependpath ${HOME}/.rbenv/bin
+prependpath ${HOME}/.local/bin
+prependpath ${HOME}/bin
 unset prependpath
 export PATH
 
-# Source Android env, if it exists.
-[ -r ~/.envsetup.sh ] && . ~/.envsetup.sh
+# Source Android environment, if it exists.
+[ -r ~/.envsetup_android.sh ] && . ~/.envsetup_android.sh
 
 # if running bash, include .bashrc if it exists.
 [ -n $BASH_VERSION ] && [ -f ~/.bashrc ] && . ~/.bashrc

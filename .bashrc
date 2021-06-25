@@ -22,15 +22,6 @@ shopt -s cmdhist
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-export LANG=en_US.UTF-8
-export EDITOR=vim
-export VISUAL=vim
-export PAGER=less
-
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTCONTROL=ignoreboth,erasedups
 HISTIGNORE=ls:ps:history
@@ -99,16 +90,23 @@ fi
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+# Some more ls aliases
 alias ll='ls -lh'
 alias la='ls -a'
 alias l='ls -lha'
+
+# Load local bash user environment
+if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then
+  for sh in $XDG_CONFIG_HOME/bashrc.d/*.sh; do
+    [ -r "$sh" ] && . "$sh"
+  done
+  unset sh
+fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.aliases.sh ]; then
     . ~/.aliases.sh
 fi
