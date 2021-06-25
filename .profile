@@ -50,8 +50,16 @@ prependpath ${HOME}/bin
 unset prependpath
 export PATH
 
-# Source Android environment, if it exists.
-[ -r ~/.envsetup_android.sh ] && . ~/.envsetup_android.sh
+# Load local user profiles settings (~/.config/profile.d). if available.
+if [ -d $XDG_CONFIG_HOME/profile.d ]; then
+    for sh in $XDG_CONFIG_HOME/profile.d/*.sh; do
+        [ -r "$sh" ] && . "$sh"
+    done
+    unset sh
+fi
 
 # if running bash, include .bashrc if it exists.
 [ -n $BASH_VERSION ] && [ -f ~/.bashrc ] && . ~/.bashrc
+
+# Source Android environment, if it exists.
+[ -r ~/.envsetup.sh ] && . ~/.envsetup.sh
