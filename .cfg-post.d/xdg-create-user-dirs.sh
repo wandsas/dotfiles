@@ -16,14 +16,9 @@ xdgvars=(
     "XDG_DATA_HOME: $HOME/.local/share"
 )
 
-echo ${xdg_vars[*]}
-echo ${xdg_vars[0]}
-echo ${xdg_vars[1]}
-echo ${xdg_vars[2]}
-
 # Prepare xdg dirs for first user login.
-for xdg_var in ${xdg_vars[@]}; do
-    echo "xdg $xdg_var"
+for xdgvar in ${xdgvars[@]}; do
+    echo "xdg $xdgvar":
 done
   
 printf "${yellow}==>${reset} \n"

@@ -60,7 +60,7 @@ alias la='ls -a'
 alias  l='ls -lha'
 alias cls=clear
 
-# Load more bash user settings.
+# Load local bash user environment
 if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then
   for sh in $XDG_CONFIG_HOME/bashrc.d/*.sh; do
     [ -r "$sh" ] && . "$sh"
