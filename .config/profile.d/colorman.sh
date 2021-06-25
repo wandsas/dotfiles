@@ -1,4 +1,6 @@
-# ~/.config/bashrc.d/colorman.sh
+# ~/.config/profile.d/colorman.sh
+
+# colorized manual pages
 
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \

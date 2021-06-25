@@ -3,8 +3,10 @@
 # No git-prompt for root.
 [ $EUID == 0 ] && return
 
-#  No git-prompt, if git-prompt.sh config not available.
+# If git-prompt.sh not available -> No git-prompt for all users
 [ -r $XDG_CONFIG_HOME/bashrc.d/git-prompt.sh ] || return
+
+# Update git-prompt.sh 
 
 # Git properties
 # Overridable by bash.showDirtyState=true

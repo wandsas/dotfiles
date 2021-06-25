@@ -9,6 +9,14 @@ col=0
 row=8
 col=0
 
+[/home/wandsas/desktop/RUBY-STYLE]
+row=3
+col=1
+
+[/home/wandsas/desktop/emulator-install-using-avdmanager.md]
+row=1
+col=1
+
 [/home/wandsas/desktop/firefox.desktop]
 row=7
 col=0
@@ -25,12 +33,20 @@ col=0
 row=2
 col=0
 
+[/home/wandsas/desktop/SH-STYLE.md]
+row=4
+col=1
+
 [/home/wandsas/desktop/keyring.sh]
 row=4
 col=0
 
 [/home/wandsas/desktop/intellij-idea.desktop]
 row=8
+col=1
+
+[/home/wandsas/desktop/C-STYLE.md]
+row=2
 col=1
 
 [/home/wandsas/desktop/28.eml]

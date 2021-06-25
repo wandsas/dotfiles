@@ -2,13 +2,18 @@
 .vim/autoload/plug.vim
 
 .config/Chromium
-.config/gcloud
 .config/Mousepad
 .config/Thunar
 .config/autostart
-.config/dconf
+.config/gcloud
 .config/gcolor3
 .config/gimp
+.config/dconf
+.config/htop
 .config/keybase
-.config/spicy
+.config/libvirt
+.config/lxc
 .config/mr
+.config/spicy
+.config/user-dirs.conf
+.config/user-dirs.dirs

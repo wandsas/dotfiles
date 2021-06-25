@@ -1,5 +1,6 @@
 [core]
   compression = 9
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [init]
   defaultBranch = master
   templateDir = /var/empty
@@ -22,6 +23,7 @@
 
 
 [color]
+	ui = true
   branch = yes
   pager = yes
   diff = auto
@@ -43,3 +45,5 @@
   added = yellow
   changed = green
   untracked = cyan
+[interactive]
+	diffFilter = diff-so-fancy --patch
