@@ -1,4 +1,4 @@
-envfile=$TMPDIR/ssh-agent-env
+envfile=$XDG_CACHE_HOME/ssh-agent-env
 if [ -r $envfile ]; then
 	while read line; do
 		export $line
