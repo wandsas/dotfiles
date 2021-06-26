@@ -26,36 +26,42 @@ export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/sh
 export SVDIR=$HOME/service
 export ETCSVDIR=$HOME/sv
 
-export GOPATH=$HOME/.local/lib/go
-
-PERL5LIB=${HOME}/.local/lib/perl5${PERL5LIB:+:${PERL5LIB}}; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT=${HOME}/.local/lib/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"${HOME}/.local/lib/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=${HOME}/.local/lib/perl5"; export PERL_MM_OPT;
-
-PATH="/home/wandsas/perl5/bin${PATH:+:${PATH}}"; export PATH;
-
-export JAVA_HOME=/usr/lib/jvm/openjdk11
-export JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -XX:-UsePerfData'
-
+# C/C++
 export MAKEOPTS='^-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory'
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:path=01;36:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
 
-export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
-export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
+# Perl
+export PERL5LIB=${HOME}/.local/lib/perl5${PERL5LIB:+:${PERL5LIB}};
 
-export LESS='--max-back-scroll=100 --ignore-case --jump-target=15 --quiet --RAW-CONTROL-CHARS --HILITE-UNREAD --max-forw-scroll=100 --no-init'
+# Go
+export GOPATH=$HOME/.local/lib/go
+
+# Java
+export JAVA_HOME=/usr/lib/jvm/openjdk11
+export JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -XX:-UsePerfData'
+
+# pyenv
+export PYENV_ROOT=$HOME/.local/lib/pyenv
+eval "$($PYENV_ROOT/bin/pyenv init --path)"
+
+# rbenv
+export RBENV_ROOT=$HOME/.local/lib/rbenv
+eval "$($RBENV_ROOT/bin/rbenv init - bash)"
+# NVM
+export NVM_DIR=$HOME/.local/lib/nvm
+[ -s $NVM_DIR/nvm.sh ] && \. "$NVM_DIR/nvm.sh
+[ -s $NVM_DIR/bash_completion ] && \. "$NVM_DIR/bash_completion
+
+export LESS="-a -h100 -i -j15 -M -q -R -W -y100 -X"
 export LESSOPEN='|lesspipe %s'
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 export LESSKEY=$XDG_CACHE_HOME/less.key
-export SSH_ASKPASS=gnome-ssh-askpass
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
+export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
+export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
+export SSH_ASKPASS=gnome-ssh-askpass
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
-
-#export NVM_DIR=$HOME/.local/lib/nvm
-#[ -s $NVM_DIR/nvm.sh ] && \. "$NVM_DIR/nvm.sh
-#[ -s $NVM_DIR/bash_completion ] && \. "$NVM_DIR/bash_completion
 
 # Build a custom user path
 prependpath () {
@@ -72,7 +78,9 @@ prependpath /usr/sbin
 prependpath /usr/bin
 prependpath /usr/local/sbin
 prependpath /usr/local/bin
-prependpath ${HOME}/.local/lib/perl5/bin
+prependpath ${RBENV_ROOT}/bin
+prependpath ${PYENV_ROOT}/bin
+prependpath ${PERL5LIB}/bin
 prependpath ${GOPATH}/bin
 prependpath ${HOME}/.cargo/bin
 prependpath ${HOME}/.local/bin
@@ -80,7 +88,7 @@ prependpath ${HOME}/bin
 unset prependpath
 export PATH
 
-# Load local user profiles settings (~/.config/profile.d). if available.
+# Load local user profiles settings, if available.
 if [ -d $XDG_CONFIG_HOME/profile.d ]; then
   for sh in $XDG_CONFIG_HOME/profile.d/*.sh; do
     [ -r "$sh" ] && . "$sh"
