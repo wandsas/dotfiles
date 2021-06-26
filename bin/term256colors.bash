@@ -1,4 +1,14 @@
 #!/bin/bash
+#
+# terminal 256 colors display script
+#
+# $Header: ${HOME}/bin/term256colors.bash                   Exp $
+# $Author: (c) 2014-15 -tclover <tokiclover@gmail.com>      Exp $
+# $License: MIT (or 2-clause/new/simplified BSD)            Exp $
+# $Version: 1.0 2015/05/15                              Exp $
+# $Screenhots: https://imgur.com/EqE6iOz.png                Exp $
+#
+# $Original: http://frexx.de/xterm-256-notes/data/colortable16.sh
 
 function pr-line {
 	echo "     >------------------------------------------<"
@@ -45,3 +55,7 @@ for (( b=0; i<8; i++ )); do
 done
 
 unset B BO CLR E F FO R
+
+#
+# vim:fenc=utf-8:ci:pi:sts=2:sw=2:ts=2:
+#

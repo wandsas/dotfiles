@@ -2,19 +2,16 @@
 
 # dotfiles/.cfg-post.d
 
-
-# Ansi colors
-yellow="\e[0;93m"
-reset="\e[0m"
+. ${HOME}/lib/stdout-log.sh
 
 # Prepare xdg dirs for first user login.
 for xdgvar in ~/.config ~/.cache ~/.local/share; do
-    printf "${yellow}==>${reset} Testing $xdgvar.\n"
+    info "Testing $xdgvar."
 
     if [ -d $XDG ]; then
-        printf "${yellow}==>${reset} Dir: $xdgvar exists. Doing nothing.\n"
+        msg "Dir: $xdgvar exists. Doing nothing."
     else
-        printf "${yellow}==>${reset} Create dir: $xdgvar.\n"
+        msg "Create dir: $xdgvar."
         mkdir -p $xdgvar
     fi
 done

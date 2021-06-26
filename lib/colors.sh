@@ -1,10 +1,10 @@
 # ~/lib/colors.sh
 #
-# RED: Errors
-# BLUE: Descriptions
 # GREEN: Info, Success
-# YELLOW: Warning
+# YELLOW: Description
+# BLUE: Warning
 # CYAN: Questions
+# RED: Errors
 
 # ansi colors
 black="\033[0;90m"
@@ -20,18 +20,17 @@ reset="\033[m"
 
 
 # tput colors
-tblack=$(tput setaf 0)
-tred=$(tput setaf 1)
-tgreen=$(tput setaf 2)
-tyellow=$(tput setaf 3)
-tblue=$(tput setaf 4)
-tmagenta=$(tput setaf 5)
-tcyan=$(tput setaf 6)
-tbold=$(tput bold)
-tunderline=$(tput smul)
-treset=$(tput sgr0)
+#black=$(tput setaf 0)
+#red=$(tput setaf 1)
+#green=$(tput setaf 2)
+#yellow=$(tput setaf 3)
+#blue=$(tput setaf 4)
+#magenta=$(tput setaf 5)
+#cyan=$(tput setaf 6)
+#bold=$(tput bold)
+#underline=$(tput smul)
+#reset=$(tput sgr0)
 
 ### TESTING ###
-
-printf "${green}INFO:${reset} foo bar bar foo\n"
+#printf "${green}INFO:${reset} foo bar bar foo\n"
 

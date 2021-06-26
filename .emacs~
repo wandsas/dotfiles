@@ -910,7 +910,7 @@ Inside COMMAND, % is replaced with the current file name."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "grey90" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "GOOG" :family "Roboto"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "grey90" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width semi-condensed :foundry "misc" :family "fixed"))))
  '(Info-quoted ((t nil)))
  '(comint-highlight-prompt ((t (:foreground "gray90"))))
  '(completions-first-difference ((t nil)))
@@ -987,7 +987,6 @@ Inside COMMAND, % is replaced with the current file name."
  '(erc-user-full-name "Leah Neukirchen")
  '(erc-warn-about-blank-lines t)
  '(focus-follows-mouse t)
- '(font-use-system-font t)
  '(git-commit-summary-max-length 72)
  '(gnus-article-browse-delete-temp t)
  '(gnus-header-face-alist
