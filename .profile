@@ -45,12 +45,11 @@ export SSH_ASKPASS=gnome-ssh-askpass
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
 
-export RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
+#export RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # This will even work in zsh
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Build a custom user path
 prependpath () {
