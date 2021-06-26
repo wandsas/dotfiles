@@ -1,25 +1,98 @@
-[core]
-  compression = 9
-	pager = diff-so-fancy | less --tabs=4 -RFX
-[init]
-  defaultBranch = master
-  templateDir = /var/empty
-[push]
-  default = simple
 [user]
   name = Sascha Wander
   email = sascha.wander@gmail.com
   signkey = 0xC026CCEBC1D3B54C
-
+[github]
+  user = wandsas
+[core]
+  excludesfile = ~/.gitignore
+  pager = less -+$LESS -FRX
+	pager = diff-so-fancy | less --tabs=4 -RFX
+  compression = 9
+[gpg]
+  program = gpg2
+[init]
+  templateDir = /var/empty
+[push]
+  default = simple
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[diff]
+  renames = copies
+[merge]
+  log = true
+[log]
+  decorate = auto
 [alias]
-    l = log --pretty='format:%h %s%d' -n 20 --graph
-    tags = tag -l
-    branches = branch -a
-    remotes = remote -v
-    s = status -sb
-    ss = s -uno
+  l = log --pretty='format:%h %s%d' -n 20 --graph
+	alias = "!git config -l | sed -n 's/^alias\\.//p'"
+	which = "!_() { git config --global --get alias.$1;};_"
+	st = status -s -uno
+	stu = status -s -unormal
+	ix = diff --cached
+	d = diff -c HEAD
+	dd = diff -c HEAD --name-status
+	tree = log --oneline --decorate --graph
+	news = log -p @{1}..
+	lg = log --date=short --pretty='%cd %h%d %s'
+	leg = log --date=short --pretty='%cd %h%d %aE: %s'
+	lop = log -p
+	puff = pull --ff-only
+	pura = pull --rebase --autostash
+	up = pull --rebase --autostash
+	sprunge = "!_(){ git format-patch --stdout \"$@\" |curl -sF 'sprunge=<-' http://sprunge.us ;}; _"
+	prev = checkout HEAD^
+	ignored = ls-files --others -i --exclude-standard
+	madd = "!git diff --name-only --diff-filter=U -z | xargs -0r grep -LZ '<<<<<<<' | xargs -0r git add -v"
+	medit = "!git diff --name-only --diff-filter=U -z | xargs -0r grep -lZ '<<<<<<<' | xargs -0ro vim '+/<<<<<<<'"
+	mlist = "!git diff --name-only --diff-filter=U"
+	this = "!git rev-parse --show-prefix 2>/dev/null || { git init && git add . && git commit -m \"Initial import of ${PWD##*/}\";}"
+	git = !git
+	tig = !tig
+	sl = stash list --name-status --pretty='format:%gd [%ar]: %s'
+	autosquash = "!git rebase -i --autostash --autosquash $(git merge-base HEAD ${@:-'@{u}'})"
+	rank = shortlog -sn --no-merges
+	scissor = "!_(){ git format-patch --stdout \"${@:-@^}\" | awk 'BEGIN{print \"-- >8 --\"} !/^From/ && !/^Date/' ;}; _"
+	sub = submodule update --init --recursive
+	refresh = "!git diff -z --relative --name-only @^ | GIT_COMMITTER_DATE=$(git show -s --format=%cI @) xargs -0r git commit --amend --no-edit"
+	renames = "!_() { git log --name-status --format= --diff-filter=R --reverse \"$@\" | awk -F\"\\t\" 'BEGIN{PROCINFO[\"sorted_in\"]=\"@val_str_asc\"}/^R/{m[$3]=m[$2]?m[$2]:$2;delete m[$2]}END{for(f in m)if(m[f]!=f)print m[f]\" => \"f}'; }; _"
+	churn = !git log --all -M -C --name-only --format='format:' "$@" | grep . | sort | uniq -c | sort
+	whoami = !git var GIT_COMMITTER_IDENT | sed 's/>.*/>/'
+	ls = ls-files
+	amu = "!_() { url=$1; shift; curl -sL \"$url\" | gunzip -f | git am "$@"; }; _"
+	fx = commit --amend --no-edit
+	fcommit = "!_() { f=$1; shift; git commit -m \"${f#.}: $*\" -- "$f"; }; _"
+	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [ \\\"$`echo $VAR`\\\" = '$OLD' ]; then export $VAR='$NEW'; fi\" $@; }; f "
+	push-branch = push -u origin HEAD
+	source = remote get-url origin
+	lazytag = "!_() { t=$1; shift; git tag -a "$t" -m "$t" "$@"; }; _"
+[merge "wiggle"]
+	name = "Wiggle flexible merging"
+	driver = wiggle -o %A %A %O %B
+	recursive = binary
+[mergetool "wiggle"]
+	cmd = wiggle -B -o $MERGED $LOCAL $BASE $REMOTE
+[difftool "wiggle"]
+	cmd = wiggle -Bd $LOCAL $REMOTE
+[includeIf "gitdir:~/work/"]
+	path = ~/work/.gitconfig
+[sendemail]
+	suppresscc = self
+	confirm = always
+	annotate = true
+[pull]
+	ff = only
+[am]
+	messageid = yes
+[advice]
+	addIgnoredFile = false
+[submodule]
+	recurse = true
+
+
+
+
+
 
 
 [color]
