@@ -16,21 +16,9 @@ shopt -s no_empty_cmd_completion
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-shopt -s histappend
-shopt -s cmdhist 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTCONTROL=ignoreboth,erasedups
-HISTIGNORE=ls:ps:history
-HISTSIZE=1000
-HISTFILESIZE=2000
-HISTTIMEFORMAT="%h %d %H:%M:%S "
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-HISTFILE=$XDG_CACHE_HOME/bash_history
-LESSHISTFILE=$XDG_CACHE_HOME/less_history
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
