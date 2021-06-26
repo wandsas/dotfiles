@@ -6,7 +6,7 @@ set_current_tty () {
     export GPG_TTY
 }
 
-init-gpg-agent () {
+init_gpg_agent () {
     set_current_tty
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
     echo UPDATESTARTUPTTY | gpg-connect-agent >/dev/null 2>&1
