@@ -26,7 +26,14 @@ export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/sh
 export SVDIR=$HOME/service
 export ETCSVDIR=$HOME/sv
 
-export GOPATH=$HOME/go
+export GOPATH=$HOME/.local/lib/go
+
+PERL5LIB=${HOME}/.local/lib/perl5${PERL5LIB:+:${PERL5LIB}}; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT=${HOME}/.local/lib/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"${HOME}/.local/lib/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=${HOME}/.local/lib/perl5"; export PERL_MM_OPT;
+
+PATH="/home/wandsas/perl5/bin${PATH:+:${PATH}}"; export PATH;
 
 export JAVA_HOME=/usr/lib/jvm/openjdk11
 export JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -XX:-UsePerfData'
@@ -44,12 +51,11 @@ export LESSKEY=$XDG_CACHE_HOME/less.key
 export SSH_ASKPASS=gnome-ssh-askpass
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
 
-#export RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# This will even work in zsh
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR=$HOME/.local/lib/nvm
+#[ -s $NVM_DIR/nvm.sh ] && \. "$NVM_DIR/nvm.sh
+#[ -s $NVM_DIR/bash_completion ] && \. "$NVM_DIR/bash_completion
 
 # Build a custom user path
 prependpath () {
@@ -66,10 +72,11 @@ prependpath /usr/sbin
 prependpath /usr/bin
 prependpath /usr/local/sbin
 prependpath /usr/local/bin
-prependpath "$GOPATH/bin"
-prependpath "$HOME/.cargo/bin"
-prependpath "$HOME/.local/bin"
-prependpath "$HOME/bin"
+prependpath ${HOME}/.local/lib/perl5/bin
+prependpath ${GOPATH}/bin
+prependpath ${HOME}/.cargo/bin
+prependpath ${HOME}/.local/bin
+prependpath ${HOME}/bin
 unset prependpath
 export PATH
 
