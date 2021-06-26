@@ -91,6 +91,4 @@ case "${0##*/}" in
 	(mktmp*) mktmp "${@}";;
 esac
 
-#
-# vim:fenc=utf-8:ft=sh:ci:pi:sts=2:sw=2:ts=2:
-#
+# vim:fenc=utf-8:ft=bash:ts=2:sts=2:sw=2:et:

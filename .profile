@@ -49,11 +49,11 @@ export RBENV_ROOT=$HOME/.local/lib/rbenv
 eval "$($RBENV_ROOT/bin/rbenv init - bash)"
 # NVM
 export NVM_DIR=$HOME/.local/lib/nvm
-[ -s $NVM_DIR/nvm.sh ] && \. "$NVM_DIR/nvm.sh
-[ -s $NVM_DIR/bash_completion ] && \. "$NVM_DIR/bash_completion
+[ -s $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
+[ -s $NVM_DIR/bash_completion ] && . $NVM_DIR/bash_completion
 
 export LESS="-a -h100 -i -j15 -M -q -R -W -y100 -X"
-export LESSOPEN='|lesspipe %s'
+export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 export LESSKEY=$XDG_CACHE_HOME/less.key
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
