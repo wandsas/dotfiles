@@ -1,6 +1,6 @@
 [user]
-  name = ubu3
-  email = ubuntu@ubu3.lxd
+  name = Sascha Wander
+  email = sascha.wander@gmail.com
 [init]
   defaultBranch = master
   templateDir = /var/empty
