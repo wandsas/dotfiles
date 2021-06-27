@@ -6,10 +6,8 @@
 [push]
   default = simple
 [user]
-  name = Sascha Wander
-  email = sascha.wander@gmail.com
-  signkey = 0xC026CCEBC1D3B54C
-
+  name = ubu3
+  email = ubuntu@ubu3.lxd
 [alias]
     l = log --pretty='format:%h %s%d' -n 20 --graph
     tags = tag -l
@@ -17,8 +15,6 @@
     remotes = remote -v
     s = status -sb
     ss = s -uno
-
-
 [color]
   branch = yes
   pager = yes

@@ -65,4 +65,4 @@ fi
 [ -n $BASH_VERSION ] && [ -f ~/.bashrc ] && . ~/.bashrc
 
 # Source Android environment, if it exists.
-[ -r ~/.envsetup.sh ] && . ~/.envsetup.sh
+[ -r $HOME/android/envsetup.sh ] && . $HOME/android/envsetup.sh
