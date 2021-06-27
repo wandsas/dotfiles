@@ -1,13 +1,13 @@
-[core]
-  compression = 9
-[init]
-  defaultBranch = master
-  templateDir = /var/empty
-[push]
-  default = simple
 [user]
   name = ubu3
   email = ubuntu@ubu3.lxd
+[init]
+  defaultBranch = master
+  templateDir = /var/empty
+[core]
+  compression = 9
+[push]
+  default = simple
 [alias]
     l = log --pretty='format:%h %s%d' -n 20 --graph
     tags = tag -l
