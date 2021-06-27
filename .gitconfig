@@ -1,30 +1,30 @@
 [user]
-  name = Sascha Wander
-  email = sascha.wander@gmail.com
-  signkey = 0xC026CCEBC1D3B54C
+    name = Sascha Wander
+    email = sascha.wander@gmail.com
+    signkey = 0xC026CCEBC1D3B54C
 [github]
-  user = wandsas
+    user = wandsas
 [core]
-  excludesfile = ~/.gitignore
-  pager = less -+$LESS -FRX
-	pager = diff-so-fancy | less --tabs=4 -RFX
-  compression = 9
+    excludesfile = ~/.gitignore
+    #pager = less -+$LESS -FRX
+	pager = diff-so-fancy | less --tabs=4 -FRX
+    compression = 9
 [gpg]
   program = gpg2
 [init]
-  templateDir = /var/empty
+    templateDir = /var/empty
 [push]
-  default = simple
+    default = simple
+[diff]
+    renames = copies
+[merge]
+    log = true
+[log]
+    decorate = auto
 [url "git@github.com:"]
 	insteadOf = https://github.com/
-[diff]
-  renames = copies
-[merge]
-  log = true
-[log]
-  decorate = auto
 [alias]
-  l = log --pretty='format:%h %s%d' -n 20 --graph
+    l = log --pretty='format:%h %s%d' -n 20 --graph
 	alias = "!git config -l | sed -n 's/^alias\\.//p'"
 	which = "!_() { git config --global --get alias.$1;};_"
 	st = status -s -uno
@@ -88,13 +88,6 @@
 	addIgnoredFile = false
 [submodule]
 	recurse = true
-
-
-
-
-
-
-
 [color]
 	ui = true
   branch = yes
