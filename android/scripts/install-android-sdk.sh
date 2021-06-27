@@ -2,10 +2,16 @@
 
 export ANDROID_HOME=$HOME/android/sdk
 
-sudo apt-get update
-sudo apt-get install openjdk-17-jdk curl unzip
+if [ ! -d $ANDROID_HOME ]; then
+    mkdir -p $ANDROID_HOME
+    sudo apt-get update
+    sudo apt-get -y dist-upgrade
+    sudo apt-get -y --purge auto-remove
+    sudo apt-get -y install openjdk-17-jdk curl zip unzip bison flex \
+    ncurses libssl-dev xzutils bash-completion git
+fi
 
-# cmdline-tools
+### cmdline-tools ###
 [ -d $ANDROID_HOME/cmdline-tools ] || mkdir -p $ANDROID_HOME/cmdline-tools
 cd $ANDROID_HOME/cmdline-tools
 curl -O https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
@@ -15,14 +21,14 @@ rm commandlinetools-linux-7302050_latest.zip
 mv tools latest
 export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
 sdkmanager 'cmdline-tools;latest'
-# platform-tools
+### platform-tools ###
 sdkmanager platform-tools
 export PATH=$ANDROID_HOME/platform-tools:$PATH
-# build-tools
+### build-tools ###
 sdkmanager 'build-tools;30.0.2'
 export PATH=$HOME/android/sdk/build-tools/30.0.2:$PATH
-# ndk-bundle
+### ndk-bundle ###
 sdkmanager ndk-bundle
 export PATH=$ANDROID_HOME/ndk-bundle:$PATH
-
+### 
 sdkmanager --update
