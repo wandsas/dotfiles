@@ -15,6 +15,8 @@
     templateDir = /var/empty
 [push]
     default = simple
+[pull]
+	ff = only
 [diff]
     renames = copies
 [merge]
@@ -23,6 +25,49 @@
     decorate = auto
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[merge "wiggle"]
+	name = "Wiggle flexible merging"
+	driver = wiggle -o %A %A %O %B
+	recursive = binary
+[mergetool "wiggle"]
+	cmd = wiggle -B -o $MERGED $LOCAL $BASE $REMOTE
+[difftool "wiggle"]
+	cmd = wiggle -Bd $LOCAL $REMOTE
+[sendemail]
+	suppresscc = self
+	confirm = always
+	annotate = true
+[am]
+	messageid = yes
+[advice]
+	addIgnoredFile = false
+[submodule]
+	recurse = true
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color]
+	ui = true
+  branch = yes
+  pager = yes
+  diff = auto
+  status = auto
+  interactive = always
+[color "branch"]
+  current = green
+  local = yellow
+  remote  = cyan
+[color "diff"]
+  meta = yellow
+  frag = magenta
+  old = red
+  new = green
+[color "interactive"]
+  error = red bold
+[color "status"]
+  header = magenta
+  added = yellow
+  changed = green
+  untracked = cyan
 [alias]
     l = log --pretty='format:%h %s%d' -n 20 --graph
 	alias = "!git config -l | sed -n 's/^alias\\.//p'"
@@ -66,50 +111,3 @@
 	push-branch = push -u origin HEAD
 	source = remote get-url origin
 	lazytag = "!_() { t=$1; shift; git tag -a "$t" -m "$t" "$@"; }; _"
-[merge "wiggle"]
-	name = "Wiggle flexible merging"
-	driver = wiggle -o %A %A %O %B
-	recursive = binary
-[mergetool "wiggle"]
-	cmd = wiggle -B -o $MERGED $LOCAL $BASE $REMOTE
-[difftool "wiggle"]
-	cmd = wiggle -Bd $LOCAL $REMOTE
-[includeIf "gitdir:~/work/"]
-	path = ~/work/.gitconfig
-[sendemail]
-	suppresscc = self
-	confirm = always
-	annotate = true
-[pull]
-	ff = only
-[am]
-	messageid = yes
-[advice]
-	addIgnoredFile = false
-[submodule]
-	recurse = true
-[color]
-	ui = true
-  branch = yes
-  pager = yes
-  diff = auto
-  status = auto
-  interactive = always
-[color "branch"]
-  current = green
-  local = yellow
-  remote  = cyan
-[color "diff"]
-  meta = yellow
-  frag = magenta
-  old = red
-  new = green
-[color "interactive"]
-  error = red bold
-[color "status"]
-  header = magenta
-  added = yellow
-  changed = green
-  untracked = cyan
-[interactive]
-	diffFilter = diff-so-fancy --patch
