@@ -1,8 +1,12 @@
-archives
+*.swo
+*.swp
+*~
+\#*#
+*.o
 
+archives
 .vim/plugins
 .vim/autoload/plug.vim
-
 .config/Chromium
 .config/Mousepad
 .config/Thunar
