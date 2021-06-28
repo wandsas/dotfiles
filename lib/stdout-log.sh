@@ -12,6 +12,10 @@ underline="\033[4m"
 reset="\033[m"
 
 info () {
+    printf "\033[0;93mINFO:\033[m \033[1m${@}\033[m\n"
+}
+
+info () {
 	printf "${green}INFO:${reset} ${@}\n" >&2
 }
 
