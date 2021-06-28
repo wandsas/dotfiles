@@ -8,13 +8,15 @@
   compression = 9
 [push]
   default = simple
+[pull]
+	ff = only
 [alias]
-    l = log --pretty='format:%h %s%d' -n 20 --graph
-    tags = tag -l
-    branches = branch -a
-    remotes = remote -v
-    s = status -sb
-    ss = s -uno
+  l = log --pretty='format:%h %s%d' -n 20 --graph
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+  s = status -sb
+  ss = s -uno
 [color]
   branch = yes
   pager = yes
@@ -37,3 +39,4 @@
   added = yellow
   changed = green
   untracked = cyan
+# vim:fenc=utf-8:ft=git:ts=2:sts=2:sw=2:et:
