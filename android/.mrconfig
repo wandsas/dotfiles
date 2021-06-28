@@ -6,10 +6,10 @@ include =
 	cat ~/.config/mr/mr-hooks 2>/dev/null || true
 lib = . ~/.config/mr/mr-functions
 
-[$HOME/android/android-emulator-container-scripts]
+[$HOME/work/android-emulator-container-scripts]
 checkout = git clone git://github.com/google/android-emulator-container-scripts.git
 
-[$HOME/android/lxc-for-android]
+[$HOME/work/lxc-for-android]
 checkout = git clone git://github.com/clondroid/lxc-for-Android-7.1.2.git
 
 
