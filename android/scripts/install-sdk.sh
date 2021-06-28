@@ -29,8 +29,8 @@ sdkmanager 'cmdline-tools;latest'
 sdkmanager platform-tools
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 ### build-tools ###
-sdkmanager 'build-tools;30.0.2'
-export PATH=$HOME/android/sdk/build-tools/30.0.2:$PATH
+sdkmanager 'build-tools;30.0.3'
+export PATH=$HOME/android/sdk/build-tools/30.0.3:$PATH
 ### ndk-bundle ###
 sdkmanager ndk-bundle
 export PATH=$ANDROID_HOME/ndk-bundle:$PATH
