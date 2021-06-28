@@ -1,28 +1,28 @@
 [user]
-    name = Sascha Wander
-    email = sascha.wander@gmail.com
-    signkey = 0xC026CCEBC1D3B54C
+  name = Sascha Wander
+  email = sascha.wander@gmail.com
+  signkey = 0xC026CCEBC1D3B54C
 [github]
-    user = wandsas
+  user = wandsas
 [core]
-    excludesfile = ~/.gitignore
-    #pager = less -+$LESS -FRX
-	pager = diff-so-fancy | less --tabs=4 -FRX
-    compression = 9
+  excludesfile = ~/.gitignore
+  #pager = less -+$LESS -FRX
+  pager = diff-so-fancy | less --tabs=4 -FRX
+  compression = 9
 [gpg]
   program = gpg2
 [init]
-    templateDir = /var/empty
+  templateDir = /var/empty
 [push]
-    default = simple
+  default = simple
 [pull]
-	ff = only
+  ff = only
 [diff]
-    renames = copies
+  renames = copies
 [merge]
-    log = true
+  log = true
 [log]
-    decorate = auto
+  decorate = auto
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [merge "wiggle"]
