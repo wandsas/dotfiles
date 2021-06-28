@@ -9,7 +9,8 @@ if [ ! -d $ANDROID_HOME ]; then
     sudo apt-get -y --purge auto-remove
     sudo apt-get -y install openjdk-17-jdk curl zip unzip bison flex \
         libssl-dev xzutils bash-completion git python3 gpg rsync \
-        diffutils ncurses-base ncurses-bin openssl signify-openbsd
+        diffutils ncurses-base ncurses-bin openssl signify-openbsd \
+        libpulse0 libxcb-xinerama0 make gcc automake pkg-config
     pip install protobuf # required to extract pixel vendor files
 fi
 
