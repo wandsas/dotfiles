@@ -6,18 +6,15 @@ set -o vi
 stty -ixon
 shopt -qs extglob
 #shopt -qs nullglob
-
 shopt -s cdspell
 shopt -s extglob
 shopt -s cdable_vars
-
 shopt -s no_empty_cmd_completion
 shopt -s checkwinsize
 
-# GNU Bash history setup
+### GNU Bash history  ###
 shopt -s histappend # append commands to the history file
 shopt -s cmdhist    # multi-line commands in one history entry
-
 HISTCONTROL=ignoredups:ignorespace,erasedups
 HISTIGNORE=ls:ps:history
 HISTSIZE=1000
@@ -25,9 +22,11 @@ HISTFILESIZE=1000
 HISTTIMEFORMAT="%h %d %H:%M:%S "
 PROMPT_COMMAND="history -a; history -c; history -r;  $PROMPT_COMMAND"
 HISTFILE=$XDG_CACHE_HOME/bash_history
+
+### GNU less history ###
 LESSHISTFILE=$XDG_CACHE_HOME/less_history
 
-# Change window title of X terminals 
+### Change window title of X terminals ###
 case ${TERM} in
 	xterm*|rxvt*|tmux*|alacritty*|kitty*|*color)
 		PS1='\[\033]0;\u@\h:\w\007\]';;
@@ -37,14 +36,14 @@ case ${TERM} in
 		unset PS1;;
 esac
 
-# Default prompt likewise Gentoo's
+### Gentoo Default Prompt ###
 if [ $EUID == 0 ]; then
     PS1+='\[\033[01;31m\]\h\[\033[01;34m\] \w \$\[\033[00m\] '
 else
     PS1+='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W \$\[\033[00m\] '
 fi
 
-# Enable color support of ls and also add handy aliases.
+### Enable dircolors color support ###
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
     alias grep='grep --color=auto'
