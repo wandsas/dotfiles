@@ -58,7 +58,7 @@ fi
 alias ll='ls -lh'
 alias la='ls -a'
 alias  l='ls -lha'
-alias cls=clear
+alias cls='tput reset'
 
 # Load local bash user environment
 if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then

@@ -13,8 +13,8 @@ alias du='grc du'
 alias dus='du -sh'
 alias free='grc free -h'
 
-cls () { clear; }
-res () { cd && reset -Q; }
+alias cls='tput reset'
+alias res='cd && reset -Q'
 
 
 # Search
