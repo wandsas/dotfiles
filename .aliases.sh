@@ -15,6 +15,7 @@ alias free='grc free -h'
 
 alias cls='tput reset'
 alias res='cd && reset -Q'
+alias dt='cd ~/desktop'
 
 
 # Search
@@ -57,6 +58,8 @@ gcd () { cd `git rev-parse --show-toplevel`; }
 alias ip='ip --color=auto'
 alias ps='grc ps'
 alias ss='grc ss'
-alias portscan='nmap -Pn'
+alias dig='grc dig'
+alias portscan='grc nmap -Pn'
+alias portsopen='grc netstat -anpu'
 alias wanip='curl ipinfo.io/ip'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'

@@ -1,6 +1,8 @@
-#!/bin/sh
+# ~/lib/shell.sh
 
-# Running session is interactive
+### Shell Utility functions ###
+
+# @Test running session is interactive
 is_interactive () {
 	case "${-}" in
 	  *i*) ;;
@@ -8,25 +10,22 @@ is_interactive () {
 	esac
 }
 
-# Running a login shell
+# @Test is login shell
 is_login_shell () {
-  [[ "$SHLVL" = 1 ]]
+  [ "$SHLVL" = 1 ]
 }
 
-# Running shell is zsh
+# @Test is zsh
 is_zsh () {
-	[[ -n "$ZSH_VERSION" ]]
+	[ -n "$ZSH_VERSION" ]
 }
 
-# Running shell is bash
+# @Test is bash
 is_bash () {
-  [[ -n "$BASH_VERSION" ]]
+  [ -n $BASH_VERSION ]
 }
 
-# Binary check helper
+# Binary checker helper
 check_bin () {
-	local _cmd
-	for _cmd; do
-		type -p $_cmd 1>$NULL 2>&1 || return
-	done
+    type -p ${1} 1>$NULL 2>&1 || return
 }

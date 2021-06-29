@@ -1,4 +1,6 @@
-#!/bin/sh
+# ~/lib/string.sh
+
+### String/Parser functions ###
 
 strlen () {
     local length=$(echo "$1" | wc -c | sed -e 's/ *//')

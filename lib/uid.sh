@@ -1,16 +1,19 @@
-#!/bin/sh
+# ~/lib/uid.sh
 
-# Check for root-permissions
-is_uid_root () {
+### User Verification Tests ### 
+
+# @Test for root permissions
+# @Exit when failed
+uid_root () {
   if [ `id -u` != 0 ]; then
     echo "Not root; aborting." >&2
     exit 1
   fi
 }
 
-
-# Check if user is not root
-is_uid_non_root () {
+# @Test if user is not root
+# @Exit when failed
+uid_non_root () {
   if [ `id -u` = 0 ]; then
     echo "Must not be root; aborting." >&2
     exit 1
