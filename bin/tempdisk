@@ -4,8 +4,6 @@
 
 me=${0}
 
-
-
 check_temp () {
   /usr/local/bin/doas /usr/bin/hddtemp ${1}
 }
