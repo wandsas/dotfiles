@@ -5,8 +5,8 @@
 [github]
     user = wandsas
 [core]
-    pager = less -+$LESS -FRX
-    #pager = diff-so-fancy | less --tabs=4 -FRX
+    #pager = less -+$LESS -FRX
+    pager = diff-so-fancy | less --tabs=4 -FRX
     compression = 9#
     hooksPath = $XDG_CONFIG_HOME/git/template/hooks
     excludesfile = $XDG_CONFIG_HOME/git/gitignore_global
