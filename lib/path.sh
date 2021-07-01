@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 # Append element at the end of the path
 appendpath () {
     case ":$PATH:" in
@@ -43,16 +42,21 @@ pathremove () {
     fi
 }
 
-
 # Convert path from relative to absolut
 relative2absolut () {
   echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
 }
 
-
 # print directories in $PATH, one per line
-print_path() {
-      local -a dirs; local dir
-          IFS=: read -ra dirs <<< "$PATH"
-              for dir in "${dirs[@]}"; do printf '%s\n' "$dir"; done
+print_path () {
+    local -a dirs
+    IFS=: read -ra dirs <<< "$PATH"
+    for dir in "${dirs[@]}"; do
+        printf '%s\n' "$dir"
+    done
+}
+
+# Binary checker helper
+check_bin () {
+    type -P ${1} &>/dev/null || return
 }
