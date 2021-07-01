@@ -29,10 +29,9 @@ export ETCSVDIR=$HOME/sv
 ### C/C++ GNU/GCC LLVM/Clang toolchains ###
 export MAKEOPTS='^-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory'
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:path=01;36:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
-export VOID_PACKAGES=$HOME/void-packages
 
 ### Perl ###
-export PERL5LIB=${HOME}/.local/lib/perl5${PERL5LIB:+:${PERL5LIB}};
+export PERL5LIB="/home/wandsas/.local/lib/perl5/lib/perl5"
 
 ### Golang ###
 export GOPATH=$HOME/.local/lib/go
@@ -52,13 +51,6 @@ fi
 if [ -d ~/.local/lib/rbenv ]; then
     export RBENV_ROOT=$HOME/.local/lib/rbenv
     eval "$($RBENV_ROOT/bin/rbenv init - bash)"
-fi
-
-### Node Version Manager (NVM) ###
-if [ -d ~/.local/lib/nvm ]; then
-    export NVM_DIR=$HOME/.local/lib/nvm
-    [ -s $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
-    [ -s $NVM_DIR/bash_completion ] && . $NVM_DIR/bash_completion
 fi
 
 ### GNU less ###
@@ -91,7 +83,8 @@ prependpath /usr/local/sbin
 prependpath /usr/local/bin
 prependpath ${RBENV_ROOT}/bin
 prependpath ${PYENV_ROOT}/bin
-prependpath ${PERL5LIB}/bin
+prependpath ${HOME}/.local/lib/perl5/bin
+prependpath ${HOME}/.local/lib/perl5/lib/perl5
 prependpath ${GOPATH}/bin
 prependpath ${HOME}/.cargo/bin
 prependpath ${HOME}/.local/bin

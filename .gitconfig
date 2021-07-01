@@ -5,8 +5,8 @@
 [github]
     user = wandsas
 [core]
-    #pager = less -+$LESS -FRX
-    pager = diff-so-fancy | less --tabs=4 -FRX
+    pager = less -+$LESS -FRX
+    #pager = diff-so-fancy | less --tabs=4 -FRX
     compression = 9#
     hooksPath = $XDG_CONFIG_HOME/git/template/hooks
     excludesfile = $XDG_CONFIG_HOME/git/gitignore_global
@@ -39,9 +39,7 @@
 	cmd = wiggle -Bd $LOCAL $REMOTE
 [submodule]
 	recurse = true
-[interactive]
-	diffFilter = diff-so-fancy --patch
-### alias ###
+
 [alias]
     l = log --pretty='format:%h %s%d' -n 20 --graph
 	alias = "!git config -l | sed -n 's/^alias\\.//p'"
@@ -60,7 +58,7 @@
 	mlist = "!git diff --name-only --diff-filter=U"
 	rank = shortlog -sn --no-merges
 	ls = ls-files
-### colors ###
+
 [color]
 	ui = true
     branch = yes
