@@ -6,8 +6,8 @@
   user = wandsas
 [core]
   excludesfile = ~/.gitignore
-  #pager = less -+$LESS -FRX
-  pager = diff-so-fancy | less --tabs=4 -FRX
+  pager = less -+$LESS -FRX
+  #pager = diff-so-fancy | less --tabs=4 -FRX
   compression = 9
 [gpg]
   program = gpg2
