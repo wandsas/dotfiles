@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 # Load/unload environment variables
 if command -v direnv >/dev/null 2>&1; then
-  eval $(direnv hook bash)
+    eval "$(direnv hook bash)"
 fi
 

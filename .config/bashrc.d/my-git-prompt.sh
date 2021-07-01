@@ -3,8 +3,10 @@
 # No git-prompt for root.
 [ $EUID == 0 ] && return
 
-#  No git-prompt, if git-prompt.sh config not available.
+# If git-prompt.sh not available -> No git-prompt for all users
 [ -r $XDG_CONFIG_HOME/bashrc.d/git-prompt.sh ] || return
+
+# Update git-prompt.sh 
 
 # Git properties
 # Overridable by bash.showDirtyState=true
@@ -37,4 +39,3 @@ unset PS1
 PS1='\[\033]0;\u@\h:\w\007'
 # Prompt
 PS1+='\[\033[01;32m\]\u@\h\[\033[00m\]$(__git_ps1 " (%s)") \[\033[01;34m\]\W \$\[\033[00m\] '
-
