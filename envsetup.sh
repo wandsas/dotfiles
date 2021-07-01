@@ -1,5 +1,6 @@
-export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin
+export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
 export JAVA_OPTIONS="-Xms512m -Xmx1024m"
+
 if [ -d $HOME/android ]; then
     export ANDROID_HOME=$HOME/android/sdk
     export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
