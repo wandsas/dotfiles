@@ -13,6 +13,7 @@
   program = gpg2
 [init]
   templateDir = /var/empty
+	defaultBranch = master
 [push]
   default = simple
 [pull]

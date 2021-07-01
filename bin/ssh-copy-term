@@ -1,4 +1,0 @@
-#!/bin/sh
-# ssh-copy-term - copy terminfo via ssh
-# 10dec2014  +chris+
-infocmp $TERM | ssh "$@" 't="$(mktemp)" && cat >"$t" && tic -s "$t"'
