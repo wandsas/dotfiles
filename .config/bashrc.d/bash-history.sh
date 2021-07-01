@@ -15,6 +15,5 @@ HISTFILESIZE=2000
 HISTTIMEFORMAT="%h %d %H:%M:%S "
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 HISTFILE=${XDG_CACHE_HOME:-$HOME/.cache}/bash_history
-LESSHISTFILE=$XDG_CACHE_HOME/less_history
 
 export PROMPT_COMMAND="history -a; history -c; history -r;  $PROMPT_COMMAND"

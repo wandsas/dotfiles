@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-=======
-# .bashrc void linux
->>>>>>> master
 
 # If not running interactively, don't do anything
 case $- in
@@ -16,12 +12,9 @@ set -o vi
 stty -ixon
 shopt -qs extglob
 #shopt -qs nullglob
-<<<<<<< HEAD
-=======
 shopt -s cdspell
 shopt -s extglob
 shopt -s cdable_vars
->>>>>>> master
 shopt -s no_empty_cmd_completion
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -30,7 +23,6 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-<<<<<<< HEAD
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -62,35 +54,6 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-=======
-### GNU Bash history  ###
-shopt -s histappend # append commands to the history file
-shopt -s cmdhist    # multi-line commands in one history entry
-HISTCONTROL=ignoredups:ignorespace,erasedups
-HISTIGNORE=ls:ps:history
-HISTSIZE=1000
-HISTFILESIZE=1000
-HISTTIMEFORMAT="%h %d %H:%M:%S "
-PROMPT_COMMAND="history -a; history -c; history -r;  $PROMPT_COMMAND"
-HISTFILE=$XDG_CACHE_HOME/bash_history
-
-### GNU less history ###
-LESSHISTFILE=$XDG_CACHE_HOME/less_history
-
-### Change window title of X terminals ###
-case ${TERM} in
-	xterm*|rxvt*|tmux*|alacritty*|kitty*|*color)
-		PS1='\[\033]0;\u@\h:\w\007\]';;
-	screen*)
-		PS1='\[\033k\u@\h:\w\033\\\]';;
-	*)
-		unset PS1;;
-esac
-
-### Gentoo Default Prompt ###
-if [ $EUID == 0 ]; then
-    PS1+='\[\033[01;31m\]\h\[\033[01;34m\] \w \$\[\033[00m\] '
->>>>>>> master
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -115,7 +78,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias ip='ip --color=auto'
 fi
 
-<<<<<<< HEAD
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -123,23 +85,6 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 alias ll='ls -lh'
 alias la='ls -a'
 alias l='ls -lha'
-=======
-### Enable dircolors color support ###
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-    alias ls='ls --color=auto'
-    alias ip='ip --color=auto'
-fi 
-
-# Some minimal local user aliases.
-alias ll='ls -lh'
-alias la='ls -a'
-alias  l='ls -lha'
-alias cls='tput reset'
->>>>>>> master
 
 # Load local bash user environment
 if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then
@@ -149,7 +94,6 @@ if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then
   unset sh
 fi
 
-<<<<<<< HEAD
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -168,7 +112,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-=======
-# Load some more local user aliases, if available.
-[ -r ~/.aliases.sh ] && . ~/.aliases.sh
->>>>>>> master
