@@ -8,8 +8,8 @@
     #pager = less -+$LESS -FRX
     pager = diff-so-fancy | less --tabs=4 -FRX
     compression = 9#
-    hooksPath = $XDG_CONFIG_HOME/git/template/hooks
-    excludesfile = $XDG_CONFIG_HOME/git/gitignore_global
+    hooksPath = ~/.config/git/template/hooks
+    excludesfile = ~/.config/git/gitignore_global
     attributesfile = $XDG_CONFIG_HOME/git/gitattributes
 [gpg]
     program = /usr/bin/gpg2
