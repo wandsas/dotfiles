@@ -40,10 +40,10 @@ Meta-n: history-search-forward
 "\eOH": beginning-of-line
 "\eOF": end-of-line
 
-set colored-stats on
-set visible-stats on
-set mark-symlinked-directories On
-set completion-ignore-case On
+#set colored-stats on
+#set visible-stats on
+#set mark-symlinked-directories On
+#set completion-ignore-case On
 set bell-style visible
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
