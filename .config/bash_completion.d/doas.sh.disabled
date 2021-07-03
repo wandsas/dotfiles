@@ -1,0 +1,8 @@
+# bash completion for doas(5)
+
+HOME
+LOGNAME
+PATH
+SHELL
+DO_USER
+

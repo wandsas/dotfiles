@@ -63,3 +63,5 @@ alias portscan='grc nmap -Pn'
 alias portsopen='grc netstat -anpu'
 alias wanip='curl ipinfo.io/ip'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+alias dnvim='docker run -it -v $(pwd):/home/spacevim/src nvim'
