@@ -21,8 +21,8 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-__ZFS_CMD="/usr/local/sbin/zfs"
-__ZPOOL_CMD="/usr/local/sbin/zpool"
+__ZFS_CMD="/usr/bin/zfs"
+__ZPOOL_CMD="/usr/bin/zpool"
 
 # Disable bash's built-in hostname completion, as this makes it impossible to
 # provide completions containing an @-sign, which is necessary for completing
