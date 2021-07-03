@@ -1,8 +1,18 @@
-# .bashrc void linux
+# ~/.bashrc void linux
 
-[[ $- != *i* ]] && return   # Shell is non-interactive.  Be done now!
+[[ $- != *i* ]] && return   # Shell is non-interactive. Be done now!
 
+umask 022
+
+# vi keybindings
 set -o vi
+# ctrl+p/n 
+bind '"\ep":history-search-backward'
+bind '"\en":history-search-forward'
+bind '"\e\C-i":dynamic-complete-history'
+# ctrl+w
+bind '"\C-w": backward-kill-word'
+
 stty -ixon
 shopt -qs extglob
 #shopt -qs nullglob

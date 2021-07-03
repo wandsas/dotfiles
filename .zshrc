@@ -1,12 +1,15 @@
+# ~/.zshrc void linux
 
-# If not running interactively, don't do anything else
-[[ $- != *i* ]] && return
+[[ $- != *i* ]] && return   # Shell is non-interactive. Be done now! 
 
 umask 022
 
+# vi keybindings
 bindkey -v
 
-# Zsh options (See man zshoptions)
+stty sane
+
+# ZSH options (See man zshoptions)
 setopt                      \
     always_to_end           \
     auto_cd                 \

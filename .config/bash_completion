@@ -1,0 +1,11 @@
+
+# Local user bash-completion scripts
+
+# Are we running a bash?
+if [ -n $BASH_VERSION ]; then
+    for sh in $XDG_CONFIG_HOME/bash_completion.d/*.sh; do
+        if shopt -q progcomp && [ -r $XDG_CONFIG_HOME/bash_completion/*.sh ]; then
+            [ -r $sh ] && . $sh
+        fi
+    done
+fi

@@ -57,7 +57,10 @@ fi
 export LESS="-a -h100 -i -j15 -M -q -R -W -y100 -X"
 export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
-export LESSKEY=$XDG_CACHE_HOME/less.key
+export LESSKEY=$XDG_CACHE_HOME/less
+
+# Make sure synced with .cfg-post.d/shell-env.sh
+export LESSKEY="$XDG_CONFIG_HOME/less"
 
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
@@ -65,6 +68,7 @@ export SSH_ASKPASS=gnome-ssh-askpass
 export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
 export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 
 ### Build a custom user path ###
 prependpath () {
