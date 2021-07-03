@@ -14,7 +14,9 @@
 [init]
     templateDir = /var/empty
     templateDir = ~/.config/git/template/hooks
-	defaultBranch = master
+    defaultBranch = master
+[pager]
+    diff = diff-so-fance | less --tabs=4 -RFXS --pattern '^(Data|added|deleted|modified): '
 [push]
     default = simple
 [pull]
@@ -42,23 +44,24 @@
     program = /usr/bin/gpg2
 
 [alias]
-    l = log --pretty='format:%h %s%d' -n 20 --graph
 	alias = "!git config -l | sed -n 's/^alias\\.//p'"
-	which = "!_() { git config --global --get alias.$1;};_"
-	st = status -s -uno
-	stu = status -s -unormal
-	ix = diff --cached
 	d = diff -c HEAD
-	tree = log --oneline --decorate --graph
+	dsf = diff --color
+	ix = diff --cached
+    l = log --pretty='format:%h %s%d' -n 20 --graph
 	lg = log --date=short --pretty='%cd %h%d %s'
 	lop = log -p
-	puff = pull --ff-only
-	pura = pull --rebase --autostash
-	up = pull --rebase --autostash
-	sprunge = "!_(){ git format-patch --stdout \"$@\" |curl -sF 'sprunge=<-' http://sprunge.us ;}; _"
-	mlist = "!git diff --name-only --diff-filter=U"
-	rank = shortlog -sn --no-merges
 	ls = ls-files
+	mlist = "!git diff --name-only --diff-filter=U"
+    patch = !git --no-pager diff --no-color
+    puff = pull --ff-only
+	pura = pull --rebase --autostash
+	rank = shortlog -sn --no-merges
+	sprunge = "!_(){ git format-patch --stdout \"$@\" |curl -sF 'sprunge=<-' http://sprunge.us ;}; _"
+	st = status -s -uno
+	stu = status -s -unormal
+	tree = log --oneline --decorate --graph
+	which = "!_() { git config --global --get alias.$1;};_"
 
 [color]
 	ui = true
@@ -83,3 +86,5 @@
     added = yellow
     changed = green
     untracked = cyan
+[pager]
+	dsf = diff-so-fancy | less --tabs=4 -RFXS
