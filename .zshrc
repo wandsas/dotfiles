@@ -62,26 +62,22 @@ stty -ixon
 
 # Zsh modules (See man zshmodules)
 
-# Smart pasting/escaping
+### Smart paste/escape ###
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
-
-# Smart urls
+### Smart Urls ###
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
-
-# Helping system
+### ZSH Help System ###
 (( ${+aliases[run-help]} )) && unalias run-help
 autoload -Uz run-help
-
-# Zsh Mime
+### ZSH Mime Extensions ###
 # For file extensions, we use the defaults of zsh-mime-setup.
 # See /etc/mailcap, /etc/mime.types for system configs
 # and ~/.mailcap, ~/.config/mimeapps.list for user configs.
 zstyle ":mime:*" current-shell true
 autoload -Uz zsh-mime-setup && zsh-mime-setup
-
-# Environment setup
+### Environment setup ###
 NULLCMD=:
 READNULLCMD=less
 # Turn off mail checking
@@ -94,7 +90,7 @@ TIMEFMT='%J  %M kB %*E (user: %*U, kernel: %*S)'
 # watch for everyone but me and root
 watch=(notme root)
 
-# Infopath
+### Infopath ###
 typeset -U infopath
 infopath=(
     $HOME/{.local/,}share/info
@@ -102,7 +98,7 @@ infopath=(
     $infopath
         )
 
-# Manpath
+### Manpath ###
 typeset -U manpath
 manpath=(
     $ZDOTDIR/{.local/,}share/man
@@ -110,11 +106,11 @@ manpath=(
     $manpath[@]
     )
 
-# Prompt
+### Custom User Prompt ###
 autoload -Uz promptinit && promptinit
 [[ ${EUID} == 0 ]] && prompt wandsas || prompt wandsas2
 
-# Use modern completion system
+### ZSH Completion System ###
 autoload -Uz compinit && compinit
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' auto-description '%F{cyan}specify: %d'
@@ -131,27 +127,19 @@ zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
 # Describe each match group.
 zstyle ':completion:*:descriptions' format ' %F{cyan}-- %d% --%f'
-
 # Messages/Warnings format
 zstyle ':completion:*:messages' format ' %F{cyan} -- %d --%f'
 zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-
 # Expand partial paths
 zstyle ':completion:*' expand yes
 zstyle ':completion:*' squeeze-slashes yes
-
-# Docker completion
-zstyle ':completion:*:*:docker:*' option-stacking yes
-zstyle ':completion:*:*:docker:-*:*' option-stacking yes
-
 # When completing inside array, the array elements are more useful
 # than parameters so complete them first
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
-# Completion Caching
+### ZSH Completion Caching ###
 zstyle ':completion:*' use-cache  yes
 zstyle ':completion:*:complete:*' cache-path ${XDG_CACHE_HOME}/zsh_cache
 
@@ -161,10 +149,10 @@ zstyle ':completion:*' special-dirs ..
 # Add a special SUDO_PATH for completion of sudo & friends:
 [[ $UID -eq 0 ]] || () {
 zstyle ":completion:*:sudo:*" command-path /root/bin \
-                                            /home/wandsas/bin \
-                                            /usr/local/{bin,sbin} \
-                                            /usr/{bin,sbin} \
-                                            /{bin,sbin}
+                                           /home/wandsas/bin \
+                                           /usr/local/{bin,sbin} \
+                                           /usr/{bin,sbin} \
+                                           /{bin,sbin}
 }
 
 # Load user environment settings 
@@ -174,7 +162,7 @@ if [ -d $XDG_CONFIG_HOME/zshrc.d ]; then
   done
 fi
 
-# Load some more local user aliases, if available.
+# Load some more user aliases, if available.
 [ -r ~/.aliases.sh ] && . ~/.aliases.sh
 
-# vim:fenc=utf-8:ft=zsh:
+# vim:fenc=utf-8:ft:=zsh:

@@ -1,8 +1,6 @@
-# ~/.bashrc void linux
+# ~/.bashrc
 
 [[ $- != *i* ]] && return   # Shell is non-interactive. Be done now!
-
-umask 022
 
 # vi keybindings
 set -o vi
@@ -32,9 +30,6 @@ HISTFILESIZE=1000
 HISTTIMEFORMAT="%h %d %H:%M:%S "
 PROMPT_COMMAND="history -a; history -c; history -r;  $PROMPT_COMMAND"
 HISTFILE=$XDG_CACHE_HOME/bash_history
-
-### GNU less history ###
-LESSHISTFILE=$XDG_CACHE_HOME/less_history
 
 ### Change window title of X terminals ###
 case ${TERM} in

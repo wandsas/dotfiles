@@ -1,7 +1,7 @@
-# ~/.config/profile.d/colorman.sh
+# ~/.config/profile.d/man.sh
 
-# colorized manual pages
-
+### Colorized Manual Pages ###
+# powered by GNU less
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
