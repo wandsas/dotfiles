@@ -1,32 +1,32 @@
 [user]
-    name = Sascha Wander
-    email = sascha.wander@gmail.com
-    signkey = 0xC026CCEBC1D3B54C
+  name = Sascha Wander
+  email = sascha.wander@gmail.com
+  signkey = 0xC026CCEBC1D3B54C
 [github]
-    user = wandsas
+  user = wandsas
 [core]
-    #pager = less -+$LESS -FRX
-    pager = diff-so-fancy | less --tabs=4 -FRX
-    compression = 9#
-    hooksPath = ~/.config/git/template/hooks
-    excludesfile = ~/.config/git/gitignore_global
-    attributesfile = ~/.config/git/gitattributes
+  #pager = less -+$LESS -FRX
+  pager = diff-so-fancy | less --tabs=4 -FRX
+  compression = 9#
+  hooksPath = ~/.config/git.d/template/hooks
+  excludesfile = ~/.config/git.d/gitignore_global
+  attributesfile = ~/.config/git.d/gitattributes
 [init]
-    templateDir = /var/empty
-    templateDir = ~/.config/git/template/hooks
-    defaultBranch = master
+  #templateDir = /var/empty
+  templateDir = ~/.config/git/.d/template/hooks
+  defaultBranch = master
 [pager]
-    diff = diff-so-fance | less --tabs=4 -RFXS --pattern '^(Data|added|deleted|modified): '
+  diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Data|added|deleted|modified): '
 [push]
-    default = simple
+  default = simple
 [pull]
-    ff = only
+  ff = only
 [diff]
-    renames = copies
+  renames = copies
 [merge]
-    log = true
+  log = true
 [log]
-    decorate = auto
+  decorate = auto
 [merge "wiggle"]
 	name = "Wiggle flexible merging"
 	driver = wiggle -o %A %A %O %B
@@ -41,7 +41,7 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [gpg]
-    program = /usr/bin/gpg2
+  program = /usr/bin/gpg2
 
 [alias]
 	alias = "!git config -l | sed -n 's/^alias\\.//p'"
