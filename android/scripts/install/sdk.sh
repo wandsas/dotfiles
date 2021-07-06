@@ -1,6 +1,7 @@
 #!/bin/sh
 
-export ANDROID_HOME=$HOME/android/sdk
+export JAVA_HOME=${ANDROID_HOME=
+export ANDROID_HOME=${1:-/usr/lib/jvm}
 
 if [ ! -d $ANDROID_HOME ]; then
     mkdir -p $ANDROID_HOME

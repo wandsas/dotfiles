@@ -54,4 +54,4 @@ export PATH
 [ -n $BASH_VERSION ] && [ -f ~/.bashrc ] && . ~/.bashrc
 
 # Source Android environment, if it exists.
-[ -r $HOME/envsetup.sh ] && . $HOME/envsetup.sh
+[ -r ~/envsetup.sh ] && . ~/envsetup.sh
