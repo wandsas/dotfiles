@@ -1,5 +1,5 @@
 <configuration version="35">
-    <folder id="qvvbz-zrc7y" label="z800.homelab" path="/home/wandsas/syncthing/z800.homelab" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="96ni2-kr6bv" label="Music" path="/home/wandsas/syncthing/pixel4a/Music" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="6FMCYYE-YHQECGU-GRDETM4-SO2APD4-NXVNSRJ-OATFQVZ-QDNWR2U-JKOFJAH" introducedBy="">
             <encryptionPassword></encryptionPassword>
@@ -8,10 +8,8 @@
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
-        <versioning type="simple">
-            <param key="cleanoutDays" val="0"></param>
-            <param key="keep" val="5"></param>
-            <cleanupIntervalS>3600</cleanupIntervalS>
+        <versioning>
+            <cleanupIntervalS>0</cleanupIntervalS>
             <fsPath></fsPath>
             <fsType>basic</fsType>
         </versioning>
@@ -37,7 +35,7 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="zszwj-eqexn" label="Music" path="/home/wandsas/syncthing/pixel4a/music" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="rck6d-mtpcl" label="Download" path="/home/wandsas/syncthing/pixel4a/Download" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="6FMCYYE-YHQECGU-GRDETM4-SO2APD4-NXVNSRJ-OATFQVZ-QDNWR2U-JKOFJAH" introducedBy="">
             <encryptionPassword></encryptionPassword>
@@ -46,10 +44,8 @@
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
-        <versioning type="simple">
-            <param key="cleanoutDays" val="0"></param>
-            <param key="keep" val="5"></param>
-            <cleanupIntervalS>3600</cleanupIntervalS>
+        <versioning>
+            <cleanupIntervalS>0</cleanupIntervalS>
             <fsPath></fsPath>
             <fsType>basic</fsType>
         </versioning>
@@ -75,14 +71,48 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <device id="6FMCYYE-YHQECGU-GRDETM4-SO2APD4-NXVNSRJ-OATFQVZ-QDNWR2U-JKOFJAH" name="Pixel 4a (5G)" compression="metadata" introducer="true" skipIntroductionRemovals="false" introducedBy="">
+    <folder id="umpfs-upbnw" label="Documents" path="/home/wandsas/syncthing/pixel4a/Documents" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+        <filesystemType>basic</filesystemType>
+        <device id="6FMCYYE-YHQECGU-GRDETM4-SO2APD4-NXVNSRJ-OATFQVZ-QDNWR2U-JKOFJAH" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <device id="6TSIIXU-TC5CFPP-PLMFYRI-XUER4R4-LA6I3U7-5PTJZPI-57ZSKKA-P66LSQP" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <minDiskFree unit="%">1</minDiskFree>
+        <versioning>
+            <cleanupIntervalS>0</cleanupIntervalS>
+            <fsPath></fsPath>
+            <fsType>basic</fsType>
+        </versioning>
+        <copiers>0</copiers>
+        <pullerMaxPendingKiB>0</pullerMaxPendingKiB>
+        <hashers>0</hashers>
+        <order>random</order>
+        <ignoreDelete>false</ignoreDelete>
+        <scanProgressIntervalS>0</scanProgressIntervalS>
+        <pullerPauseS>0</pullerPauseS>
+        <maxConflicts>10</maxConflicts>
+        <disableSparseFiles>false</disableSparseFiles>
+        <disableTempIndexes>false</disableTempIndexes>
+        <paused>false</paused>
+        <weakHashThresholdPct>25</weakHashThresholdPct>
+        <markerName>.stfolder</markerName>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
+        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <disableFsync>false</disableFsync>
+        <blockPullOrder>standard</blockPullOrder>
+        <copyRangeMethod>standard</copyRangeMethod>
+        <caseSensitiveFS>false</caseSensitiveFS>
+        <junctionsAsDirs>false</junctionsAsDirs>
+    </folder>
+    <device id="6FMCYYE-YHQECGU-GRDETM4-SO2APD4-NXVNSRJ-OATFQVZ-QDNWR2U-JKOFJAH" name="pixel4a" compression="metadata" introducer="true" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
         <paused>false</paused>
         <autoAcceptFolders>true</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>
-        <ignoredFolder time="2021-07-04T20:01:40.418Z" id="zds1g-bjthg" label="Music"></ignoredFolder>
-        <ignoredFolder time="2021-07-04T20:01:41.801Z" id="ec5hx-ysyyo" label="Default"></ignoredFolder>
         <maxRequestKiB>0</maxRequestKiB>
         <untrusted>false</untrusted>
         <remoteGUIPort>0</remoteGUIPort>
