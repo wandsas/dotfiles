@@ -1,13 +1,18 @@
 #!/bin/bash
 
-if [ ! -f $XDG_CONFIG_HOME/bash_completion.d/tmux.sh ]; then
-    curl -fLo $XDG_CONFIG_HOME/bash_completion.d/tmux.sh --create-dirs \
+. ~/lib/stdout-log.s
+
+[ -d ~/.config/bash_completion.d ] || mkdir -p ~/.config/bash_completion.d
+
+if [ ! -f ~/.config/bash_completion.d/tmux.sh ]; then
+    curl -fLo ~/.config/bash_completion.d/tmux.sh --create-dirs \
         https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux
+    info "Added tmux bash completion support."
 fi
 
-if [ ! -f $XDG_CONFIG_HOME/bash_completion.d/zfs.sh ]; then
+if [ ! -f ~/.config/bash_completion.d/zfs.sh ]; then
     if [ ! -d ~/.GIT/zfs/zfs ]; then
-        [ -d ~/.GIT/zfs ] || install -u $USER -g $USER -g 755 ~/.GIT/zfs
+        [ -d ~/.GIT/zfs ] || install -m 755 ~/.GIT/zfs
         cd .GIT/zfs
         git clone git://github.com/openzfs/zfs.git
         cd zfs
@@ -15,6 +20,7 @@ if [ ! -f $XDG_CONFIG_HOME/bash_completion.d/zfs.sh ]; then
         ./configure
         make
     fi  
-    cp $HOME/.GIT/zfs/zfs/contrib/bash_completion.d/zfs \
-        $HOME/.GIT/wandsas/dotfiles/.config/bash_completion.d/zfs.sh
+    cp ~/.GIT/zfs/zfs/contrib/bash_completion.d/zfs \
+        ~/.GIT/wandsas/dotfiles/.config/bash_completion.d/zfs.sh
+    info "Added zfs bash completion support."
 fi
