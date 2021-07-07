@@ -1,4 +1,4 @@
-#!/bin/bash
+# ~/.config/bashrc.d/55-sx.sh
 
 # Thanks to mikachu on #zsh for helping with this :-)
 # In zsh, setopt xtrace is immune to setopt no_localoptions, i.e.

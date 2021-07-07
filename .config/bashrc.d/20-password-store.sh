@@ -1,4 +1,4 @@
-# ~/.config/bashrc.d/password-store.sh
+# ~/.config/bashrc.d/20-password-store.sh
 
 PASSWORD_STORE_DIR="$HOME/.password-store"
 PASSWORD_STORE_GENERATED_LENGTH="24"

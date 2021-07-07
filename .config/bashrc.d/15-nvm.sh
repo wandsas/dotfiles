@@ -1,4 +1,4 @@
-### Node Version Manager (NVM) ###
+# ~/.config/bashrc.d/15-nvm.sh
 
 if [ -d ~/.local/lib/nvm ]; then
     export NVM_DIR=$HOME/.local/lib/nvm

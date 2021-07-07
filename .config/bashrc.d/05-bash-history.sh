@@ -1,13 +1,20 @@
-# ~/.config/bashrc.d/bash-completion.sh
-#
-# Configuration of Bash History
-#
+# ~/.config/bashrc.d/05-bash-history.sh
 
+# GNU Bash history
+
+shopt -s cmdhist
 shopt -s histappend
-[ -d $XDG_CACHE_HOME ] || mkdir -p $XDG_CACHE_HOME
-HISTFILE=${XDG_CACHE_HOME:-$HOME/.cache}/bash_history
+HISTFILE=$XDG_CACHE_HOME/bash_history
 HISTCONTROL=ignoredups:ignorespace
+HISTIGNORE=ls:ps:history
 HISTSIZE=1000
 HISTFILESIZE=1000
+HISTTIMEFORMAT="%h %d %H:%M:%S "
+HISTFILE=$XDG_CACHE_HOME/bash_history
+alias h=history
 
-export PROMPT_COMMAND="history -a; history -c; history -r;  $PROMPT_COMMAND"
+if [ ! 'history -a;history -c;history -r;' = '*${PROMPT_COMMAND}*' ]; then
+  echo "05-bash-history.sh"
+  echo $PROMPT_COMMAND
+  PROMPT_COMMAND="history -a;history -c;history -r;$PROMPT_COMMAND"
+fi
