@@ -1,4 +1,4 @@
-dircolors.zsh
+# dircolors.zsh
 
 (( $+commands[dircolors] )) && {
     if [[ -r "${XDG_CONFIG_HOME}/dir_colors" ]] {

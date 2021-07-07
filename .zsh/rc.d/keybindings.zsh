@@ -1,4 +1,4 @@
-
+# keybindings.zsh
 zmodload zsh/terminfo
 
 # 'ctrl+p' paste, 'ctrl+y' copy

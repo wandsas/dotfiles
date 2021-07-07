@@ -156,8 +156,8 @@ zstyle ":completion:*:sudo:*" command-path /root/bin \
 }
 
 # Load user environment settings 
-if [ -d $XDG_CONFIG_HOME/zshrc.d ]; then
-  for sh in $XDG_CONFIG_HOME/zshrc.d/*.zsh; do
+if [ -d ~/.zsh/rc.d ]; then
+  for zsh in ~/.zsh/rc.d/*.zsh; do
     [ -r "$zsh" ] && . "$zsh"
   done
 fi
@@ -165,4 +165,4 @@ fi
 # Load some more user aliases, if available.
 [ -r ~/.aliases.sh ] && . ~/.aliases.sh
 
-# vim:fenc=utf-8:ft:=zsh:
+# vim:fenc=utf-8:ft=zsh:

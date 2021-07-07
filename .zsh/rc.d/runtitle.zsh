@@ -1,3 +1,5 @@
+# runtitle.zsh
+
 # Activate support for title from https://github.com/vaeth/runtitle/
 
 (($+commands[title])) && {
