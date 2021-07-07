@@ -24,3 +24,5 @@ archives
 .config/user-dirs.conf
 .config/user-dirs.dirs
 .config/xfce4
+
+.zsh/5.8
