@@ -45,13 +45,11 @@ prependpath /usr/sbin
 prependpath /usr/bin
 prependpath /usr/local/sbin
 prependpath /usr/local/bin
-prependpath ${HOME}/.local/bin
-prependpath ${HOME}/bin
+prependpath /snap/bin
+prependpath $HOME/.local/bin
+prependpath $HOME/bin
 unset prependpath
 export PATH
 
 # if running bash, include .bashrc if it exists.
 [ -n $BASH_VERSION ] && [ -f ~/.bashrc ] && . ~/.bashrc
-
-# Source Android environment, if it exists.
-[ -r ~/envsetup.sh ] && . ~/envsetup.sh
