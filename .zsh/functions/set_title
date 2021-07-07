@@ -31,5 +31,3 @@ case "$type" in
   *)      print "Usage: set_title ( window | icon | screen ) <title>"
           return 1 ;;
 esac
-
-

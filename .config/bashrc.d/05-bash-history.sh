@@ -14,7 +14,5 @@ HISTFILE=$XDG_CACHE_HOME/bash_history
 alias h=history
 
 if [ ! 'history -a;history -c;history -r;' = '*${PROMPT_COMMAND}*' ]; then
-  echo "05-bash-history.sh"
-  echo $PROMPT_COMMAND
   PROMPT_COMMAND="history -a;history -c;history -r;$PROMPT_COMMAND"
 fi
