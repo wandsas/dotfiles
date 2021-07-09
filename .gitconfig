@@ -17,6 +17,7 @@
   defaultBranch = master
 [pager]
   diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Data|added|deleted|modified): '
+	dsf = diff-so-fancy | less --tabs=4 -RFXS
 [push]
   default = simple
 [pull]
@@ -48,13 +49,13 @@
 	d = diff -c HEAD
 	dsf = diff --color
 	ix = diff --cached
-    l = log --pretty='format:%h %s%d' -n 20 --graph
+  l = log --pretty='format:%h %s%d' -n 20 --graph
 	lg = log --date=short --pretty='%cd %h%d %s'
 	lop = log -p
 	ls = ls-files
 	mlist = "!git diff --name-only --diff-filter=U"
-    patch = !git --no-pager diff --no-color
-    puff = pull --ff-only
+  patch = !git --no-pager diff --no-color
+  puff = pull --ff-only
 	pura = pull --rebase --autostash
 	rank = shortlog -sn --no-merges
 	sprunge = "!_(){ git format-patch --stdout \"$@\" |curl -sF 'sprunge=<-' http://sprunge.us ;}; _"
@@ -86,5 +87,3 @@
     added = yellow
     changed = green
     untracked = cyan
-[pager]
-	dsf = diff-so-fancy | less --tabs=4 -RFXS
