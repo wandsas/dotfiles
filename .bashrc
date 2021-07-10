@@ -4,6 +4,7 @@
 
 # vi keybindings
 set -o vi
+
 # ctrl+p/n 
 bind '"\ep":history-search-backward'
 bind '"\en":history-search-forward'
