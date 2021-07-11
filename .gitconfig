@@ -8,7 +8,7 @@
   #pager = less -+$LESS -FRX
   pager = diff-so-fancy | less --tabs=4 -FRX
   compression = 9
-  hooksPath = ~/.config/git/template/hooks
+	hooksPath = .git/hooks
   excludesfile = ~/.config/git/gitignore_global
   attributesfile = ~/.config/git/gitattributes
 [init]
@@ -20,8 +20,6 @@
 	dsf = diff-so-fancy | less --tabs=4 -RFXS
 [push]
   default = simple
-[pull]
-  ff = only
 [diff]
   renames = copies
 [merge]
