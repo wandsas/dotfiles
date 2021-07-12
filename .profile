@@ -69,6 +69,7 @@ export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
 export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
+export SMARTGIT_JAVA_HOME=$JAVA_HOME
 
 export SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh
 
