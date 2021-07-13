@@ -5,27 +5,17 @@
 [github]
   user = wandsas
 [core]
-  excludesfile = ~/.gitignore
   pager = less -+$LESS -FRX
   #pager = diff-so-fancy | less --tabs=4 -FRX
-  compression = 9
 [gpg]
   program = /usr/bin/gpg2
 [init]
   templateDir = /var/empty
 	defaultBranch = master
-[core]
-  compression = 9
 [push]
   default = simple
-[pull]
-	ff = only
 [diff]
   renames = copies
-[log]
-  decorate = auto
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [merge "wiggle"]
 	name = "Wiggle flexible merging"
 	driver = wiggle -o %A %A %O %B
@@ -34,6 +24,8 @@
 	cmd = wiggle -B -o $MERGED $LOCAL $BASE $REMOTE
 [difftool "wiggle"]
 	cmd = wiggle -Bd $LOCAL $REMOTE
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 [sendemail]
 	suppresscc = self
 	confirm = always
