@@ -11,6 +11,7 @@ umask 022
 ### POSIX variables ###
 # http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03
 export LANG=en_US.UTF-8
+export LC_COLLATE=C
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
@@ -32,6 +33,7 @@ export NO_AT_BRIDGE=1
 
 # Android
 export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
+export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -XX:-UsePerfData"
 
 # Build a custom user path
 prependpath () {
