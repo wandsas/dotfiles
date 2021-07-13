@@ -33,7 +33,7 @@ export NO_AT_BRIDGE=1
 
 # Android
 export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
-export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -XX:-UsePerfData"
+export JAVA_OPTIONS="-XX:-UsePerfData"
 
 # Build a custom user path
 prependpath () {
