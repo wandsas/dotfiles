@@ -1,8 +1,4 @@
-#!/bin/bash
-
 # ~/.cfg-post.d/xdg.sh
-
-. ~/lib/stdout-log.sh
 
 me=${0}
 

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # .cfg.post.d/shell-env.sh
 
 . ~/lib/stdout-log.sh
