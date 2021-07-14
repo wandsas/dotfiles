@@ -9,6 +9,6 @@ if [ ${ZSH_VERSION} ]; then
 fi
 
 # Make sure synced with $LESSKEY in .profile
-if which lesskey >/dev/null 2>&1; then
+if which lesskey >/dev/null 2>&1 && test -f ~/.config/lesskey; then
   lesskey -o $XDG_CACHE_HOME/less.key -- $XDG_CONFIG_HOME/lesskey
 fi
