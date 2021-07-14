@@ -12,6 +12,7 @@ text/markdown=mousepad.desktop
 application/pgp-keys=gvim.desktop
 application/xml=mousepad.desktop
 application/x-shellscript=gvim.desktop
+image/png=feh.desktop
 
 [Added Associations]
 text/markdown=mousepad.desktop;
