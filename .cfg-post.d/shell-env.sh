@@ -2,9 +2,6 @@
 
 me=${0}
 
-msg "Started job: ${me}"
-
-
 if which zsh >&/dev/null; then
   zsh -c zrec
 fi
