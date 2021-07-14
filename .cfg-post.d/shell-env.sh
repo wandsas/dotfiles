@@ -2,8 +2,10 @@
 
 me=${0}
 
-if which zsh >&/dev/null; then
-  zsh -c zrec
+if [ ${ZSH_VERSION} ]; then
+  if which zsh >&/dev/null; then
+    zsh -c zrec
+  fi
 fi
 
 # Make sure synced with $LESSKEY in .profile
