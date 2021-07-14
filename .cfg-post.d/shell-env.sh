@@ -1,4 +1,4 @@
-# .cfg.post.d/shell-env.sh
+#!/bin/sh
 
 . ~/lib/stdout-log.sh
 

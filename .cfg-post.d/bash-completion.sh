@@ -1,5 +1,4 @@
-# ~/.cfg.post.d/bash-completion.sh
-
+#!/bin/sh
 
 [ -d ~/.config/bash_completion.d ] || mkdir -p ~/.config/bash_completion.d
 

@@ -1,4 +1,4 @@
-# ~/.cfg-post.d/xdg.sh
+#!/bin/sh
 
 me=${0}
 
