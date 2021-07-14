@@ -9,8 +9,6 @@
   pager = diff-so-fancy | less --tabs=4 -FRX
   compression = 9
 	hooksPath = .git/hooks
-  excludesfile = ~/.config/git/gitignore_global
-  attributesfile = ~/.config/git/gitattributes
 [init]
   #templateDir = /var/empty
   templateDir = ~/.config/git/template/hooks

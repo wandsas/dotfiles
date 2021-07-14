@@ -57,8 +57,6 @@ fi
 export LESS="-a -h100 -i -j15 -M -q -R -W -y100 -X"
 export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
-export LESSKEY=$XDG_CACHE_HOME/less
-
 # Make sure synced with .cfg-post.d/shell-env.sh
 export LESSKEY="$XDG_CONFIG_HOME/less"
 
