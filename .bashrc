@@ -36,11 +36,6 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 	# We have color support; assume it's compliant with Ecma-48
@@ -68,7 +63,7 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
+# enable color support of ls and also add handy aliases.
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -78,7 +73,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ip='ip --color=auto'
 fi
 
-# colored GCC warnings and errors
+# Colored GCC warnings and errors.
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Some more ls aliases
@@ -86,7 +81,7 @@ alias ll='ls -lh'
 alias la='ls -a'
 alias l='ls -lha'
 
-# Load local bash user environment
+# Source user's local bash environment.
 if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then
   for sh in $XDG_CONFIG_HOME/bashrc.d/*.sh; do
     [ -r "$sh" ] && . "$sh"

@@ -40,7 +40,7 @@ prependpath () {
     case ":$PATH:" in
 	*":$1:"*) ;;
 	*) PATH="$1${PATH:+:$PATH}";;
-    esac
+esac
 }
 
 PATH=
@@ -56,5 +56,5 @@ prependpath $HOME/bin
 unset prependpath
 export PATH
 
-# if running bash, include .bashrc if it exists.
-[ -n $BASH_VERSION ] && [ -f ~/.bashrc ] && . ~/.bashrc
+# if running bash, source .bashrc if it exists.
+[ $BASH_VERSION ] && [ -f ~/.bashrc ] && . ~/.bashrc
