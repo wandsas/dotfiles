@@ -37,11 +37,12 @@ unclutter -keystroke -idle 2 -noevents &
 #exec dbus-launch --exit-with-session runsvdir-wandsas -P ~/service
 
 # Init gnome-keyring and inform dbus.
-#eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
-#export GPG_AGENT_INFO SSH_AUTH_SOCK
-#dbus-update-activation-environment --all DISPLAY
-# Authentication
-#/usr/libexec/xfce-polkit &
+eval "$(gnome-keyring-daemon --components=pkcs11,secrets) --start"
+export GNOME_KEYRING_PID GNOME_KEYRING_SOCKET
+# gpg-agent starts as runit user service
+#export GPG_AGENT_INFO SSH_AUTH_SOCK 
+dbus-update-activation-environment --all DISPLAY
+/usr/libexec/xfce-polkit &
 
 ### SESSION CONFIGURATION ### 
 
@@ -53,7 +54,4 @@ case "${1:-$(tty)}" in
         #XKB_DEFAULT_LAYOUT=de exec sway -V >> ~/.cache/sway/log-$(date +'%F-%k-%M-%S') 2>&1;;
     *)
         xterm -geometry 80x24-0-0
-
 esac
-
-#XKB_DEFAULT_LAYOUT=de exec sway -V >> ~/.cache/sway/log-$(date +'%F-%k-%M-%S') 2>&1
