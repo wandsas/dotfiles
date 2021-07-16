@@ -20,9 +20,9 @@ alias dt='cd ~/desktop'
 
 # Search
 alias grep='grep --color=auto'
-alias egrep='egrep --color=auito'
 alias fgrep='fgrep --color=auto'
-
+alias egrep='egrep --color=auto'
+alias pgrep='pgrep --color=auto'
 
 # Tmux
 alias  tma='tmux attach'
