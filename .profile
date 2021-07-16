@@ -69,9 +69,6 @@ export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 export SMARTGIT_JAVA_HOME=$JAVA_HOME
 
-export GNOME_KEYRING_SOCKET=/run/user/$(id -u)/keyring/control
-export SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh
-
 ### Build a custom user path ###
 prependpath () {
   case ":$PATH:" in
