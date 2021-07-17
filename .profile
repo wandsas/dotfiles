@@ -68,7 +68,7 @@ export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 export SMARTGIT_JAVA_HOME=$JAVA_HOME
-
+export XFSM_VERBOSE=true
 ### Build a custom user path ###
 prependpath () {
   case ":$PATH:" in
