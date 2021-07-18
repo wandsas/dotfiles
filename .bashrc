@@ -28,8 +28,10 @@ HISTIGNORE=ls:ps:history
 HISTSIZE=1000
 HISTFILESIZE=1000
 HISTTIMEFORMAT="%h %d %H:%M:%S "
-#PROMPT_COMMAND="history -a;history -c;history -r; $PROMPT_COMMAND"
 HISTFILE=$XDG_CACHE_HOME/bash_history
+
+[  'history -a;history -c;history -r;' = '*${PROMPT_COMMAND}*' ] || \
+    PROMPT_COMMAND="history -a;history -c;history -r;$PROMPT_COMMAND" 
 
 ### Change window title of X terminals ###
 case ${TERM} in

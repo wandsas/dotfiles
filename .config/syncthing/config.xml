@@ -35,7 +35,7 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="efah4-pbfmq" label="Download" path="/home/wandsas/syncthing/pixel4a/Download" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="kffjq-yljfd" label="Documents" path="/home/wandsas/syncthing/pixel4a/Documents" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="6FMCYYE-YHQECGU-GRDETM4-SO2APD4-NXVNSRJ-OATFQVZ-QDNWR2U-JKOFJAH" introducedBy="">
             <encryptionPassword></encryptionPassword>
@@ -45,7 +45,7 @@
         </device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning>
-            <cleanupIntervalS>0</cleanupIntervalS>
+            <cleanupIntervalS>3600</cleanupIntervalS>
             <fsPath></fsPath>
             <fsType>basic</fsType>
         </versioning>
@@ -71,7 +71,7 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="kffjq-yljfd" label="Documents" path="/home/wandsas/syncthing/pixel4a/Documents" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="mvjzp-7e2uj" label="Download" path="/home/wandsas/syncthing/pixel4a/Download" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="6FMCYYE-YHQECGU-GRDETM4-SO2APD4-NXVNSRJ-OATFQVZ-QDNWR2U-JKOFJAH" introducedBy="">
             <encryptionPassword></encryptionPassword>
