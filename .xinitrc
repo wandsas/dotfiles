@@ -31,23 +31,18 @@ xbacklight -set 15
 # Hide your X mouse cursor when you do not need it
 unclutter -keystroke -idle 2 -noevents &
 
-##### SESSION CONFIGURATION #####
-
-# Start runit service of local user, inform dbus.
-#exec dbus-launch --exit-with-session runsvdir-wandsas -P ~/service
-
 # Init gnome-keyring and inform dbus.
-eval "$(gnome-keyring-daemon --components=pkcs11,secrets) --start"
-export GNOME_KEYRING_PID GNOME_KEYRING_SOCKET
-# gpg-agent starts as runit user service
-#export GPG_AGENT_INFO SSH_AUTH_SOCK 
+eval "$(gnome-keyring-daemon --components=pkcs11,secrets --start)" 
 dbus-update-activation-environment --all DISPLAY
-/usr/libexec/xfce-polkit &
+#/usr/libexec/xfce-polkit &
 
-### SESSION CONFIGURATION ### 
+# Enable xfce4-session-manager verbose logs
+# export XFSM_VERBOSE=1
+# Grab all xfce4-session data and create tarball:
+#bsdtar -cvf xfce4-session-data.tar.xz ${XDG_CACHE_HOME}/sessions/*.log
 
 case "${1:-$(tty)}" in
-    xfce4|*tty1)
+    xfce4|*tty1)    
         exec startxfce4;;
     sway|*tty2)
         XKB_DEFAULT_LAYOUT=de exec sway;;
