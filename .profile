@@ -32,8 +32,8 @@ export DISPLAY=:0.0
 export NO_AT_BRIDGE=1
 
 # Android
-export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
-export JAVA_OPTIONS="-XX:-UsePerfData"
+#export JAVA_HOME=${HOME}/android/jdk8
+#export JAVA_OPTIONS="-XX:-UsePerfData"
 
 # Build a custom user path
 prependpath () {
@@ -51,8 +51,9 @@ prependpath /usr/bin
 prependpath /usr/local/sbin
 prependpath /usr/local/bin
 prependpath /snap/bin
-prependpath $HOME/.local/bin
-prependpath $HOME/bin
+prependpath ${HOME}/.local/bin
+prependpath ${HOME}/bin
+prependpath ${JAVA_HOME}/bin
 unset prependpath
 export PATH
 
