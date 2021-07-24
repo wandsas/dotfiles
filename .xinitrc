@@ -32,8 +32,8 @@ xbacklight -set 15
 unclutter -keystroke -idle 2 -noevents &
 
 # Init gnome-keyring and inform dbus.
-eval "$(gnome-keyring-daemon --components=pkcs11,secrets --start)" 
-dbus-update-activation-environment --all DISPLAY
+#eval "$(gnome-keyring-daemon --components=pkcs11,secrets --start)" 
+#dbus-update-activation-environment --all DISPLAY
 #/usr/libexec/xfce-polkit &
 
 # Enable xfce4-session-manager verbose logs
