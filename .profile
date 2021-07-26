@@ -68,9 +68,6 @@ export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 export SMARTGIT_JAVA_HOME=$JAVA_HOME
-export PASSWORD_STORE_DIR=${HOME}/.password-store
-export PASSWORD_STORE_KEY=0xC026CCEBC1D3B54C
-export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 #export XFSM_VERBOSE=true
 
 ## Build a custom user path
