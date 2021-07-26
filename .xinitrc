@@ -29,11 +29,11 @@ sct 4400 2>&- || :
 xbacklight -set 15
 
 # Hide your X mouse cursor when you do not need it
-#unclutter -keystroke -idle 2 -noevents &
+unclutter -keystroke -idle 2 -noevents &
 
 case "${1:-$(tty)}" in
-    xfce4|*tty1|*tty2)    
-        exec startxfce4;;
+    xfce4|*tty1)    
+        exec startxfce4;;    
     *)
         xterm -geometry 80x24-0-0
 esac
