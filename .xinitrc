@@ -29,24 +29,11 @@ sct 4400 2>&- || :
 xbacklight -set 15
 
 # Hide your X mouse cursor when you do not need it
-unclutter -keystroke -idle 2 -noevents &
-
-# Init gnome-keyring and inform dbus.
-#eval "$(gnome-keyring-daemon --components=pkcs11,secrets --start)" 
-#dbus-update-activation-environment --all DISPLAY
-#/usr/libexec/xfce-polkit &
-
-# Enable xfce4-session-manager verbose logs
-# export XFSM_VERBOSE=1
-# Grab all xfce4-session data and create tarball:
-#bsdtar -cvf xfce4-session-data.tar.xz ${XDG_CACHE_HOME}/sessions/*.log
+#unclutter -keystroke -idle 2 -noevents &
 
 case "${1:-$(tty)}" in
-    xfce4|*tty1)    
+    xfce4|*tty1|*tty2)    
         exec startxfce4;;
-    sway|*tty2)
-        XKB_DEFAULT_LAYOUT=de exec sway;;
-        #XKB_DEFAULT_LAYOUT=de exec sway -V >> ~/.cache/sway/log-$(date +'%F-%k-%M-%S') 2>&1;;
     *)
         xterm -geometry 80x24-0-0
 esac
