@@ -21,8 +21,6 @@
 	gpgsign = true
 [push]
   default = simple
-[pull]
-  rebase = true
 [diff]
   renames = copies
 [merge]
