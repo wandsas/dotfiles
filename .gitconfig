@@ -9,7 +9,7 @@
 [gpg]
   program = gpg
 [init]
-  templateDir = ${HOME}/.config/git/template
+  templateDir = ~/.config/git/template
 	defaultBranch = master
 [push]
   default = simple
