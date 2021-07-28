@@ -5,13 +5,16 @@
 [core]
   pager = less -+$LESS -FRX
   #pager = diff-so-fancy | less --tabs=4 -FRX
+  hooksPath = .git/hooks
 [gpg]
-  program = /usr/bin/gpg
+  program = gpg
 [init]
   templateDir = ${HOME}/.config/git/template
 	defaultBranch = master
 [push]
   default = simple
+[commit]
+  gpgsign = true
 [diff]
   renames = copies
 [merge "wiggle"]
