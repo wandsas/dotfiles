@@ -12,7 +12,7 @@
   compression = 9
   hooksPath = .git/hooks
 [init]
-  templateDir = ~/.config/git/template/hooks
+  templateDir = ~/.config/git/template
   defaultBranch = master
 [pager]
   diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Data|added|deleted|modified): '
