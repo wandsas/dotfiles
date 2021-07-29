@@ -22,14 +22,45 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/run/user/$(id -u)}
+
+## XDG system path variable
+# https://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html.
 export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
+
+## Voidlinux Runit user service
+export SVDIR=$HOME/service
+export ETCSVDIR=$HOME/sv
 
 # X11
 export DISPLAY=:0.0
 export NO_AT_BRIDGE=1
 
+export LESS="-a -h100 -i -j15 -M -q -R -W -y100 -X"
+export LESSOPEN="|lesspipe %s"
+export LESSHISTFILE=$XDG_CACHE_HOME/less_history
+# Make sure synced with .cfg-post.d/shell-env.sh
+export LESSKEY="$XDG_CONFIG_HOME/less"
+
+export TMUX_TMPDIR=$XDG_RUNTIME_DIR
+export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
+export SSH_ASKPASS=gnome-ssh-askpass
+export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
+export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
+export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
+export SMARTGIT_JAVA_HOME=$JAVA_HOME
+# Xfce4-session-manager logs
+#export XFSM_VERBOSE=true
+
+## GCC
+export MAKEOPTS='^-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory'
+export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:path=01;36:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
+
+## Golang
+export GOPATH=$HOME/.local/lib/go
+export GOBIN=$HOME/.local/bin
+
 # Android
-#export JAVA_HOME=${HOME}/android/jdk8
 #export JAVA_OPTIONS="-XX:-UsePerfData"
 
 # Build a custom user path
