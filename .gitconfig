@@ -1,13 +1,6 @@
 # vim:fenc=utf-8:ft=git:ts=2:sts=2:sw=2:et:
 
-[user]
-  name = Sascha Wander
-  email = sascha.wander@gmail.com
-  signingkey = 0xC026CCEBC1D3B54C
-[github]
-  user = wandsas
 [core]
-  #pager = less -+$LESS -FRX
   pager = diff-so-fancy | less --tabs=4 -FRX
   compression = 9
   hooksPath = .git/hooks
@@ -21,6 +14,10 @@
 	gpgsign = true
 [push]
   default = simple
+[receive]
+    denyCurrentBranch = warn
+[receive]
+    denyCurrentBranch = warn
 [diff]
   renames = copies
 [merge]
@@ -37,9 +34,15 @@
 	cmd = wiggle -Bd $LOCAL $REMOTE
 [submodule]
 	recurse = true
-# Convert https => ssh
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
+[user]
+  name = Sascha Wander
+  email = sascha.wander@gmail.com
+  signingkey = 0xC026CCEBC1D3B54C
+[github]
+  user = wandsas
 [gpg]
   program = gpg2
 
@@ -62,7 +65,7 @@
 	stu = status -s -unormal
 	tree = log --oneline --decorate --graph
 	which = "!_() { git config --global --get alias.$1;};_"
-
+ colors
 [color]
 	ui = true
     branch = yes
