@@ -35,20 +35,18 @@ export ETCSVDIR=$HOME/sv
 export DISPLAY=:0.0
 export NO_AT_BRIDGE=1
 
-export LESS="-a -h100 -i -j15 -M -q -R -W -y100 -X"
+export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 # Make sure synced with .cfg-post.d/shell-env.sh
 export LESSKEY="$XDG_CONFIG_HOME/less"
 
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
-export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
 export SSH_ASKPASS=gnome-ssh-askpass
 export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
 export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
-export SMARTGIT_JAVA_HOME=$JAVA_HOME
 # Xfce4-session-manager logs
 #export XFSM_VERBOSE=true
 
@@ -79,9 +77,7 @@ prependpath /usr/bin
 prependpath /usr/local/sbin
 prependpath /usr/local/bin
 prependpath /snap/bin
-prependpath ${HOME}/.local/bin
 prependpath ${HOME}/bin
-prependpath ${JAVA_HOME}/bin
 unset prependpath
 export PATH
 
