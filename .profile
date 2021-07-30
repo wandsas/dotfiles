@@ -27,10 +27,6 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/run/user/$(id -u)}
 # https://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html.
 export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
 
-## Voidlinux Runit user service
-export SVDIR=$HOME/service
-export ETCSVDIR=$HOME/sv
-
 # X11
 export DISPLAY=:0.0
 export NO_AT_BRIDGE=1
@@ -38,17 +34,9 @@ export NO_AT_BRIDGE=1
 export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
-# Make sure synced with .cfg-post.d/shell-env.sh
-export LESSKEY="$XDG_CONFIG_HOME/less"
 
-export TMUX_TMPDIR=$XDG_RUNTIME_DIR
-export SSH_ASKPASS=gnome-ssh-askpass
-export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
-export GIMP2_DIRECTORY=$XDG_CONFIG_HOME/gimp
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
-# Xfce4-session-manager logs
-#export XFSM_VERBOSE=true
 
 ## GCC
 export MAKEOPTS='^-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory'
@@ -57,9 +45,6 @@ export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locu
 ## Golang
 export GOPATH=$HOME/.local/lib/go
 export GOBIN=$HOME/.local/bin
-
-# Android
-#export JAVA_OPTIONS="-XX:-UsePerfData"
 
 # Build a custom user path
 prependpath () {
