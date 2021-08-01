@@ -4,7 +4,8 @@
 # http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03
 export LANG=en_US.UTF-8
 export LC_COLLATE=C
-export EDITOR=/usr/bin/nvim
+export DISPLAY=:0.0
+export EDITOR=/usr/bin/vim
 export VISUAL=$EDITOR
 export PAGER=less
 export PATH=${PATH:-/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin}
@@ -31,7 +32,6 @@ export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 # Make sure synced with .cfg-post.d/shell-env.sh
 export LESSKEY="$XDG_CONFIG_HOME/less"
-
 
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 #export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
@@ -69,7 +69,6 @@ if [ -d ~/.local/lib/rbenv ]; then
     export RBENV_ROOT=$HOME/.local/lib/rbenv
     eval "$($RBENV_ROOT/bin/rbenv init - bash)"
 fi
-
 
 ## Build a custom user path
 prependpath () {
