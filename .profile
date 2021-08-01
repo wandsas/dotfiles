@@ -4,8 +4,8 @@
 # http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03
 export LANG=en_US.UTF-8
 export LC_COLLATE=C
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=/usr/bin/nvim
+export VISUAL=$EDITOR
 export PAGER=less
 export PATH=${PATH:-/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin}
 export MANPATH=${MANPATH:-$HOME/.local/share/man:/usr/local/share/man:/usr/share/man}
