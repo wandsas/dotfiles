@@ -43,8 +43,9 @@ export MAKEOPTS='^-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory'
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:path=01;36:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
 
 ## Golang
-export GOPATH=$HOME/.local/lib/go
-export GOBIN=$HOME/.local/bin
+#export GOPATH=$HOME/.local/lib/go
+#export GOBIN=$HOME/.local/bin
+export GOPATH=$HOME/go
 
 # Build a custom user path
 prependpath () {
