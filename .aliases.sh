@@ -1,3 +1,4 @@
+# dir
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -8,23 +9,23 @@ alias ll='ls -lh'
 alias la='ls -A'
 alias  l='ls -lha'
 
+alias cls='tput reset'
+alias res='cd && reset -Q'
+alias dt='cd ~/desktop'
+
+# filesystem
 alias df='grc df -hPT'
 alias du='grc du'
 alias dus='du -sh'
 alias free='grc free -h'
 
-alias cls='tput reset'
-alias res='cd && reset -Q'
-alias dt='cd ~/desktop'
-
-
-# Search
+# search
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias pgrep='pgrep --color=auto'
 
-# Tmux
+# tmux
 alias  tma='tmux attach'
 alias  tmd='tmux detach-client'
 alias tmls='tmux list-sessions'
@@ -33,8 +34,7 @@ tmx () {
     tmux list-sessions | awk -F':' '{print $1}' | xargs -n 1 tmux kill-session -t; 
 }
 
-
-# Git
+# git
 alias d=diff
 alias g=git
 alias ga='git add'
@@ -55,8 +55,7 @@ alias gd='git diff'
 alias gl='git l'
 gcd () { cd `git rev-parse --show-toplevel`; }
 
-
-# Network
+# network
 alias ip='ip --color=auto'
 alias ps='grc ps'
 alias ss='grc ss'
@@ -68,4 +67,5 @@ alias portsopen='netstat -anpu'
 alias wanip='curl ipinfo.io/ip'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
-alias dnvim='docker run -it -v $(pwd):/home/spacevim/src nvim'
+alias dnvim='docker run --rm --hostname nvim --name nvim -it -v $(pwd):/home/spacevim/src nvim'
+alias ds6='docker run --rm --hostname s6 --name s6 -v $(pwd):/root -it project42/s6-alpine /bin/ash'
