@@ -36,14 +36,14 @@ case ${TERM} in
 		unset PS1;;
 esac
 
-## Prompt
+## Set my Prompt
 if [ $EUID == 0 ]; then
     PS1+='\[\033[01;31m\]\h\[\033[01;34m\] \w \$\[\033[00m\] '
 else
     PS1+='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w \$\[\033[00m\] '
 fi
 
-## Enable dircolors color support
+# Enable dircolors color support
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
     alias grep='grep --color=auto'
