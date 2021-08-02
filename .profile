@@ -30,8 +30,6 @@ export ETCSVDIR=$HOME/sv
 export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
-# Make sure synced with .cfg-post.d/shell-env.sh
-export LESSKEY="$XDG_CONFIG_HOME/less"
 
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 #export RXVT_SOCKET=$XDG_RUNTIME_DIR/urxvtd
