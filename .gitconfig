@@ -4,6 +4,7 @@
   pager = diff-so-fancy | less --tabs=4 -FRX
   compression = 9
   hooksPath = .git/hooks
+	excludesFile = ~/.config/git/gitignore_global
 [init]
   templateDir = ~/.config/git/template
   defaultBranch = master
