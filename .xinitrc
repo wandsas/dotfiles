@@ -31,9 +31,4 @@ xbacklight -set 15
 # Hide your X mouse cursor when you do not need it
 unclutter -keystroke -idle 2 -noevents &
 
-case "${1:-$(tty)}" in
-    xfce4|*tty1)    
-        exec startxfce4;;    
-    *)
-        xterm -geometry 80x24-0-0
-esac
+exec startxfce4
