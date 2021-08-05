@@ -32,3 +32,6 @@ xbacklight -set 15
 unclutter -keystroke -idle 2 -noevents &
 
 exec startxfce4
+
+# if we got here, then exec failed
+exit 1
