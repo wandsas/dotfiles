@@ -8,10 +8,9 @@ alias ll='ls -lh'
 alias la='ls -A'
 alias  l='ls -lha'
 
-alias df='grc df -hPT'
-alias du='grc du'
+alias df='df -hPT'
 alias dus='du -sh'
-alias free='grc free -h'
+alias free='free -h'
 
 alias cls='tput reset'
 alias res='cd && reset -Q'
@@ -56,10 +55,7 @@ gcd () { cd `git rev-parse --show-toplevel`; }
 
 # Network
 alias ip='ip --color=auto'
-alias ps='grc ps'
-alias ss='grc ss'
-alias dig='grc dig'
-alias portscan='grc nmap -Pn'
-alias portsopen='grc netstat -anpu'
+alias portscan='nmap -Pn'
+alias portsopen='netstat -anpu'
 alias wanip='curl ipinfo.io/ip'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'

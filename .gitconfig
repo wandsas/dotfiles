@@ -5,6 +5,7 @@
 [core]
   pager = less -+$LESS -FRX
   #pager = diff-so-fancy | less --tabs=4 -FRX
+  compression = 9
   hooksPath = .git/hooks
 [gpg]
   program = gpg

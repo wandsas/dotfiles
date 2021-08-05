@@ -29,13 +29,14 @@ export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/sha
 
 # X11
 export DISPLAY=:0.0
-export NO_AT_BRIDGE=1
+#export NO_AT_BRIDGE=1
 
 export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 
-export GOPATH=$HOME/go
+export GOPATH=$HOME/.local/lib/go
+export GOBIN=$HOME/.local/bin
 
 # Build a custom user path
 prependpath () {
@@ -53,6 +54,7 @@ prependpath /usr/bin
 prependpath /usr/local/sbin
 prependpath /usr/local/bin
 prependpath /snap/bin
+prependpath ${HOME}/.local/bin
 prependpath ${HOME}/bin
 unset prependpath
 export PATH

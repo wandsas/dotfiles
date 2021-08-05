@@ -11,7 +11,6 @@ esac
 set -o vi
 stty -ixon
 shopt -qs extglob
-#shopt -qs nullglob
 shopt -s cdspell
 shopt -s extglob
 shopt -s cdable_vars
