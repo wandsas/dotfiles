@@ -11,7 +11,7 @@
   program = gpg
 [init]
   templateDir = ~/.config/git/template
-	defaultBranch = master
+  defaultBranch = master
 [push]
   default = simple
 [commit]
