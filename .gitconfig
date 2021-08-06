@@ -1,4 +1,4 @@
-# vim:fenc=utf-8:ft=git:ts=2:sts=2:sw=2:et:
+# vim:fenc=utf-8:ft=gitconfig:ts=2:sts=2:sw=2:et:
 
 [core]
   pager = diff-so-fancy | less --tabs=4 -FRX

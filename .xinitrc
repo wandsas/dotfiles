@@ -29,7 +29,7 @@ sct 4400 2>&- || :
 xbacklight -set 15
 
 # Hide your X mouse cursor when you do not need it
-unclutter -keystroke -idle 2 -noevents &
+#unclutter -keystroke -idle 2 -noevents &
 
 exec startxfce4
 

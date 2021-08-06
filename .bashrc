@@ -2,9 +2,7 @@
 
 [[ $- != *i* ]] && return   # Shell is non-interactive. Be done now!
 
-# vi keybindings
 set -o vi
-
 stty -ixon
 shopt -qs extglob
 #shopt -qs nullglob

@@ -5,12 +5,9 @@
 export LANG=en_US.UTF-8
 export LC_COLLATE=C
 export DISPLAY=:0.0
-export EDITOR=/usr/bin/vim
-export VISUAL=${EDITOR}
+export EDITOR=vim VISUAL=vim
 export PAGER=less
 export PATH=${PATH:-/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin}
-export MANPATH=${MANPATH:-$HOME/.local/share/man:/usr/local/share/man:/usr/share/man}
-export INFOPATH=${INFOPATH:-$HOME/.local/share/info:/usr/local/share/info:/usr/share/info}
 
 # XDG path variables
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -23,16 +20,16 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/run/user/$(id -u)}
 # https://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html.
 export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
 
-# Runit user service
-export SVDIR=${HOME}/service
-export ETCSVDIR=${HOME}/sv
+# runit init and service supervision
+export SVDIR=$HOME/service
+export ETCSVDIR=$HOME/sv
 
 export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
-export LESSHISTFILE=${XDG_CACHE_HOME}/less_history
+export LESSHISTFILE={XDG_CACHE_HOME}/less_history
 
-#export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
 export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
+export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
 export TMUX_TMPDIR=${XDG_RUNTIME_DIR}
 
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
@@ -40,9 +37,9 @@ export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc
 export GIMP2_DIRECTORY=${XDG_CONFIG_HOME}/gimp
 export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
 export SSH_ASKPASS=gnome-ssh-askpass
-export XFSM_VERBOSE=true
+#export XFSM_VERBOSE=true
 
-## LLVM/Clang GCC
+# LLVM/Clang GCC
 export MAKEOPTS='^-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory'
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:path=01;36:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
 # Perl
@@ -53,13 +50,11 @@ export GOBIN=${HOME}/.local/bin
 # OpenJDK Java
 export JAVA_HOME=/usr/lib/jvm/openjdk11
 export JAVA_OPTIONS="-XX:-UsePerfData ${JAVA_OPTIONS}"
-
 # pyenv
 if [ -d ~/.local/lib/pyenv ]; then
     export PYENV_ROOT=${HOME}/.local/lib/pyenv
     eval "$(${PYENV_ROOT}/bin/pyenv init --path)"
 fi
-
 # rbenv
 if [ -d ~/.local/lib/rbenv ]; then
     export RBENV_ROOT=$HOME/.local/lib/rbenv

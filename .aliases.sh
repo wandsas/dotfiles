@@ -21,8 +21,8 @@ alias free='grc free -h'
 
 # search
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 alias pgrep='pgrep --color=auto'
 
 # tmux
