@@ -2,22 +2,36 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# If not running interactively, don't do anything
+[[ $- != *i* ]] && return   # Shell is non-interactive. Be done now!
+
+set -o vi
+stty -ixon
+shopt -qs extglob
+#shopt -qs nullglob
+shopt -s cdspell
+shopt -s cdable_vars
+shopt -s no_empty_cmd_completion
+shopt -s checkwinsize
+
+## Bash history
+shopt -s histappend # append commands to the history file
+shopt -s cmdhist    # multi-line commands in one history entry
+HISTCONTROL=ignoredups,ignorespace,erasedups
+HISTIGNORE=ls:ps:history
+HISTSIZE=1000
+HISTFILESIZE=1000
+HISTTIMEFORMAT="%h %d %H:%M:%S "
+HISTFILE=$XDG_CACHE_HOME/bash_history
+if [ ! 'history -a;history -c;history -r;' = '*${PROMPT_COMMAND}*' ]; then
+    PROMPT_COMMAND="history -a;history -c;history -r;$PROMPT_COMMAND" 
+fi
+
+## Change window title of X terminals
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-set -o vi
-stty -ixon
-shopt -qs extglob
-shopt -s cdspell
-shopt -s extglob
-shopt -s cdable_vars
-shopt -s no_empty_cmd_completion
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
@@ -72,13 +86,13 @@ if [ -x /usr/bin/dircolors ]; then
     alias ip='ip --color=auto'
 fi
 
-# Colored GCC warnings and errors.
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Some more ls aliases
 alias ll='ls -lh'
 alias la='ls -a'
 alias l='ls -lha'
+alias cls=clear
+alias dt='cd ~/desktop'
 
 # Source user's local bash environment.
 if [ -d $XDG_CONFIG_HOME/bashrc.d ]; then
@@ -106,3 +120,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Colored GCC warnings and errors.
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

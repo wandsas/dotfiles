@@ -4,11 +4,10 @@
 # see /usr/share/doc/bash/examples/startup-files for examples.
 # the files are located in the bash-doc package.
 
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
+# setting default umask for ssh logins (libpam-umask).
 umask 022
 
-### POSIX variables ###
+# POSIX variables
 # http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03
 export LANG=en_US.UTF-8
 export LC_COLLATE=C
@@ -16,14 +15,14 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 
-### XDG path variables ###
+# XDG path variables
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/run/user/$(id -u)}
 
-## XDG system path variable
+# XDG system path variable
 # https://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html.
 export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
 
@@ -37,6 +36,8 @@ export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 
 export GOPATH=$HOME/.local/lib/go
 export GOBIN=$HOME/.local/bin
+
+export SSH_ASKPASS=gnome-ssh-askpass
 
 # Build a custom user path
 prependpath () {
