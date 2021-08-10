@@ -2,7 +2,7 @@
 ! rxvt-unicode-256color
 ! ----------------------------------------------------------------------------
 URxvt*termName:       rxvt-unicode-256color
-URxvt*font:           -*-terminus-*-*-*-*-16-*-*-*-*-*-iso8859-*
+URxvt*font:           -*-terminus-*-*-*-*-18-*-*-*-*-*-iso8859-*
 ! Perl extensions
 URxvt.perl-ext-common:default,clipboard,matcher,keyboard-select
 URxvt.keysym.M-u:     perl:url-select:select_next
