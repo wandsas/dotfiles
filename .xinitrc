@@ -31,7 +31,12 @@ xbacklight -set 15
 # Hide your X mouse cursor when you do not need it
 #unclutter -keystroke -idle 2 -noevents &
 
-exec startxfce4
+session=${1:-xfce}
 
+
+case "${1:-$(tty)}" in
+	(sway*|*tty2) exec sway;;
+	(xfce*|*tty1)   exec startxfce4;;
+esac
 # if we got here, then exec failed
 exit 1

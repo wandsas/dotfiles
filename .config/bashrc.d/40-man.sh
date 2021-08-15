@@ -1,4 +1,4 @@
-# ~/.config/profile.d/man.sh
+# 40-man.sh
 
 ### Colorized Manual Pages ###
 # powered by GNU less

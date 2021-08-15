@@ -1,4 +1,4 @@
-# ~/.config/bashrc.d/35-my-git-prompt.sh ###
+# 35-my-git-prompt.sh ###
 
 # No git-prompt.sh for root.
 [ $EUID == 0 ] && return
