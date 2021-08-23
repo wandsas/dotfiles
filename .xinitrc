@@ -33,10 +33,10 @@ xbacklight -set 15
 
 session=${1:-xfce}
 
-
 case "${1:-$(tty)}" in
-	(sway*|*tty2) exec sway;;
 	(xfce*|*tty1)   exec startxfce4;;
+	(sway*|*tty2)   exec sway;;
+    (dwm*|*tty3)    exec dwm;;
 esac
 # if we got here, then exec failed
 exit 1

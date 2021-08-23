@@ -26,7 +26,7 @@ export ETCSVDIR=$HOME/sv
 
 export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
-export LESSHISTFILE={XDG_CACHE_HOME}/less_history
+export LESSHISTFILE=${XDG_CACHE_HOME}/less_history
 
 export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
 export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
