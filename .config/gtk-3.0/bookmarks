@@ -2,9 +2,4 @@ file:///home/wandsas/configs
 file:///home/wandsas/downloads
 file:///home/wandsas/images
 file:///tmp
-ftp://ftp.gnu.org/ ftp.gnu.org
-ftp://ftp.fu-berlin.de/ ftp.fu-berlin.de
-ftp://download.freebsd.org/ ftp.freebsd.org
-ftp://ftp.osuosl.org/
-ftp://ftp.zsh.org/
-ftp://ftp.de.freebsd.org/
+file:///home/wandsas/docs
