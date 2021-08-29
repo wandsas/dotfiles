@@ -1,5 +1,15 @@
 #!/bin/sh
 
+info () { printf "\033[1m\033[92mINFO:\033[m $@\n"; exit 1; }
+
+check_bin () { type -P "$1" &>/dev/null; }
+
+check_bin xrdb       || info "xrdb not available."
+check_bin xset       || info "xset not available."
+check_bin xbacklight || info "xbacklight not available."
+check_bin setxkbmap  || info "setxkbmap not available."
+check_bin sct        || info "sct not available."
+
 # Fonts
 xset +fp ~/.fonts
 xset fp+ /usr/share/fonts
@@ -9,8 +19,15 @@ xset s off
 xset fp rehash
 xset b off
 
+# Screen color temperature
+sct 4400
+xbacklight -set 15
+
 # Mouse
 xset m 15/10 1
+
+# Hide your X mouse cursor when you do not need it
+unclutter -keystroke -idle 2 -noevents &
 
 # Keyboard
 setxkbmap \
@@ -23,20 +40,10 @@ setxkbmap \
 [ -s ~/.Xmodmap ]       && xmodmap ~/.Xmodmap
 [ -s ~/.Xbindkeysrc ]   && xbindkeys -f ~/.Xbindkeysrc
 
-# Color temperature
-sct 4400 2>&- || :
+# Start Xserver
+startxfce4
+#dwm
+#i3
 
-xbacklight -set 15
-
-# Hide your X mouse cursor when you do not need it
-#unclutter -keystroke -idle 2 -noevents &
-
-session=${1:-xfce}
-
-case "${1:-$(tty)}" in
-	(xfce*|*tty1)   exec startxfce4;;
-	(sway*|*tty2)   exec sway;;
-    (dwm*|*tty3)    exec dwm;;
-esac
 # if we got here, then exec failed
 exit 1
