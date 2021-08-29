@@ -4,10 +4,8 @@
 # http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03
 export LANG=en_US.UTF-8
 export LC_COLLATE=C
-export DISPLAY=:0.0
-export EDITOR=vim VISUAL=vim
+export EDITOR=vim
 export PAGER=less
-export PATH=${PATH:-/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin}
 
 # XDG path variables
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -22,7 +20,6 @@ export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/sha
 
 # runit init and service supervision
 export SVDIR=$HOME/service
-export ETCSVDIR=$HOME/sv
 
 export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
@@ -39,7 +36,6 @@ export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
 export SSH_ASKPASS=gnome-ssh-askpass
 #export XFSM_VERBOSE=true
 
-# LLVM/Clang GCC
 export MAKEOPTS='^-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory'
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:path=01;36:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
 # Perl
@@ -87,14 +83,6 @@ prependpath ${HOME}/.local/bin
 prependpath ${HOME}/bin
 unset prependpath
 export PATH
-
-# Load local user profiles settings, if available
-#if [ -d $XDG_CONFIG_HOME/profile.d ]; then
-#  for sh in $XDG_CONFIG_HOME/profile.d/*.sh; do
-#    [ -r "$sh" ] && . "$sh"
-#  done
-#  unset sh
-#fi
 
 # If running bash, we also want to source ~/.bashrc
 [ $BASH_VERSION ] && [ -f ~/.bashrc ] && . ~/.bashrc
