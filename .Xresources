@@ -1,40 +1,42 @@
-! ----------------------------------------------------------------------------
-! rxvt-unicode-256color
-! ----------------------------------------------------------------------------
+! .Xresources
+
+! -*- rxvt-unicode-256color -*-
 URxvt*termName:       rxvt-unicode-256color
 URxvt*font:           -*-terminus-*-*-*-*-18-*-*-*-*-*-iso8859-*
-! Perl extensions
+! -*- Perl extensions -*-
 URxvt.perl-ext-common:default,clipboard,matcher,keyboard-select
 URxvt.keysym.M-u:     perl:url-select:select_next
-URxvt.url-launcher:    /bin/chromium
+URxvt.url-launcher:    /usr/bin/chromium
 URxvt.underlineURLs:  True
 URxvt.matcher.button: 1 
 URxvt.keysym.M-Escape:perl:keyboard-select:activate
 URxvt.keysym.M-c:     perl:clipboard:copy
 URxvt.keysym.M-v:     perl:clipboard:paste
 URxvt.keysym.M-C-v:   perl:clipboard:paste_escaped
-!URxvt.copyCommand:   xsel -ib
-!URxvt.pasteCommand:  xsel -ob
 URxvt.copyCommand:   xclip-copyfile
 URxvt.pasteCommand:  xclip-pastefile
-! Scrollbar style - rxvt::plain:next:xterm
+! -*- Scrollbar style - rxvt::plain:next:xterm -*-
 URxvt*scrollstyle:    urxvt
 URxvt*scrollBar:      False
 URxvt*matcher.button: 1
 URxvt*geometry:       128x36
 URxvt.saveLines:      1000
-! Fading
+
+! -*- Fading -*-
 URxvt*fading:         5
 URxvt*fadeColor:      #202020
 URxvt*tintColor:      #404040
 URxvt*inheritPixmap:  False
-! Fake Transparency
+
+! -*- Fake Transparency -*-
 !URxvt*transparent:    True
 !URxvt*shading:        30
-! Composite Transparency
+
+! -*- Composite Transparency -*-
 URxvt*depth:          32
+
+! -*- Colors -*-
 URxvt*background:     rgba:0000/0000/0200/c800
-! Fore/background
 !URxvt*background:     #151515
 URxvt*foreground:     #999
 ! Manpages
@@ -47,9 +49,7 @@ URxvt.colorUL:        cyan
 *VT100.colorUL:       cyan
 
 
-! ----------------------------------------------------------------------------
-! XTerm/UXTerm
-! ----------------------------------------------------------------------------
+! -*- XTerm -*-
 XTerm*faceName:   Terminus
 XTerm*faceSize:   13
 XTerm*utf8:       0
@@ -58,6 +58,7 @@ XTerm*font3:     	-misc-fixed-medium-r-normal-*-*-100-*-*-c-*-iso8859-15
 XTerm*font4:     	-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-15
 XTerm*font5:     	-misc-fixed-medium-r-normal-*-*-140-*-*-c-*-iso8859-15
 
+! -*- UXTerm -*- start via xterm -class UXTerm or uxterm
 UXTerm*faceName:  Terminus
 UXTerm*faceSize:  13
 UXTerm*utf8:      1
@@ -70,15 +71,12 @@ UXTerm*font6:     -misc-fixed-medium-r-normal--20-200-75-75-c-100-iso10646-1
 UXTerm*utf8Fonts.font:  -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 UXTerm*utf8Fonts.wideFont:  -misc-fixed-medium-r-normal-ko-18-120-100-100-c-180-iso10646-1
 
-UXTerm*allowFontOps: true
-! start via xterm -class UXTerm or 'uxterm'
-UXTerm*eightBitInput: false
+UXTerm*allowFontOps:    true
+UXTerm*eightBitInput:   false
 UXTerm*metaSendsEscape: true
 
 
-! ----------------------------------------------------------------------------
-! Tomorrow Theme
-! ----------------------------------------------------------------------------
+! -*- Tomorrow Theme -*-
 *.foreground:   #c5c8c6
 *.background:   #1d1f21
 *.cursorColor:  orange
@@ -100,17 +98,12 @@ UXTerm*metaSendsEscape: true
 *.color15:      #ecebec
 
 
-! ----------------------------------------------------------------------------
-! Xcursor
-! ----------------------------------------------------------------------------
-!Xcursor.theme:        Vanilla-DMZ-AA
+! -*- Xcursor -*-
 Xcursor.theme:        plan9
-!Xcursor.size:         22
+Xcursor.size:         16
 
 
-! ----------------------------------------------------------------------------
-! Xft settings
-! ----------------------------------------------------------------------------
+! -*- Xft settings -*-
 Xft*dpi:              96
 Xft.antialias:        1
 Xft.autohint:         0
@@ -120,9 +113,7 @@ Xft.lcdfilter:        lcddefault
 Xft.rgba:             rgb
 
 
-! ----------------------------------------------------------------------------
-! Xpdf
-! ----------------------------------------------------------------------------
+! -*- Xpdf -*-
 Xpdf.toolTipEnable:   False
 Xpdf*foreground:      grey
 Xpdf*background:      black
@@ -137,9 +128,7 @@ Xpdf*enableFreetype:  yes
 Xpdf*fontList:        Terminus
 
 
-! ----------------------------------------------------------------------------
-! Xclock
-! ----------------------------------------------------------------------------
+! -*- Xclock -*-
 Xclock*faceName:          Terminus:pixelsize=8
 Xclock*update:            1
 Xclock*analog:            false
@@ -147,9 +136,7 @@ Xclock*Foreground:        #245f99
 Xclock*background:        #101010
 
 
-! ----------------------------------------------------------------------------
-! Xcalc
-! ----------------------------------------------------------------------------
+! -*- Xcalc -*-
 xcalc*faceName:                        Terminus:pixelsize=8
 xcalc*geometry:                        200x275
 xcalc.ti.bevel.background:             #151515

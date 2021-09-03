@@ -58,7 +58,7 @@ if command --identify --builtin-command bindkey >/dev/null; then
 	bindkey --vi-command '\^P' beginning-search-backward
 fi
 
-. "${XDG_CONFIG_HOME:-$HOME/.config}"/sh/aliases 2>/dev/null
+. $HOME/.aliases.sh 2>/dev/null
 
 # define some basic variables if missing
 : ${PAGER:=less} ${EDITOR:=vi} ${FCEDIT:=$EDITOR}
@@ -68,7 +68,7 @@ fi
 : ${ECHO_STYLE:=RAW}
 
 # variables needed for command history
-HISTFILE=~/.yash_history HISTSIZE=5000
+HISTFILE=${XDG_CACHE_HOME}/yash_history HISTSIZE=5000
 
 PS1=\
 '${{{PWD:/~/\~}##*/}:-$PWD}'\

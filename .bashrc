@@ -14,15 +14,13 @@ shopt -s checkwinsize
 ## Bash history
 shopt -s histappend # append commands to the history file
 shopt -s cmdhist    # multi-line commands in one history entry
-HISTCONTROL=ignoredups,ignorespace,erasedups
+HISTCONTROL=ignoredups,erasedups
 HISTIGNORE=ls:ps:history
-HISTSIZE=1000
-HISTFILESIZE=1000
+HISTSIZE=10000
+HISTFILESIZE=10000
 HISTTIMEFORMAT="%h %d %H:%M:%S "
 HISTFILE=$XDG_CACHE_HOME/bash_history
-if [ ! 'history -a;history -c;history -r;' = '*${PROMPT_COMMAND}*' ]; then
-    PROMPT_COMMAND="history -a;history -c;history -r;$PROMPT_COMMAND" 
-fi
+PROMPT_COMMAND="history -a; history -c; history -r;"
 
 ## Change window title of X terminals
 case ${TERM} in
@@ -42,15 +40,18 @@ else
 fi
 
 # Enable dircolors color support
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
-    alias grep='grep --color=auto'
-    alias egrep='egrep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias pgrep='pgrep --color=auto'
-    alias ls='ls --color=auto'
+#if [ -x /usr/bin/dircolors ]; then
+#    test -r /etc/colors/DIR_COLORS.256color && eval "$(dircolors -b
+#    /etc/colors/DIR_COLORS.256color)" || eval "$(dircolors -b)"
+    export CLICOLOR=1
+    export LSCOLORS="ExGxFxdxCxDxDxhbadExEx"
+#    alias grep='grep --color=auto'
+#    alias egrep='egrep --color=auto'
+#    alias fgrep='fgrep --color=auto'
+#    alias pgrep='pgrep --color=auto'
+#    alias ls='ls --color=auto'
     alias ip='ip --color=auto'
-fi 
+#fi 
 
 ## Some minimal local user aliases.
 alias ll='ls -lh'

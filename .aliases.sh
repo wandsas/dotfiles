@@ -1,8 +1,8 @@
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias pgrep='pgrep --color=auto'
-alias ls='ls --color=auto'
+#alias grep='grep --color=auto'
+#alias egrep='egrep --color=auto'
+#alias fgrep='fgrep --color=auto'
+#alias pgrep='pgrep --color=auto'
+#alias ls='ls --color=auto'
 alias ip='ip --color=auto'
 
 # dir
@@ -20,7 +20,7 @@ alias res='cd && reset -Q'
 alias dt='cd ~/desktop'
 
 # filesystem
-alias df='command -v grc &>/dev/null && grc df -hPT || df -hPT'
+alias df='command -v grc &>/dev/null && grc df -h || df -h'
 alias du='du'
 alias dus='du -sh'
 alias free='free -h'

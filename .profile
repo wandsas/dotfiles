@@ -6,6 +6,7 @@ export LANG=en_US.UTF-8
 export LC_COLLATE=C
 export EDITOR=vim
 export PAGER=less
+export MANPATH="/usr/local/share/man:/usr/share/man"
 
 # XDG path variables
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -20,12 +21,13 @@ export XDG_DATA_DIRS=${XDG_DATA_HOME}:${XDG_DATA_DIRS:-/usr/local/share:/usr/sha
 
 # runit init and service supervision
 export SVDIR=$HOME/service
+export ETCSVDIR=$HOME/.sv
 
 export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=${XDG_CACHE_HOME}/less_history
 
-export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
+#export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
 export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
 export TMUX_TMPDIR=${XDG_RUNTIME_DIR}
 
@@ -36,20 +38,29 @@ export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
 export SSH_ASKPASS=gnome-ssh-askpass
 #export XFSM_VERBOSE=true
 
+# void-x86_64-linux-gnu chroot
+export VOIDNSRUN_DIR=/mnt/glibc
+export VOIDNSUNDO_BIN=/usr/local/bin/voidnsrun
+
 export MAKEOPTS='^-j$(($(getconf _NPROCESSORS_ONLN)+1)) --no-print-directory'
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:path=01;36:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
+# Python
+export PYTHONPATH="${HOME}/.local/lib/python3.9/site-packages/"
 # Perl
 export PERL5LIB="${HOME}/.local/lib/perl5/lib/perl5"
+# Rust/Cargo
+export CARGO_HOME=${HOME}/.local/lib/cargo
 # Golang
 export GOPATH=${HOME}/.local/lib/go
 export GOBIN=${HOME}/.local/bin
-# OpenJDK Java
+# OpenJDK
 export JAVA_HOME=/usr/lib/jvm/openjdk11
 export JAVA_OPTIONS="-XX:-UsePerfData ${JAVA_OPTIONS}"
 # pyenv
 if [ -d ~/.local/lib/pyenv ]; then
     export PYENV_ROOT=${HOME}/.local/lib/pyenv
     eval "$(${PYENV_ROOT}/bin/pyenv init --path)"
+    eval "$(${PYENV_ROOT}/bin/pyenv virtualenv-init -)"
 fi
 # rbenv
 if [ -d ~/.local/lib/rbenv ]; then
@@ -77,9 +88,8 @@ prependpath ${RBENV_ROOT}/bin
 prependpath ${PYENV_ROOT}/bin
 prependpath ${HOME}/.local/lib/perl5/bin
 prependpath ${HOME}/.local/lib/perl5/lib/perl5
-prependpath ${GOPATH}/bin
-prependpath ${HOME}/.cargo/bin
-prependpath ${HOME}/.local/bin
+prependpath ${CARGO_HOME}/bin
+prependpath ${GOBIN}
 prependpath ${HOME}/bin
 unset prependpath
 export PATH
