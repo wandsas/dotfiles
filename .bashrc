@@ -43,14 +43,14 @@ fi
 #if [ -x /usr/bin/dircolors ]; then
 #    test -r /etc/colors/DIR_COLORS.256color && eval "$(dircolors -b
 #    /etc/colors/DIR_COLORS.256color)" || eval "$(dircolors -b)"
-    export CLICOLOR=1
-    export LSCOLORS="ExGxFxdxCxDxDxhbadExEx"
+#    export CLICOLOR=1
+#    export LSCOLORS="ExGxFxdxCxDxDxhbadExEx"
 #    alias grep='grep --color=auto'
 #    alias egrep='egrep --color=auto'
 #    alias fgrep='fgrep --color=auto'
 #    alias pgrep='pgrep --color=auto'
 #    alias ls='ls --color=auto'
-    alias ip='ip --color=auto'
+#    alias ip='ip --color=auto'
 #fi 
 
 ## Some minimal local user aliases.

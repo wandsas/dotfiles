@@ -46,7 +46,7 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # History configurations
-HISTFILE=~/.zsh_history
+HISTFILE=~/.cache/zsh_history
 HISTSIZE=1000
 SAVEHIST=2000
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
@@ -173,17 +173,17 @@ else
 fi
 unset color_prompt force_color_prompt
 
-toggle_oneline_prompt(){
-    if [ "$PROMPT_ALTERNATIVE" = oneline ]; then
-        PROMPT_ALTERNATIVE=twoline
-    else
-        PROMPT_ALTERNATIVE=oneline
-    fi
-    configure_prompt
-    zle reset-prompt
-}
-zle -N toggle_oneline_prompt
-bindkey ^P toggle_oneline_prompt
+#toggle_oneline_prompt(){
+#    if [ "$PROMPT_ALTERNATIVE" = oneline ]; then
+#        PROMPT_ALTERNATIVE=twoline
+#    else
+#        PROMPT_ALTERNATIVE=oneline
+#    fi
+#    configure_prompt
+#    zle reset-prompt
+#}
+#zle -N toggle_oneline_prompt
+#bindkey ^P toggle_oneline_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -235,9 +235,10 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -lh'
+alias la='ls -a'
+alias l='ls -lha'
+alias df='df -h'
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
