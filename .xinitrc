@@ -35,15 +35,13 @@ setxkbmap \
   -option 'grp:shifts_toggle,compose:menui,terminate:ctrl_alt_bksp'
   -model  'pc105'
 
+/usr/bin/pipewire &
+
 # Load user environment setup
 [ -s ~/.Xresources ]    && xrdb -load ~/.Xresources
 [ -s ~/.Xmodmap ]       && xmodmap ~/.Xmodmap
 [ -s ~/.Xbindkeysrc ]   && xbindkeys -f ~/.Xbindkeysrc
 
-# Start Xserver
-startxfce4
-#dwm
-#i3
+dbus-launch --exit-with-session dwm
 
-# if we got here, then exec failed
 exit 1

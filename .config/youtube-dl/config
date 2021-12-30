@@ -1,0 +1,38 @@
+# Youtube Downloader
+
+# Convert audio stream
+--extract-audio
+#--audio-format m4a
+--audio-quality 0
+
+# B
+# Batch Downloads
+#--batch-file "$HOME/music/ytdl-queue.txt"
+
+# Download Archive
+#--download-archive "$HOME/music/ytdl-archive.txt"
+
+# Save Path
+-o "$HOME/music/%(playlist_title)s/%(playlist_index)s - %(title)s.%(ext)s"
+
+# Enable .netrc as db of login credentials
+#--netrc
+
+# Number of Retries
+--retries 5
+
+# Timeout
+--socket-timeout 20
+
+# Sleep
+--sleep-interval 5
+--max-sleep-interval 10
+
+# Prefer ffmpeg conversion
+--prefer-ffmpeg
+
+# Ignore Errors
+--ignore-errors
+
+# Debug Options
+#--verbose
