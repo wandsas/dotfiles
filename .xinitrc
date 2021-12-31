@@ -35,13 +35,15 @@ setxkbmap \
   -option 'grp:shifts_toggle,compose:menui,terminate:ctrl_alt_bksp'
   -model  'pc105'
 
-/usr/bin/pipewire &
-
 # Load user environment setup
 [ -s ~/.Xresources ]    && xrdb -load ~/.Xresources
 [ -s ~/.Xmodmap ]       && xmodmap ~/.Xmodmap
 [ -s ~/.Xbindkeysrc ]   && xbindkeys -f ~/.Xbindkeysrc
 
+#exec /usr/bin/pipewire &
+exec /usr/libexec/polkit-gnome-authentication-agent-1
+exec nm-applet --indicator
+exec dwmstatus &
 dbus-launch --exit-with-session dwm
 
 exit 1

@@ -52,7 +52,7 @@ input 1133:49271:Logitech_USB_Optical_Mouse {
     bindsym $mod+Shift+d exec xfce4-appfinder -c
     bindsym $mod+p exec passmenu
 
-    bindsym $mod+Ctrl+Return exec thunar
+    bindsym $mod+Ctrl+Return exec spacefm
     bindsym $mod+t exec xfce4-taskmanager
 
     bindsym $mod+c exec chromium
@@ -200,19 +200,24 @@ bar {
 #
 # Floating windows
 #
+# get windowid with: swaymsg -t get_tree | grep app_id
+#
 #for_window [app_id="thunar"] floating enable
 for_window [app_id="file-roller"] floating enable
-for_window [app_id="xfce4-taskmanager"] floating enable
+for_window [class="Gvim"] floating enable
+for_window [instance="gmpc"] floating enable
 for_window [class="jetbrains-idea-ce"] floating enable
 for_window [app_id="virt-manager"] floating enable
 for_window [app_id="nm-connection-editor"] floating enable
 for_window [app_id="seahorse"] floating enable
 for_window [app_id="spicy"] floating enable
+for_window [app_id="xfce4-taskmanager"] floating enable
 
 # User daemons
+#exec /usr/bin/pipewire
 exec wl-paste -t text --watch clipman store --no-persist
-exec nm-applet --indicator
 exec /usr/libexec/polkit-gnome-authentication-agent-1
-exec thunar --daemon
+exec nm-applet --indicator
+exec ympd -h /run/user/1000/mpd -w hz620.homelab:8080
 
 include /etc/sway/config.d/*
