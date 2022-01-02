@@ -25,16 +25,16 @@ export SVDIR=$HOME/service
 export LESS="-R -M"
 export LESSOPEN="|lesspipe %s"
 export LESSHISTFILE=${XDG_CACHE_HOME}/less_history
-export MAIL=
+
 export MPD_HOST=${XDG_RUNTIME_DIR}/mpd
-export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
+#export RXVT_SOCKET=${XDG_RUNTIME_DIR}/urxvtd
 export TMUX_TMPDIR=${XDG_RUNTIME_DIR}
 
+export SSH_ASKPASS=gnome-ssh-askpass
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc
 export GIMP2_DIRECTORY=${XDG_CONFIG_HOME}/gimp
 export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
-export SSH_ASKPASS=gnome-ssh-askpass
 
 # void-x86_64-linux-gnu chroot
 export VOIDNSRUN_DIR=${HOME}/void-glibc
