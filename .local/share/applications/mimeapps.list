@@ -1,10 +1,17 @@
 [Default Applications]
 application/pdf=mupdf.desktop
-text/html=chromium-browser-chromium.desktop
-text/plain=chromium-browser-chromium.desktop
-text/xml=chromium-browser-chromium.desktop
-text/xml+xhtml=chromium-browser-chromium.desktop
-x-scheme-handler/about=chromium-browser-chromium.desktop
-x-scheme-handler/ftp=chromium-browser-chromium.desktop
-x-scheme-handler/http=chromium-browser-chromium.desktop
-x-scheme-handler/https=chromium-browser-chromium.desktop
+text/html=qutebrowser.desktop
+text/plain=qutebrowser.desktop
+text/xml=qutebrowser.desktop
+text/xml+xhtml=qutebrowser.desktop
+x-scheme-handler/about=qutebrowser.desktop
+x-scheme-handler/ftp=qutebrowser.desktop
+x-scheme-handler/http=qutebrowser.desktop
+x-scheme-handler/https=qutebrowser.desktop
+x-scheme-handler/chrome=qutebrowser.desktop
+application/x-extension-htm=qutebrowser.desktop
+application/x-extension-html=qutebrowser.desktop
+application/x-extension-shtml=qutebrowser.desktop
+application/xhtml+xml=qutebrowser.desktop
+application/x-extension-xhtml=qutebrowser.desktop
+application/x-extension-xht=qutebrowser.desktop
